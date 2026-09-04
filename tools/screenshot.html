@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>截图工具 · Inverstent</title>
+<style>
+  :root{--navy:#0f2350;--bg:#f4f6fa;--card:#fff;--text:#1c2b45;--muted:#6b7a94;--line:#e3e8f0;--accent:#2456c4;--red:#d64541;--green:#1e9e5a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{background:var(--navy);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;flex-wrap:wrap}
+  .back{color:#b9c6de;text-decoration:none;font-size:13px}
+  .back:hover{color:#fff}
+  h1{font-size:16px;font-weight:600;margin-right:6px}
+  .btn{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;transition:background .15s}
+  .btn:hover{background:rgba(255,255,255,.22)}
+  .btn.primary{background:var(--accent);border-color:var(--accent)}
+  .btn.primary:hover{background:#1d47a6}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .toolbar{background:var(--card);border-bottom:1px solid var(--line);padding:8px 18px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+  .tool-btn{border:1px solid var(--line);background:#fff;color:var(--text);font-size:13px;padding:6px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:5px}
+  .tool-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .tool-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .sep{width:1px;height:22px;background:var(--line);margin:0 4px}
+  .field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+  input[type=color]{width:30px;height:28px;border:1px solid var(--line);border-radius:6px;cursor:pointer;padding:1px;background:#fff}
+  input[type=range]{width:80px;accent-color:var(--accent)}
+  .canvas-wrap{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:20px}
+  .stage{position:relative;box-shadow:0 4px 20px rgba(15,35,80,.12);border-radius:6px;background:#fff}
+  canvas{display:block;border-radius:6px;cursor:crosshair;max-width:none}
+  .empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);gap:10px;pointer-events:none;background:#fbfcfe;border:2px dashed var(--line);border-radius:6px}
+  .empty .big{font-size:44px}
+  .empty kbd{background:#eef3fc;color:var(--accent);padding:2px 8px;border-radius:6px;font-size:12px;border:1px solid #d6e2f7}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:13px;padding:10px 22px;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:99}
+  .toast.show{opacity:.95}
+  #textInput{position:absolute;display:none;font-size:14px;border:2px solid var(--accent);border-radius:6px;padding:4px 8px;outline:none;box-shadow:0 4px 14px rgba(15,35,80,.2);font-family:inherit;min-width:120px;background:#fff}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="../index.html">← 返回导航</a>
+  <h1>📸 截图工具</h1>
+  <button class="btn primary" id="btnCapture">🖥️ 截取屏幕</button>
+  <button class="btn" id="btnUpload">📁 上传图片</button>
+  <button class="btn" id="btnPasteInfo">📋 粘贴 (Ctrl+V)</button>
+  <input type="file" id="fileInput" accept="image/*" hidden>
+</header>
+
+<div class="toolbar">
+  <button class="tool-btn" data-tool="pen" title="画笔">✏️ 画笔</button>
+  <button class="tool-btn" data-tool="rect" title="矩形">▭ 矩形</button>
+  <button class="tool-btn" data-tool="ellipse" title="椭圆">◯ 椭圆</button>
+  <button class="tool-btn" data-tool="arrow" title="箭头">➡️ 箭头</button>
+  <button class="tool-btn" data-tool="line" title="直线">╱ 直线</button>
+  <button class="tool-btn" data-tool="text" title="文字">🅰 文字</button>
+  <div class="sep"></div>
+  <div class="field">颜色 <input type="color" id="color" value="#d64541"></div>
+  <div class="field">粗细 <input type="range" id="width" min="1" max="12" value="3"></div>
+  <div class="sep"></div>
+  <button class="tool-btn" id="btnUndo">↩️ 撤销</button>
+  <button class="tool-btn" id="btnClear">🗑️ 清除标注</button>
+  <div class="sep"></div>
+  <button class="tool-btn" id="btnDownload">💾 保存 PNG</button>
+  <button class="tool-btn" id="btnCopy">📄 复制到剪贴板</button>
+</div>
+
+<div class="canvas-wrap">
+  <div class="stage">
+    <canvas id="cv" width="960" height="560"></canvas>
+    <input id="textInput" placeholder="输入文字后回车">
+    <div class="empty" id="empty">
+      <div class="big">📸</div>
+      <div>点击上方「截取屏幕」捕获屏幕画面，或直接 <kbd>Ctrl+V</kbd> 粘贴图片</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+  const emptyEl=document.getElementById('empty'),toast=document.getElementById('toast');
+  const textInput=document.getElementById('textInput');
+  const colorEl=document.getElementById('color'),widthEl=document.getElementById('width');
+  let baseImg=null, shapes=[], cur=null, tool='arrow', hasImg=false;
+  let textPos=null;
+
+  // 恢复未完成文字输入时丢弃
+  function toastMsg(m){toast.textContent=m;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800);}
+
+  // ---------- 工具选择 ----------
+  document.querySelectorAll('.tool-btn[data-tool]').forEach(b=>{
+    if(b.dataset.tool===tool)b.classList.add('active');
+    b.onclick=()=>{tool=b.dataset.tool;
+      document.querySelectorAll('.tool-btn[data-tool]').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');};
+  });
+  tool='arrow';
+  document.querySelector('[data-tool="arrow"]').classList.add('active');
+
+  // ---------- 图片载入 ----------
+  function loadImage(img){
+    const maxW=Math.min(1400,window.innerWidth-80), maxH=window.innerHeight-190;
+    let w=img.width,h=img.height;
+    const s=Math.min(1,maxW/w,maxH/h);
+    w=Math.round(w*s);h=Math.round(h*s);
+    cv.width=w;cv.height=h;
+    baseImg=img;
+    shapes=[];hasImg=true;emptyEl.style.display='none';
+    render();
+  }
+  function render(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    if(baseImg)ctx.drawImage(baseImg,0,0,cv.width,cv.height);
+    else{ctx.fillStyle='#fbfcfe';ctx.fillRect(0,0,cv.width,cv.height);}
+    shapes.forEach(drawShape);
+    if(cur)drawShape(cur);
+  }
+  function drawShape(s){
+    ctx.save();
+    ctx.strokeStyle=s.color;ctx.fillStyle=s.color;ctx.lineWidth=s.width;ctx.lineCap='round';ctx.lineJoin='round';
+    if(s.type==='pen'){ctx.beginPath();s.pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();}
+    else if(s.type==='rect'){ctx.strokeRect(s.x1,s.y1,s.x2-s.x1,s.y2-s.y1);}
+    else if(s.type==='ellipse'){ctx.beginPath();ctx.ellipse((s.x1+s.x2)/2,(s.y1+s.y2)/2,Math.abs(s.x2-s.x1)/2,Math.abs(s.y2-s.y1)/2,0,0,Math.PI*2);ctx.stroke();}
+    else if(s.type==='line'){ctx.beginPath();ctx.moveTo(s.x1,s.y1);ctx.lineTo(s.x2,s.y2);ctx.stroke();}
+    else if(s.type==='arrow'){
+      ctx.beginPath();ctx.moveTo(s.x1,s.y1);ctx.lineTo(s.x2,s.y2);ctx.stroke();
+      const a=Math.atan2(s.y2-s.y1,s.x2-s.x1),hl=Math.max(12,s.width*4);
+      ctx.beginPath();ctx.moveTo(s.x2,s.y2);
+      ctx.lineTo(s.x2-hl*Math.cos(a-0.45),s.y2-hl*Math.sin(a-0.45));
+      ctx.lineTo(s.x2-hl*Math.cos(a+0.45),s.y2-hl*Math.sin(a+0.45));
+      ctx.closePath();ctx.fill();
+    }
+    else if(s.type==='text'){ctx.font=`600 ${s.fontSize}px "Segoe UI","Microsoft YaHei",sans-serif`;ctx.textBaseline='top';ctx.fillText(s.text,s.x1,s.y1);}
+    ctx.restore();
+  }
+
+  // ---------- 屏幕捕获 ----------
+  document.getElementById('btnCapture').onclick=async()=>{
+    try{
+      const stream=await navigator.mediaDevices.getDisplayMedia({video:{cursor:"never"}});
+      const video=document.createElement('video');
+      video.srcObject=stream;await video.play();
+      await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+      const track=stream.getVideoTracks()[0].getSettings();
+      const c=document.createElement('canvas');
+      c.width=track.width;c.height=track.height;
+      c.getContext('2d').drawImage(video,0,0);
+      stream.getTracks().forEach(t=>t.stop());
+      const img=new Image();
+      img.onload=()=>{loadImage(img);toastMsg('✅ 屏幕捕获成功');};
+      img.src=c.toDataURL('image/png');
+    }catch(e){toastMsg('❌ 已取消屏幕捕获');}
+  };
+
+  // ---------- 上传 ----------
+  document.getElementById('btnUpload').onclick=()=>document.getElementById('fileInput').click();
+  document.getElementById('fileInput').onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const img=new Image();
+    img.onload=()=>{loadImage(img);toastMsg('✅ 图片已载入');};
+    img.src=URL.createObjectURL(f);e.target.value='';
+  };
+
+  // ---------- 剪贴板粘贴 ----------
+  document.addEventListener('paste',e=>{
+    const items=e.clipboardData&&e.clipboardData.items;if(!items)return;
+    for(const it of items){
+      if(it.type.startsWith('image/')){
+        const img=new Image();
+        img.onload=()=>{loadImage(img);toastMsg('✅ 粘贴成功');};
+        img.src=URL.createObjectURL(it.getAsFile());
+        e.preventDefault();return;
+      }
+    }
+  });
+
+  // ---------- 绘制交互 ----------
+  function pos(e){const r=cv.getBoundingClientRect();return{x:Math.round(e.clientX-r.left),y:Math.round(e.clientY-r.top)};}
+  cv.addEventListener('mousedown',e=>{
+    if(!hasImg)return;
+    const p=pos(e);
+    if(tool==='text'){
+      textPos=p;
+      textInput.style.display='block';
+      textInput.style.left=(cv.offsetLeft+p.x)+'px';
+      textInput.style.top=(cv.offsetTop+p.y-12)+'px';
+      setTimeout(()=>textInput.focus(),10);
+      return;
+    }
+    cur={type:tool,x1:p.x,y1:p.y,x2:p.x,y2:p.y,pts:[p],color:colorEl.value,width:+widthEl.value};
+    if(tool==='pen')cur.type='pen';
+  });
+  cv.addEventListener('mousemove',e=>{
+    if(!cur)return;const p=pos(e);
+    cur.x2=p.x;cur.y2=p.y;
+    if(cur.type==='pen')cur.pts.push(p);
+    render();
+  });
+  window.addEventListener('mouseup',()=>{
+    if(cur){if(cur.type!=='text')shapes.push(cur);cur=null;render();}
+  });
+
+  // ---------- 文字输入 ----------
+  textInput.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&textInput.value.trim()){
+      shapes.push({type:'text',x1:textPos.x,y1:textPos.y,text:textInput.value.trim(),
+        color:colorEl.value,width:+widthEl.value,fontSize:Math.max(16,+widthEl.value*6)});
+      textInput.value='';textInput.style.display='none';render();
+    }else if(e.key==='Escape'){textInput.value='';textInput.style.display='none';}
+  });
+  textInput.addEventListener('blur',()=>{textInput.style.display='none';textInput.value='';});
+
+  // ---------- 撤销 / 清除 ----------
+  document.getElementById('btnUndo').onclick=()=>{shapes.pop();render();};
+  document.getElementById('btnClear').onclick=()=>{if(shapes.length){shapes=[];render();toastMsg('已清除全部标注');}};
+
+  // ---------- 导出 ----------
+  document.getElementById('btnDownload').onclick=()=>{
+    if(!hasImg){toastMsg('请先载入图片');return;}
+    const a=document.createElement('a');
+    a.download='inverstent_screenshot_'+Date.now()+'.png';
+    a.href=cv.toDataURL('image/png');a.click();
+    toastMsg('💾 已保存 PNG');
+  };
+  document.getElementById('btnCopy').onclick=async()=>{
+    if(!hasImg){toastMsg('请先载入图片');return;}
+    try{
+      const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      toastMsg('📄 已复制到剪贴板');
+    }catch(e){toastMsg('❌ 复制失败，请使用保存 PNG');}
+  };
+
+  // 快捷键
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();shapes.pop();render();}
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
