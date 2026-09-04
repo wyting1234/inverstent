@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>资产配置百宝箱 · 策略构建</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <style>
+        /* ===== 全局样式（与之前保持一致） ===== */
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2a5a8a;
+            --primary-lighter: #e8f0fe;
+            --accent: #3b8fc2;
+            --accent-green: #2d9b6e;
+            --bg: #f4f7fb;
+            --card-bg: #ffffff;
+            --text: #1e2a3a;
+            --text-light: #5a6a7a;
+            --border: #dce4ec;
+            --shadow: 0 8px 30px rgba(0, 20, 40, 0.08);
+            --radius: 18px;
+            --radius-sm: 10px;
+            --transition: 0.25s ease;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            padding: 24px 16px 80px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ===== 头部 ===== */
+        .app-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px 24px;
+            margin-bottom: 28px;
+            background: var(--card-bg);
+            padding: 18px 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--primary);
+        }
+        .brand span {
+            background: var(--primary);
+            color: #fff;
+            font-size: 14px;
+            padding: 2px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+        }
+
+        .strategy-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .strategy-btn {
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .strategy-btn:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+        .strategy-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(26, 58, 92, 0.25);
+        }
+
+        /* ===== Tab 导航 ===== */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 28px;
+            background: var(--card-bg);
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .tab-btn {
+            padding: 10px 22px;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab-btn:hover {
+            background: var(--primary-lighter);
+            color: var(--primary);
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(26, 58, 92, 0.2);
+        }
+
+        /* ===== 卡片容器 ===== */
+        .panel {
+            display: none;
+            animation: fadeUp 0.3s ease;
+        }
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px 28px;
+            margin-bottom: 24px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        .card-sub {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 32px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px 24px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 14px 20px;
+        }
+
+        @media (max-width: 800px) {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 500px) {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            .app-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding: 6px 8px;
+            }
+            .tab-btn {
+                white-space: nowrap;
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            .card {
+                padding: 18px 16px;
+            }
+        }
+
+        /* ===== 表单 ===== */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+        .form-control {
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 500;
+            background: #fafcff;
+            transition: var(--transition);
+            width: 100%;
+            color: var(--text);
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 143, 194, 0.15);
+            background: #fff;
+        }
+        .form-control::placeholder {
+            color: #b0c0d0;
+            font-weight: 400;
+        }
+        select.form-control {
+            appearance: auto;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26, 58, 92, 0.2);
+        }
+        .btn-secondary {
+            background: var(--accent-green);
+        }
+        .btn-secondary:hover {
+            background: #238a5e;
+        }
+        .btn-danger {
+            background: #c9424a;
+        }
+        .btn-danger:hover {
+            background: #b1323a;
+        }
+        .btn-block {
+            width: 100%;
+            text-align: center;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 13px;
+        }
+
+        /* ===== 结果展示 ===== */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 16px 0 8px;
+        }
+        .result-item {
+            background: var(--primary-lighter);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            text-align: center;
+        }
+        .result-item .label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .result-item .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 4px;
+        }
+        .result-item .value.green {
+            color: var(--accent-green);
+        }
+        .result-item .value.gold {
+            color: #c97d2b;
+        }
+        .result-item .value.small {
+            font-size: 18px;
+        }
+        .result-item .value.buy {
+            color: #2d9b6e;
+        }
+        .result-item .value.sell {
+            color: #c9424a;
+        }
+
+        .chart-wrapper {
+            margin-top: 20px;
+            height: 260px;
+            position: relative;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .table-wrap th {
+            background: var(--primary-lighter);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .table-wrap td {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .table-wrap tr:hover td {
+            background: #f8faff;
+        }
+
+        .config-structure {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 30px;
+            margin: 12px 0 8px;
+        }
+        .config-structure .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .config-structure .item .name {
+            color: var(--text-light);
+        }
+        .config-structure .item .pct {
+            font-weight: 600;
+        }
+
+        .allocation-bar {
+            display: flex;
+            height: 28px;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 12px 0 16px;
+            background: var(--border);
+        }
+        .allocation-bar .seg {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.4s ease;
+        }
+        .seg-cash {
+            background: #8ba3b8;
+        }
+        .seg-bond {
+            background: #5b8db8;
+        }
+        .seg-astock {
+            background: #d97a4a;
+        }
+        .seg-oversea {
+            background: #4a9b7a;
+        }
+
+        .text-muted {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ===== 调仓建议 ===== */
+        .rebalance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+            margin: 12px 0 8px;
+        }
+        .rebalance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: #f8faff;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--border);
+        }
+        .rebalance-item .asset-name {
+            font-weight: 500;
+        }
+        .rebalance-item .diff-pct {
+            font-weight: 700;
+            margin-right: 12px;
+        }
+        .rebalance-item .diff-amount {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .rebalance-item.buy {
+            border-left-color: var(--accent-green);
+        }
+        .rebalance-item.sell {
+            border-left-color: #c9424a;
+        }
+        .rebalance-item.neutral {
+            border-left-color: #a0b0c0;
+        }
+        .buy-text {
+            color: var(--accent-green);
+        }
+        .sell-text {
+            color: #c9424a;
+        }
+
+        /* ===== 标的池样式 ===== */
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .filter-group .form-group {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+        .filter-group .form-group label {
+            margin-bottom: 0;
+        }
+        .filter-group .form-control {
+            width: auto;
+            min-width: 120px;
+        }
+        .stock-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--primary-lighter);
+            color: var(--primary);
+        }
+        .stock-badge.macro {
+            background: #d4e2f0;
+            color: #1a4a7a;
+        }
+        .stock-badge.industry {
+            background: #d4f0e8;
+            color: #1a6a5a;
+        }
+        .stock-badge.fund {
+            background: #f0e8d4;
+            color: #8a6a2a;
+        }
+        .stock-badge.bottom {
+            background: #f0d4d4;
+            color: #8a3a3a;
+        }
+        .stock-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: #eee;
+        }
+        .stock-status.observe {
+            background: #f0e8c0;
+            color: #8a7a2a;
+        }
+        .stock-status.reserve {
+            background: #c0d8f0;
+            color: #1a4a7a;
+        }
+        .stock-status.hold {
+            background: #c0f0d0;
+            color: #1a6a3a;
+        }
+
+        /* ===== 策略构建子Tab ===== */
+        .sub-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+        .sub-tab-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .sub-tab-btn:hover {
+            background: var(--primary-lighter);
+            color: var(--primary);
+        }
+        .sub-tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(26, 58, 92, 0.2);
+        }
+
+        .sub-panel {
+            display: none;
+            animation: fadeUp 0.3s ease;
+        }
+        .sub-panel.active {
+            display: block;
+        }
+
+        /* ===== 策略卡片增强 ===== */
+        .strategy-card {
+            background: var(--primary-lighter);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+        }
+        .strategy-card:hover {
+            box-shadow: var(--shadow);
+        }
+        .strategy-card .strategy-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .strategy-card .strategy-tag {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        .strategy-card .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 30px;
+            margin-top: 12px;
+        }
+        .strategy-card .detail-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            padding: 4px 0;
+            border-bottom: 1px dashed rgba(0,0,0,0.06);
+        }
+        .strategy-card .detail-item .label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 100px;
+            font-size: 14px;
+        }
+        .strategy-card .detail-item .value {
+            font-size: 14px;
+            color: var(--text);
+            flex: 1;
+        }
+        .strategy-card .config-result {
+            margin-top: 14px;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+        }
+        .strategy-card .config-result .asset-pct {
+            font-weight: 600;
+        }
+        .strategy-card .config-result .asset-pct span {
+            color: var(--primary);
+        }
+        .strategy-card .case-box {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-top: 12px;
+            border: 1px solid var(--border);
+        }
+        .strategy-card .case-box .case-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .strategy-card .case-box .case-item {
+            display: inline-block;
+            background: #eef3f8;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin: 2px 4px 2px 0;
+        }
+
+        /* ===== 实现步骤面板 ===== */
+        .step-box {
+            background: #fafcff;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--accent);
+        }
+        .step-box h4 {
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .step-box p,
+        .step-box ul {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .step-box ul {
+            padding-left: 20px;
+        }
+        .step-box .code-block {
+            background: #1e2a3a;
+            color: #d4e2f0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 8px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* ===== 工具入口 ===== */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 12px 0 8px;
+        }
+        .tool-grid .tool-item {
+            background: var(--primary-lighter);
+            border-radius: var(--radius-sm);
+            padding: 20px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-weight: 500;
+        }
+        .tool-grid .tool-item:hover {
+            border-color: var(--accent);
+            background: #dce8f5;
+            transform: translateY(-2px);
+        }
+        .tool-grid .tool-item .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-lighter);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+            padding: 32px 0 8px;
+            border-top: 1px solid var(--border);
+            margin-top: 16px;
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        .inline-flex {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .data-source-box {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-top: 12px;
+            border: 1px solid var(--border);
+        }
+        .data-source-box h4 {
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .data-source-box ul {
+            padding-left: 20px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        .data-source-box ul li {
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app" id="app">
+
+        <!-- ========== 头部 ========== -->
+        <header class="app-header">
+            <div class="brand">
+                <a href="../index.html" style="text-decoration:none;color:var(--text-light);font-size:15px;margin-right:6px;" title="返回导航">←</a>
+                📊 资产配置百宝箱
+                <span>v2.4</span>
+            </div>
+            <div class="strategy-selector" id="strategySelector">
+                <button class="strategy-btn active" data-strategy="riskParity">⚖️ 风险平价</button>
+                <button class="strategy-btn" data-strategy="trend">📈 趋势跟踪</button>
+                <button class="strategy-btn" data-strategy="contrarian">🔄 逆向投资</button>
+                <button class="strategy-btn" data-strategy="coreSatellite">🎯 核心-卫星</button>
+                <button class="strategy-btn" data-strategy="allWeather">🌤 全天候</button>
+                <button class="strategy-btn" data-strategy="barbell">🏋️ 杠铃策略</button>
+            </div>
+        </header>
+
+        <!-- ========== Tab 导航 ========== -->
+        <nav class="tabs" id="tabNav">
+            <button class="tab-btn active" data-tab="tabAlloc">📊 资产配置</button>
+            <button class="tab-btn" data-tab="tabFinal">💰 最终金额</button>
+            <button class="tab-btn" data-tab="tabDCA">📅 定投计算</button>
+            <button class="tab-btn" data-tab="tabReturn">📈 收益率</button>
+            <button class="tab-btn" data-tab="tabPeriod">⏳ 投资期限</button>
+            <button class="tab-btn" data-tab="tabWatchlist">📋 标的池</button>
+            <button class="tab-btn" data-tab="tabStrategyBuild">🧠 策略构建</button>
+            <button class="tab-btn" data-tab="tabToolbox">🧰 百宝箱</button>
+        </nav>
+
+        <!-- ============================================================ -->
+        <!-- TAB 1: 资产配置 (原有，略) -->
+        <!-- ============================================================ -->
+        <section class="panel active" id="tabAlloc">
+            <div class="card">
+                <div class="flex-between">
+                    <div>
+                        <div class="card-title">📊 资产配置计算器</div>
+                        <div class="card-sub">基于 <strong id="currentStrategyLabel">风险平价</strong> 策略 + 市场指标，给出合理配置建议及调仓比例</div>
+                    </div>
+                    <span class="badge">纯牛马 · 第二阶段</span>
+                </div>
+
+                <div class="grid-2" style="margin-top:12px;">
+                    <div>
+                        <div style="font-weight:600;margin-bottom:10px;color:var(--primary);">📁 当前资产</div>
+                        <div class="form-group"><label>现金 (元)</label><input class="form-control" id="allocCash" type="number" placeholder="0" value="100000" /></div>
+                        <div class="form-group"><label>国内债券 (元)</label><input class="form-control" id="allocBond" type="number" placeholder="0" value="200000" /></div>
+                        <div class="form-group"><label>A股资产 (元)</label><input class="form-control" id="allocAStock" type="number" placeholder="0" value="150000" /></div>
+                        <div class="form-group"><label>海外资产 (元)</label><input class="form-control" id="allocOversea" type="number" placeholder="0" value="50000" /></div>
+                    </div>
+                    <div>
+                        <div style="font-weight:600;margin-bottom:10px;color:var(--primary);">💰 新投资 &amp; 市场指标</div>
+                        <div class="form-group"><label>新投资金额 (元)</label><input class="form-control" id="allocNewInvest" type="number" placeholder="0" value="30000" /></div>
+                        <div class="form-group"><label>标普500 估值百分位 (0-100)</label><input class="form-control" id="allocSp500" type="number" placeholder="98" value="98" min="0" max="100" /></div>
+                        <div class="form-group"><label>纳斯达克100 估值百分位 (0-100)</label><input class="form-control" id="allocNasdaq" type="number" placeholder="95" value="95" min="0" max="100" /></div>
+                        <div class="form-group"><label>A股流动性信号 (0-100)</label><input class="form-control" id="allocLiquidity" type="number" placeholder="42" value="42" min="0" max="100" /></div>
+                    </div>
+                </div>
+
+                <button class="btn btn-block" id="allocCalcBtn" style="margin-top:20px;">🔄 计算配置方案</button>
+
+                <div id="allocResult" style="margin-top:24px;">
+                    <div style="margin-top:12px;">
+                        <div style="font-weight:600;color:var(--primary);">📌 当前资产配置结构</div>
+                        <div class="allocation-bar" id="currentBar"><div class="seg seg-cash" style="width:0%;">0%</div><div class="seg seg-bond" style="width:0%;">0%</div><div class="seg seg-astock" style="width:0%;">0%</div><div class="seg seg-oversea" style="width:0%;">0%</div></div>
+                        <div class="config-structure" id="currentStructure">
+                            <div class="item"><span class="name">现金</span><span>0% (0元)</span></div>
+                            <div class="item"><span class="name">债券</span><span>0% (0元)</span></div>
+                            <div class="item"><span class="name">A股</span><span>0% (0元)</span></div>
+                            <div class="item"><span class="name">海外</span><span>0% (0元)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:20px;">
+                        <div style="font-weight:600;color:var(--primary);">🧠 合理资产配置结构 <span style="font-weight:400;font-size:13px;color:var(--text-light);" id="strategyHint">(基于风险平价)</span></div>
+                        <div class="allocation-bar" id="targetBar"><div class="seg seg-cash" style="width:0%;">0%</div><div class="seg seg-bond" style="width:0%;">0%</div><div class="seg seg-astock" style="width:0%;">0%</div><div class="seg seg-oversea" style="width:0%;">0%</div></div>
+                        <div class="config-structure" id="targetStructure">
+                            <div class="item"><span class="name">现金</span><span id="tCash">0%</span></div>
+                            <div class="item"><span class="name">债券</span><span id="tBond">0%</span></div>
+                            <div class="item"><span class="name">A股</span><span id="tAStock">0%</span></div>
+                            <div class="item"><span class="name">海外</span><span id="tOversea">0%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 调仓建议 -->
+                    <div style="margin-top:24px;padding-top:20px;border-top:2px solid var(--border);">
+                        <div style="font-weight:600;color:var(--primary);">⚖️ 调仓建议（存量调整）</div>
+                        <div style="font-size:13px;color:var(--text-light);margin-bottom:8px;">基于当前总资产与目标配置的差额，建议买卖方向及金额</div>
+                        <div id="rebalanceContainer" class="rebalance-grid">
+                            <div class="rebalance-item neutral"><span class="asset-name">现金</span><span class="diff-pct">—</span><span class="diff-amount">—</span></div>
+                            <div class="rebalance-item neutral"><span class="asset-name">债券</span><span class="diff-pct">—</span><span class="diff-amount">—</span></div>
+                            <div class="rebalance-item neutral"><span class="asset-name">A股</span><span class="diff-pct">—</span><span class="diff-amount">—</span></div>
+                            <div class="rebalance-item neutral"><span class="asset-name">海外</span><span class="diff-pct">—</span><span class="diff-amount">—</span></div>
+                        </div>
+                        <div class="text-muted mt-8" id="rebalanceNote">💡 若仅调整存量资产（不包含新增资金），按以上操作进行再平衡。</div>
+                    </div>
+
+                    <!-- 新增资金分配 -->
+                    <div style="margin-top:20px;padding-top:16px;border-top:2px solid var(--border);">
+                        <div style="font-weight:600;color:var(--accent-green);">➕ 新增资金分配方案</div>
+                        <div class="config-structure" id="newAllocStructure">
+                            <div class="item"><span class="name">现金</span><span id="nCash">0元</span></div>
+                            <div class="item"><span class="name">债券</span><span id="nBond">0元</span></div>
+                            <div class="item"><span class="name">A股</span><span id="nAStock">0元</span></div>
+                            <div class="item"><span class="name">海外</span><span id="nOversea">0元</span></div>
+                        </div>
+                        <div class="text-muted mt-8" id="newAllocNote">请输入当前资产或新投资金额后点击计算</div>
+                    </div>
+
+                    <div style="margin-top:16px;padding-top:16px;border-top:2px solid var(--border);">
+                        <div style="font-weight:600;color:var(--primary);">📈 调整后的资产配置结构</div>
+                        <div class="config-structure" id="afterStructure">
+                            <div class="item"><span class="name">现金</span><span id="aCash">0元</span></div>
+                            <div class="item"><span class="name">债券</span><span id="aBond">0元</span></div>
+                            <div class="item"><span class="name">A股</span><span id="aAStock">0元</span></div>
+                            <div class="item"><span class="name">海外</span><span id="aOversea">0元</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 2-5: 复利计算 (原有，略) -->
+        <!-- ============================================================ -->
+        <section class="panel" id="tabFinal">
+            <div class="card">
+                <div class="card-title">💰 最终金额计算</div>
+                <div class="card-sub">给定起始金额、定投、收益率，计算期末总资产</div>
+                <div class="grid-2">
+                    <div class="form-group"><label>起始金额 (元)</label><input class="form-control" id="fStart" type="number" value="0" /></div>
+                    <div class="form-group"><label>投资期限 (年)</label><input class="form-control" id="fYears" type="number" value="20" /></div>
+                    <div class="form-group"><label>年化收益率 (%)</label><input class="form-control" id="fRate" type="number" step="0.1" value="10" /></div>
+                    <div class="form-group"><label>定投金额 (元/月)</label><input class="form-control" id="fDCA" type="number" value="2000" /></div>
+                </div>
+                <button class="btn" id="fCalcBtn">计算</button>
+                <div id="fResult" class="mt-16">
+                    <div class="result-grid"><div class="result-item"><span class="label">最终资产</span><div class="value" id="fFinal">—</div></div><div class="result-item"><span class="label">本金总额</span><div class="value" id="fPrincipal">—</div></div><div class="result-item"><span class="label">利息总额</span><div class="value green" id="fInterest">—</div></div></div>
+                    <div class="chart-wrapper"><canvas id="fChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="tabDCA">
+            <div class="card">
+                <div class="card-title">📅 定投金额计算</div>
+                <div class="card-sub">目标金额下，每月需要投入多少？</div>
+                <div class="grid-2">
+                    <div class="form-group"><label>目标金额 (元)</label><input class="form-control" id="dTarget" type="number" value="1000000" /></div>
+                    <div class="form-group"><label>起始金额 (元)</label><input class="form-control" id="dStart" type="number" value="0" /></div>
+                    <div class="form-group"><label>投资期限 (年)</label><input class="form-control" id="dYears" type="number" value="20" /></div>
+                    <div class="form-group"><label>年化收益率 (%)</label><input class="form-control" id="dRate" type="number" step="0.1" value="10" /></div>
+                </div>
+                <button class="btn" id="dCalcBtn">计算</button>
+                <div id="dResult" class="mt-16">
+                    <div class="result-grid"><div class="result-item"><span class="label">每月需投入</span><div class="value green" id="dMonthly">—</div></div><div class="result-item"><span class="label">本金总额</span><div class="value" id="dPrincipal">—</div></div><div class="result-item"><span class="label">利息总额</span><div class="value gold" id="dInterest">—</div></div></div>
+                    <div class="chart-wrapper"><canvas id="dChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="tabReturn">
+            <div class="card">
+                <div class="card-title">📈 年化收益率计算</div>
+                <div class="card-sub">要达到目标，需要多少年化收益率？</div>
+                <div class="grid-2">
+                    <div class="form-group"><label>目标金额 (元)</label><input class="form-control" id="rTarget" type="number" value="1000000" /></div>
+                    <div class="form-group"><label>起始金额 (元)</label><input class="form-control" id="rStart" type="number" value="0" /></div>
+                    <div class="form-group"><label>投资期限 (年)</label><input class="form-control" id="rYears" type="number" value="20" /></div>
+                    <div class="form-group"><label>定投金额 (元/月)</label><input class="form-control" id="rDCA" type="number" value="2000" /></div>
+                </div>
+                <button class="btn" id="rCalcBtn">计算</button>
+                <div id="rResult" class="mt-16">
+                    <div class="result-grid"><div class="result-item"><span class="label">所需年化收益率</span><div class="value gold" id="rRequired">—</div></div><div class="result-item"><span class="label">本金总额</span><div class="value" id="rPrincipal">—</div></div><div class="result-item"><span class="label">利息总额</span><div class="value green" id="rInterest">—</div></div></div>
+                    <div class="chart-wrapper"><canvas id="rChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="tabPeriod">
+            <div class="card">
+                <div class="card-title">⏳ 投资期限计算</div>
+                <div class="card-sub">达到目标金额需要多长时间？</div>
+                <div class="grid-2">
+                    <div class="form-group"><label>目标金额 (元)</label><input class="form-control" id="pTarget" type="number" value="1000000" /></div>
+                    <div class="form-group"><label>起始金额 (元)</label><input class="form-control" id="pStart" type="number" value="0" /></div>
+                    <div class="form-group"><label>年化收益率 (%)</label><input class="form-control" id="pRate" type="number" step="0.1" value="10" /></div>
+                    <div class="form-group"><label>定投金额 (元/月)</label><input class="form-control" id="pDCA" type="number" value="2000" /></div>
+                </div>
+                <button class="btn" id="pCalcBtn">计算</button>
+                <div id="pResult" class="mt-16">
+                    <div class="result-grid"><div class="result-item"><span class="label">所需期限</span><div class="value" id="pPeriod">—</div></div><div class="result-item"><span class="label">本金总额</span><div class="value" id="pPrincipal">—</div></div><div class="result-item"><span class="label">利息总额</span><div class="value green" id="pInterest">—</div></div></div>
+                    <div class="chart-wrapper"><canvas id="pChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 6: 标的池 (原有) -->
+        <!-- ============================================================ -->
+        <section class="panel" id="tabWatchlist">
+            <div class="card">
+                <div class="flex-between">
+                    <div><div class="card-title">📋 标的跟踪池</div><div class="card-sub">管理宏观指标、行业ETF、个股基金、底仓标的，所有数据保存在本地</div></div>
+                    <span class="badge">储备库</span>
+                </div>
+                <div style="background:var(--primary-lighter);padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:20px;">
+                    <div style="font-weight:600;margin-bottom:8px;">➕ 添加新标的</div>
+                    <div class="grid-3">
+                        <div class="form-group"><label>标的名称 *</label><input class="form-control" id="watchName" placeholder="例：沪深300 ETF" /></div>
+                        <div class="form-group"><label>类型 *</label><select class="form-control" id="watchType"><option value="macro">宏观指标</option><option value="industry">行业ETF</option><option value="fund">个股基金</option><option value="bottom">底仓标的</option></select></div>
+                        <div class="form-group"><label>状态</label><select class="form-control" id="watchStatus"><option value="observe">观察中</option><option value="reserve">储备</option><option value="hold">已持仓</option></select></div>
+                        <div class="form-group"><label>当前价格/估值</label><input class="form-control" id="watchPrice" placeholder="如：3.85 或 12倍PE" /></div>
+                        <div class="form-group"><label>备注</label><input class="form-control" id="watchNote" placeholder="关注理由、目标价等" /></div>
+                        <div style="display:flex;align-items:flex-end;gap:8px;"><button class="btn btn-secondary" id="addWatchBtn" style="margin-top:0;">➕ 添加</button><button class="btn btn-sm" id="clearWatchBtn" style="background:#aaa;">清空全部</button></div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="form-group"><label>筛选类型</label><select class="form-control" id="filterType"><option value="all">全部</option><option value="macro">宏观指标</option><option value="industry">行业ETF</option><option value="fund">个股基金</option><option value="bottom">底仓标的</option></select></div>
+                    <div class="form-group"><label>筛选状态</label><select class="form-control" id="filterStatus"><option value="all">全部</option><option value="observe">观察中</option><option value="reserve">储备</option><option value="hold">已持仓</option></select></div>
+                    <span style="margin-left:auto;font-size:13px;color:var(--text-light);">共 <span id="watchCount">0</span> 个标的</span>
+                </div>
+                <div class="table-wrap">
+                    <table><thead><tr><th>名称</th><th>类型</th><th>状态</th><th>价格/估值</th><th>备注</th><th>添加时间</th><th>操作</th></tr></thead><tbody id="watchTableBody"><tr><td colspan="7" style="text-align:center;color:var(--text-light);">暂无标的，请添加</td></tr></tbody></table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 7: 策略构建 (增强) -->
+        <!-- ============================================================ -->
+        <section class="panel" id="tabStrategyBuild">
+            <div class="card">
+                <div class="flex-between">
+                    <div>
+                        <div class="card-title">🧠 策略构建详解</div>
+                        <div class="card-sub">选择策略，查看详细画像、代表案例及实现步骤与参数计算</div>
+                    </div>
+                    <span class="badge">知识库</span>
+                </div>
+
+                <!-- 数据获取说明 -->
+                <div class="data-source-box">
+                    <h4>📌 策略构建所需数据及获取方式</h4>
+                    <ul>
+                        <li><strong>估值百分位</strong>（标普500、纳斯达克100）：可通过 Wind、iFind、Bloomberg 等金融终端获取，或参考 Gurufocus、YCharts。</li>
+                        <li><strong>A股流动性信号</strong>：综合市场成交额、换手率、两融余额等，或参考 JoinQuant、RiceQuant 的流动性因子。</li>
+                        <li><strong>资产风险收益特征</strong>：各资产历史波动率、相关性，可通过 Yahoo Finance、东方财富等计算。</li>
+                        <li><strong>宏观指标</strong>（可选）：GDP、CPI、PMI等，可从国家统计局、Trading Economics 获取。</li>
+                    </ul>
+                </div>
+
+                <!-- 子Tab切换 -->
+                <div class="sub-tabs">
+                    <button class="sub-tab-btn active" data-subtab="subDetail">📖 策略详情</button>
+                    <button class="sub-tab-btn" data-subtab="subSteps">⚙️ 实现步骤与参数计算</button>
+                </div>
+
+                <!-- 子面板1: 策略详情 -->
+                <div class="sub-panel active" id="subDetail">
+                    <div id="strategyDetailContainer"></div>
+                </div>
+
+                <!-- 子面板2: 实现步骤与参数计算 -->
+                <div class="sub-panel" id="subSteps">
+                    <div id="strategyStepsContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 8: 百宝箱 -->
+        <!-- ============================================================ -->
+        <section class="panel" id="tabToolbox">
+            <div class="card">
+                <div class="card-title">🧰 投资百宝箱</div>
+                <div class="card-sub">集中放置常用工具，点击快速切换</div>
+                <div class="tool-grid">
+                    <div class="tool-item" data-tool="tabAlloc"><span class="icon">📊</span>资产配置</div>
+                    <div class="tool-item" data-tool="tabFinal"><span class="icon">💰</span>最终金额</div>
+                    <div class="tool-item" data-tool="tabDCA"><span class="icon">📅</span>定投计算</div>
+                    <div class="tool-item" data-tool="tabReturn"><span class="icon">📈</span>收益率</div>
+                    <div class="tool-item" data-tool="tabPeriod"><span class="icon">⏳</span>投资期限</div>
+                    <div class="tool-item" data-tool="tabWatchlist"><span class="icon">📋</span>标的池</div>
+                    <div class="tool-item" data-tool="tabStrategyBuild"><span class="icon">🧠</span>策略构建</div>
+                    <div class="tool-item" data-tool="tabAlloc"><span class="icon">📋</span>财务管理桑基图</div>
+                    <div class="tool-item" data-tool="tabAlloc"><span class="icon">🎯</span>一键跟投</div>
+                    <div class="tool-item" data-tool="tabAlloc"><span class="icon">❤️</span>善缘一线牵</div>
+                </div>
+                <div style="margin-top:20px;padding:16px;background:var(--primary-lighter);border-radius:var(--radius-sm);">
+                    <div style="font-weight:600;color:var(--primary);">📌 纯牛马 · 专属工具</div>
+                    <div class="text-muted" style="margin-top:4px;">计划你的交易，交易你的计划。如需个性化付费服务，制定专属投资计划，开发专属计算工具，<a href="#" style="color:var(--primary);font-weight:500;">留下微信联系方式</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 底部 ========== -->
+        <div class="footer">
+            © 2026 资产配置百宝箱 · 数据仅供参考，投资有风险，决策需谨慎。
+            <br>📖 <a href="#" target="_blank">纯牛马第二阶段投资策略 · 专属计算工具</a>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JavaScript ===== -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. 策略配置 (与资产配置联动)
+            // ============================================================
+            const STRATEGIES = {
+                riskParity: { label: '风险平价', base: { cash: 10, bond: 51, astock: 37, oversea: 2 } },
+                trend: { label: '趋势跟踪', base: { cash: 5, bond: 25, astock: 45, oversea: 25 } },
+                contrarian: { label: '逆向投资', base: { cash: 12, bond: 30, astock: 43, oversea: 15 } },
+                coreSatellite: { label: '核心-卫星', base: { cash: 6, bond: 38, astock: 38, oversea: 18 } },
+                allWeather: { label: '全天候', base: { cash: 8, bond: 42, astock: 30, oversea: 20 } },
+                barbell: { label: '杠铃策略', base: { cash: 18, bond: 48, astock: 22, oversea: 12 } }
+            };
+            let currentStrategy = 'riskParity';
+
+            // ============================================================
+            // 2. 策略构建详细数据 (增强版)
+            // ============================================================
+            const STRATEGY_DETAILS = {
+                riskParity: {
+                    name: '风险平价',
+                    tag: '均衡风险贡献',
+                    objective: '通过等风险权重分配资产，使各类资产对组合的风险贡献相同，追求稳健的长期收益。',
+                    suitablePeople: '风险偏好中等、追求长期稳健增值的投资者，尤其适合养老金、教育金等长期资金。',
+                    suitableMarket: '适用于各类市场环境，在震荡市中表现平稳，但在单边牛市中可能跑输纯股票策略。',
+                    horizon: '中长期（5年以上）',
+                    maxDrawdown: '约 -15% ~ -20% （历史回测，以股债混合为例）',
+                    annualReturn: '年化收益约 6% ~ 9% （历史回测）',
+                    calcMethod: '基于资产协方差矩阵，通过优化求解使各资产边际风险贡献相等，权重与资产波动率倒数相关。',
+                    params: '使用近3-5年历史波动率与相关性，每季度再平衡。基础权重参考：现金10%、债券51%、A股37%、海外2%，可随市场估值动态微调。',
+                    baseConfig: { cash: 10, bond: 51, astock: 37, oversea: 2 },
+                    cases: ['桥水基金（All Weather 理念延伸）', '多家养老金采用', '代表性投资人：Ray Dalio'],
+                    steps: `
+                                1. 收集各资产（现金、债券、A股、海外）的历史收益率数据（至少3年）。
+                                2. 计算资产的协方差矩阵和波动率。
+                                3. 设定风险贡献目标：每个资产对组合的风险贡献相等。
+                                4. 使用数值优化（如MATLAB fmincon或Python scipy.optimize）求解权重。
+                                5. 每季度或半年再平衡，根据最新数据更新权重。
+                                6. 结合估值指标（如PE百分位）对股票类资产进行微调（±5%~10%）。
+                            `,
+                    calcExample: `
+                                假设债券波动率 4%，A股波动率 20%，海外波动率 18%，现金波动率 2%。
+                                风险平价目标：各资产风险贡献相等 → 权重 ∝ 1/波动率。
+                                则债券权重 ∝ 1/4=0.25，A股 ∝ 1/20=0.05，海外 ∝ 1/18≈0.0556，现金 ∝ 1/2=0.5。
+                                归一化后：现金≈58%，债券≈29%，A股≈6%，海外≈7%。但实际中会加入相关性调整和约束，最终得到更均衡的比例。
+                                本工具在基础配置上根据估值信号微调。
+                            `
+                },
+                trend: {
+                    name: '趋势跟踪',
+                    tag: '顺势而为',
+                    objective: '捕捉资产中长期趋势，在上升趋势中增加风险资产暴露，下降趋势中降低暴露，追求超额收益。',
+                    suitablePeople: '风险承受能力较高、能接受较大波动的投资者，适合对市场方向有判断能力的主动投资者。',
+                    suitableMarket: '趋势明显的市场（单边上涨或下跌）表现优异，在震荡市中可能频繁止损。',
+                    horizon: '中短期（1-3年）至中长期',
+                    maxDrawdown: '约 -25% ~ -30% （历史回测，取决于标的）',
+                    annualReturn: '年化收益约 8% ~ 14% （趋势明显时更高）',
+                    calcMethod: '使用移动平均线（如MA20/MA60）或动量指标（如过去12个月收益）生成信号，根据信号强度调整资产权重。',
+                    params: '常用参数：短期均线（20日）、长期均线（60日），动量窗口12个月，阈值±5%作为信号触发。基础权重：现金5%、债券25%、A股45%、海外25%。',
+                    baseConfig: { cash: 5, bond: 25, astock: 45, oversea: 25 },
+                    cases: ['Winton Capital', 'AQR Capital Management', '代表性投资人：David Harding'],
+                    steps: `
+                                1. 确定跟踪资产（A股、海外股票、债券等）。
+                                2. 计算每个资产的动量指标（如过去12个月收益率）。
+                                3. 设定信号规则：动量 > 0 则加仓，动量 < 0 则减仓，或采用双均线交叉。
+                                4. 根据信号调整权重，例如将风险资产权重提高或降低 10%~20%。
+                                5. 每月或每季度检查信号，进行再平衡。
+                                6. 可结合波动率控制（Volatility Targeting）来管理风险。
+                            `,
+                    calcExample: `
+                                假设A股过去12个月收益率为 +15%，海外为 +8%，债券为 +2%，现金为 0%。
+                                采用相对强弱信号：超配收益最高的资产，低配收益最低的。
+                                设定基础权重：A股45%，海外25%，债券25%，现金5%。
+                                根据动量得分调整：A股权重 +10% → 55%，海外 +5% → 30%，债券 -8% → 17%，现金 -7% → 0%（现金调低）。
+                                同时需满足总权重100%，并设定单个资产上限（如60%）。
+                                本工具简化为利用估值和流动性信号进行动态调整。
+                            `
+                },
+                contrarian: {
+                    name: '逆向投资',
+                    tag: '人弃我取',
+                    objective: '在市场恐慌或估值低位时增加风险资产，在情绪高涨时减仓，利用均值回归获取超额收益。',
+                    suitablePeople: '具有较强心理素质、能够逆市操作的长期投资者，适合价值投资理念拥护者。',
+                    suitableMarket: '极度悲观或乐观的极端市场，在估值极值区域效果显著。',
+                    horizon: '长期（5年以上）',
+                    maxDrawdown: '约 -20% ~ -25% （历史回测，取决于择时精度）',
+                    annualReturn: '年化收益约 7% ~ 12% （长期均值回归）',
+                    calcMethod: '基于估值百分位（如PE、PB）和情绪指标（如换手率、新基金发行量）构建逆向信号，低估时加仓，高估时减仓。',
+                    params: '参考估值历史分位数（如低于30%为低估，高于70%为高估），调仓幅度可设定为±10%～20%。基础权重：现金12%、债券30%、A股43%、海外15%。',
+                    baseConfig: { cash: 12, bond: 30, astock: 43, oversea: 15 },
+                    cases: ['巴菲特（Berkshire Hathaway）', '约翰·邓普顿（John Templeton）', '代表性投资人：Warren Buffett'],
+                    steps: `
+                                1. 选定估值指标（如PE、PB、股息率）和情绪指标（换手率、融资余额）。
+                                2. 计算当前估值在历史中的百分位。
+                                3. 设定阈值：百分位 < 30% 为低估，> 70% 为高估。
+                                4. 根据信号调整权益类资产权重，低估时加仓（+10%~20%），高估时减仓（-10%~20%）。
+                                5. 每季度或半年评估一次，逐步调整。
+                                6. 配合分散化投资，避免单一资产风险。
+                            `,
+                    calcExample: `
+                                假设A股PE历史百分位为25%（低估），海外PE百分位为80%（高估）。
+                                逆向策略：增加A股权重，减少海外权重。
+                                基础权重：A股43%，海外15%，债券30%，现金12%。
+                                调整：A股 +15% → 58%，海外 -8% → 7%，债券 -5% → 25%，现金 -2% → 10%。
+                                同时将现金部分用于加仓A股，实现均值回归。
+                                本工具综合标普500和纳斯达克估值百分位来调整A股和海外权重。
+                            `
+                },
+                coreSatellite: {
+                    name: '核心-卫星',
+                    tag: '稳健核心 + 弹性卫星',
+                    objective: '核心部分（多为宽基指数）提供稳定Beta，卫星部分（行业、主题、个股）捕捉Alpha，实现攻守兼备。',
+                    suitablePeople: '希望获得市场平均收益同时追求超额收益的投资者，适合有一定研究能力的投资者。',
+                    suitableMarket: '各类市场均适用，核心部分平滑波动，卫星部分灵活调整。',
+                    horizon: '中长期（3年以上）',
+                    maxDrawdown: '约 -18% ~ -22% （核心采用股债平衡，卫星增加波动）',
+                    annualReturn: '年化收益约 7% ~ 11% （视卫星表现）',
+                    calcMethod: '核心部分采用风险平价或固定比例，卫星部分基于动量或基本面选股，比例动态调整（如核心80%，卫星20%）。',
+                    params: '核心占比70%~90%，卫星占比10%~30%。卫星部分可根据市场风格（成长/价值）轮动。基础权重：现金6%、债券38%、A股38%、海外18%。',
+                    baseConfig: { cash: 6, bond: 38, astock: 38, oversea: 18 },
+                    cases: ['先锋集团（Vanguard）核心-卫星策略', '富达（Fidelity）', '代表性投资人：John Bogle（核心指数）'],
+                    steps: `
+                                1. 确定核心资产（如宽基指数ETF）和卫星资产（行业ETF、个股等）。
+                                2. 核心部分采用固定比例或风险平价，卫星部分采用主动筛选（动量、价值、成长等）。
+                                3. 定期（每季度）评估卫星表现，淘汰表现差的，纳入表现好的。
+                                4. 核心部分保持稳定，卫星部分动态调整，但总卫星仓位不超过30%。
+                                5. 再平衡时维持核心与卫星的目标比例。
+                            `,
+                    calcExample: `
+                                核心部分（债券+宽基A股+海外）占比80%，卫星部分（行业ETF或个股）占比20%。
+                                核心内部采用风险平价，卫星部分根据最近一个季度的动量选股。
+                                例如核心：现金5%，债券40%，A股30%，海外5%（合计80%）。
+                                卫星：A股行业ETF（如半导体、新能源）共20%。
+                                综合后总比例：现金5%，债券40%，A股（核心+卫星）=30%+20%=50%，海外5%。
+                                本工具的基础配置已将核心-卫星思想融入A股和海外比例中。
+                            `
+                },
+                allWeather: {
+                    name: '全天候',
+                    tag: '穿越周期的平衡',
+                    objective: '通过配置不同宏观环境下表现优异的资产（股票、债券、商品、黄金等），使组合在任何经济周期中都有正收益。',
+                    suitablePeople: '追求长期绝对收益、不想频繁调整的投资者，适合作为“压舱石”配置。',
+                    suitableMarket: '适应所有宏观经济环境（增长/衰退、通胀/通缩）。',
+                    horizon: '长期（10年以上）',
+                    maxDrawdown: '约 -12% ~ -18% （历史回测，多元资产分散）',
+                    annualReturn: '年化收益约 6% ~ 9% （长期稳健）',
+                    calcMethod: '基于风险平价扩展，纳入商品、黄金等资产，根据经济周期信号微调各类资产权重。',
+                    params: '通常配置：股票30%、债券40%、商品15%、黄金15%。本工具简化为股票（A股+海外）50%、债券42%、现金8%。基础权重：现金8%、债券42%、A股30%、海外20%。',
+                    baseConfig: { cash: 8, bond: 42, astock: 30, oversea: 20 },
+                    cases: ['桥水基金（All Weather）', '代表性投资人：Ray Dalio'],
+                    steps: `
+                                1. 将资产分为四类：股票（增长）、债券（防御）、商品（通胀对冲）、黄金（避险）。
+                                2. 每个类别配置相同风险权重（25%风险贡献）。
+                                3. 利用历史数据计算各类资产的风险贡献，通过优化求解权重。
+                                4. 每季度或半年再平衡，保持风险贡献均衡。
+                                5. 可根据经济预期（增长/衰退、通胀/通缩）微调类别内子资产。
+                            `,
+                    calcExample: `
+                                假设股票波动率18%，债券5%，商品15%，黄金12%。
+                                风险平价要求各资产风险贡献相等 → 权重 ∝ 1/波动率。
+                                则股票权重 ∝ 1/18=0.0556，债券 ∝ 1/5=0.2，商品 ∝ 1/15=0.0667，黄金 ∝ 1/12=0.0833。
+                                归一化后：股票≈14%，债券≈50%，商品≈17%，黄金≈19%。
+                                但实际全天候会加入经济增长和通胀的考量，本工具简化后采用股票（A股+海外）50%，债券42%，现金8%作为替代。
+                            `
+                },
+                barbell: {
+                    name: '杠铃策略',
+                    tag: '两端发力',
+                    objective: '同时持有极端保守（现金、短债）和极端进取（高成长股票、衍生品）的资产，避免中间地带，利用尾部收益。',
+                    suitablePeople: '风险承受能力极强或极弱的投资者，适合追求高弹性或极端保守的特定需求。',
+                    suitableMarket: '在波动性大的市场（如科技股泡沫、危机时刻）表现突出，但震荡市可能平庸。',
+                    horizon: '中长期（3-10年）',
+                    maxDrawdown: '约 -20% ~ -30% （取决于进取端占比）',
+                    annualReturn: '年化收益约 5% ~ 15% （大幅波动）',
+                    calcMethod: '保守端（如现金、短债）占比30%~50%，进取端（如创业板、科技股、期权）占比50%~70%，根据风险偏好调整。',
+                    params: '保守端可采用货币基金或短债，进取端选择高Beta资产。基础权重：现金18%、债券48%、A股22%、海外12%（代表保守端70%，进取端30%）。',
+                    baseConfig: { cash: 18, bond: 48, astock: 22, oversea: 12 },
+                    cases: ['纳西姆·塔勒布（Nassim Taleb）的尾部风险策略', '一些对冲基金的极端策略'],
+                    steps: `
+                                1. 确定保守端资产（现金、短债、货币基金）和进取端资产（高波动股票、杠杆ETF、期权）。
+                                2. 根据风险偏好设定两端比例（如保守60%，进取40%）。
+                                3. 进取端可基于动量或事件驱动选择标的。
+                                4. 定期（每月或每季度）再平衡，维持两端比例。
+                                5. 进取端若盈利丰厚，可部分获利了结转入保守端，实现动态平衡。
+                            `,
+                    calcExample: `
+                                保守端：现金20%，短债50%（合计70%）；进取端：A股成长股20%，海外科技股10%（合计30%）。
+                                则总比例：现金20%，债券50%，A股20%，海外10%。
+                                本工具基础配置为现金18%，债券48%，A股22%，海外12%，接近杠铃风格（保守66%，进取34%）。
+                                实际运作中，进取端可替换为创业板、科创板或纳斯达克科技股。
+                            `
+                }
+            };
+
+            // ============================================================
+            // 3. DOM 引用
+            // ============================================================
+            const $ = id => document.getElementById(id);
+            const $$ = sel => document.querySelectorAll(sel);
+
+            // ============================================================
+            // 4. Tab 切换 (顶层)
+            // ============================================================
+            const tabBtns = $$('.tab-btn');
+            const panels = {
+                tabAlloc: $('tabAlloc'),
+                tabFinal: $('tabFinal'),
+                tabDCA: $('tabDCA'),
+                tabReturn: $('tabReturn'),
+                tabPeriod: $('tabPeriod'),
+                tabWatchlist: $('tabWatchlist'),
+                tabStrategyBuild: $('tabStrategyBuild'),
+                tabToolbox: $('tabToolbox'),
+            };
+
+            function switchTab(tabId) {
+                tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+                Object.keys(panels).forEach(key => {
+                    panels[key].classList.toggle('active', key === tabId);
+                });
+                if (tabId === 'tabStrategyBuild') {
+                    renderStrategyDetail();
+                    renderStrategySteps();
+                }
+                if (tabId === 'tabWatchlist') renderWatchlist();
+                setTimeout(() => {
+                    if (tabId === 'tabFinal' && window.fChart) window.fChart.resize();
+                    if (tabId === 'tabDCA' && window.dChart) window.dChart.resize();
+                    if (tabId === 'tabReturn' && window.rChart) window.rChart.resize();
+                    if (tabId === 'tabPeriod' && window.pChart) window.pChart.resize();
+                }, 100);
+            }
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchTab(btn.dataset.tab);
+                });
+            });
+            $$('.tool-item[data-tool]').forEach(el => {
+                el.addEventListener('click', () => {
+                    switchTab(el.dataset.tool);
+                });
+            });
+
+            // ============================================================
+            // 5. 策略切换 (顶部)
+            // ============================================================
+            const strategyBtns = $$('.strategy-btn');
+            const strategyLabel = $('currentStrategyLabel');
+            const strategyHint = $('strategyHint');
+
+            function setStrategy(key) {
+                currentStrategy = key;
+                strategyBtns.forEach(b => b.classList.toggle('active', b.dataset.strategy === key));
+                const s = STRATEGIES[key];
+                strategyLabel.textContent = s.label;
+                strategyHint.textContent = `(基于 ${s.label})`;
+                calcAllocation();
+                // 如果策略构建面板可见，刷新详情和步骤
+                if ($('tabStrategyBuild').classList.contains('active')) {
+                    renderStrategyDetail();
+                    renderStrategySteps();
+                }
+            }
+            strategyBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setStrategy(btn.dataset.strategy);
+                });
+            });
+
+            // ============================================================
+            // 6. 资产配置计算 (沿用)
+            // ============================================================
+            function calcAllocation() {
+                const cash = parseFloat($('allocCash').value) || 0;
+                const bond = parseFloat($('allocBond').value) || 0;
+                const astock = parseFloat($('allocAStock').value) || 0;
+                const oversea = parseFloat($('allocOversea').value) || 0;
+                const newInvest = parseFloat($('allocNewInvest').value) || 0;
+                const sp = parseFloat($('allocSp500').value) || 50;
+                const nasdaq = parseFloat($('allocNasdaq').value) || 50;
+                const liq = parseFloat($('allocLiquidity').value) || 50;
+                const total = cash + bond + astock + oversea;
+                const base = { ...STRATEGIES[currentStrategy].base };
+                const valFactor = (100 - (sp + nasdaq) / 2) / 100;
+                const liqFactor = liq / 100;
+                const stockAdj = 0.6 * valFactor + 0.4 * liqFactor;
+                const adjRange = 0.15;
+                const stockShift = (stockAdj - 0.5) * 2 * adjRange;
+                const aStockPct = Math.min(60, Math.max(10, base.astock * (1 + stockShift * 0.7)));
+                const overseaPct = Math.min(40, Math.max(5, base.oversea * (1 + stockShift * 0.5)));
+                const bondPct = Math.min(70, Math.max(20, base.bond * (1 - stockShift * 0.4)));
+                const cashPct = Math.min(25, Math.max(3, base.cash * (1 - stockShift * 0.3)));
+                let raw = { cash: cashPct, bond: bondPct, astock: aStockPct, oversea: overseaPct };
+                const sum = raw.cash + raw.bond + raw.astock + raw.oversea;
+                const target = {
+                    cash: Math.round((raw.cash / sum) * 1000) / 10,
+                    bond: Math.round((raw.bond / sum) * 1000) / 10,
+                    astock: Math.round((raw.astock / sum) * 1000) / 10,
+                    oversea: Math.round((raw.oversea / sum) * 1000) / 10
+                };
+
+                const showPct = (v, t) => t > 0 ? ((v / t) * 100).toFixed(1) : 0;
+                const cp = { cash: showPct(cash, total), bond: showPct(bond, total), astock: showPct(astock, total),
+                    oversea: showPct(oversea, total) };
+                renderBar('currentBar', cp);
+                $('currentStructure').innerHTML =
+                    `<div class="item"><span class="name">现金</span><span>${cp.cash}% (${cash.toFixed(0)}元)</span></div>
+                                <div class="item"><span class="name">债券</span><span>${cp.bond}% (${bond.toFixed(0)}元)</span></div>
+                                <div class="item"><span class="name">A股</span><span>${cp.astock}% (${astock.toFixed(0)}元)</span></div>
+                                <div class="item"><span class="name">海外</span><span>${cp.oversea}% (${oversea.toFixed(0)}元)</span></div>`;
+
+                renderBar('targetBar', target);
+                $('tCash').textContent = target.cash + '%';
+                $('tBond').textContent = target.bond + '%';
+                $('tAStock').textContent = target.astock + '%';
+                $('tOversea').textContent = target.oversea + '%';
+
+                // 调仓建议
+                const currentPcts = { cash: parseFloat(cp.cash) || 0, bond: parseFloat(cp.bond) || 0, astock: parseFloat(cp
+                        .astock) || 0, oversea: parseFloat(cp.oversea) || 0 };
+                const diffPcts = { cash: target.cash - currentPcts.cash, bond: target.bond - currentPcts.bond, astock: target
+                        .astock - currentPcts.astock, oversea: target.oversea - currentPcts.oversea };
+                const diffAmounts = { cash: (diffPcts.cash / 100) * total, bond: (diffPcts.bond / 100) * total, astock: (
+                        diffPcts.astock / 100) * total, oversea: (diffPcts.oversea / 100) * total };
+                const rebalanceContainer = $('rebalanceContainer');
+                const assetNames = ['现金', '债券', 'A股', '海外'];
+                const keys = ['cash', 'bond', 'astock', 'oversea'];
+                let rebalanceHtml = '';
+                keys.forEach((key, idx) => {
+                    const diffPct = diffPcts[key];
+                    let className = 'rebalance-item neutral';
+                    let pctDisplay = diffPct.toFixed(1) + '%';
+                    let amtDisplay = '—';
+                    if (total > 0) {
+                        amtDisplay = Math.abs(diffAmounts[key]).toFixed(0) + '元';
+                    }
+                    if (diffPct > 0.1) {
+                        className = 'rebalance-item buy';
+                        pctDisplay = '+' + diffPct.toFixed(1) + '%';
+                        amtDisplay = '买入 ' + Math.abs(diffAmounts[key]).toFixed(0) + '元';
+                    } else if (diffPct < -0.1) {
+                        className = 'rebalance-item sell';
+                        pctDisplay = diffPct.toFixed(1) + '%';
+                        amtDisplay = '卖出 ' + Math.abs(diffAmounts[key]).toFixed(0) + '元';
+                    } else {
+                        pctDisplay = '0.0%';
+                        amtDisplay = '无需调整';
+                    }
+                    rebalanceHtml += `
+                                <div class="${className}">
+                                    <span class="asset-name">${assetNames[idx]}</span>
+                                    <span class="diff-pct ${diffPct > 0.1 ? 'buy-text' : (diffPct < -0.1 ? 'sell-text' : '')}">${pctDisplay}</span>
+                                    <span class="diff-amount">${amtDisplay}</span>
+                                </div>
+                            `;
+                });
+                rebalanceContainer.innerHTML = rebalanceHtml;
+                $('rebalanceNote').textContent = total > 0 ?
+                    `💡 基于当前总资产 ${total.toFixed(0)} 元，建议按以上操作进行存量再平衡。` :
+                    '💡 当前总资产为0，请先输入资产金额。';
+
+                // 新增资金分配
+                const newTotal = newInvest;
+                const nCash = (target.cash / 100) * newTotal;
+                const nBond = (target.bond / 100) * newTotal;
+                const nAStock = (target.astock / 100) * newTotal;
+                const nOversea = (target.oversea / 100) * newTotal;
+                $('nCash').textContent = nCash.toFixed(0) + '元';
+                $('nBond').textContent = nBond.toFixed(0) + '元';
+                $('nAStock').textContent = nAStock.toFixed(0) + '元';
+                $('nOversea').textContent = nOversea.toFixed(0) + '元';
+                $('newAllocNote').textContent = `新增投资 ${newInvest.toFixed(0)} 元，按目标比例分配`;
+
+                $('aCash').textContent = (cash + nCash).toFixed(0) + '元';
+                $('aBond').textContent = (bond + nBond).toFixed(0) + '元';
+                $('aAStock').textContent = (astock + nAStock).toFixed(0) + '元';
+                $('aOversea').textContent = (oversea + nOversea).toFixed(0) + '元';
+            }
+
+            function renderBar(barId, data) {
+                const bar = $(barId);
+                const keys = ['cash', 'bond', 'astock', 'oversea'];
+                const colors = ['seg-cash', 'seg-bond', 'seg-astock', 'seg-oversea'];
+                const vals = keys.map(k => parseFloat(data[k]) || 0);
+                const total = vals.reduce((a, b) => a + b, 0) || 1;
+                const pcts = vals.map(v => (v / total) * 100);
+                bar.innerHTML = '';
+                let html = '';
+                for (let i = 0; i < 4; i++) {
+                    const w = pcts[i];
+                    if (w < 0.5) html += `<div class="seg ${colors[i]}" style="width:0%;"></div>`;
+                    else html += `<div class="seg ${colors[i]}" style="width:${w}%;">${w.toFixed(0)}%</div>`;
+                }
+                bar.innerHTML = html;
+            }
+
+            $('allocCalcBtn').addEventListener('click', calcAllocation);
+            ['allocCash', 'allocBond', 'allocAStock', 'allocOversea', 'allocNewInvest',
+                'allocSp500', 'allocNasdaq', 'allocLiquidity'
+            ].forEach(id => $(id).addEventListener('input', calcAllocation));
+
+            // ============================================================
+            // 7. 复利计算工具 (沿用)
+            // ============================================================
+            function futureValueWithDCA(start, monthly, annualRate, years, monthsPerYear = 12) {
+                const r = annualRate / 100,
+                    n = monthsPerYear,
+                    t = years;
+                const totalMonths = Math.round(n * t);
+                if (totalMonths <= 0) return 0;
+                const ratePerMonth = Math.pow(1 + r, 1 / n) - 1;
+                let fv = start;
+                for (let i = 0; i < totalMonths; i++) fv = fv * (1 + ratePerMonth) + monthly;
+                return fv;
+            }
+
+            function solveDCA(target, start, annualRate, years, monthsPerYear = 12) {
+                const r = annualRate / 100,
+                    n = monthsPerYear,
+                    t = years;
+                const totalMonths = Math.round(n * t);
+                if (totalMonths <= 0) return 0;
+                const ratePerMonth = Math.pow(1 + r, 1 / n) - 1;
+                if (ratePerMonth === 0) return (target - start) / totalMonths;
+                const fvStart = start * Math.pow(1 + ratePerMonth, totalMonths);
+                const annuityFactor = (Math.pow(1 + ratePerMonth, totalMonths) - 1) / ratePerMonth;
+                return (target - fvStart) / annuityFactor;
+            }
+
+            function solveRate(target, start, monthly, years, monthsPerYear = 12) {
+                const n = monthsPerYear;
+                const totalMonths = Math.round(n * years);
+                if (totalMonths <= 0) return 0;
+                let lo = -0.99,
+                    hi = 2.0;
+                for (let iter = 0; iter < 100; iter++) {
+                    const mid = (lo + hi) / 2;
+                    const fv = futureValueWithDCA(start, monthly, mid * 100, years, n);
+                    if (fv < target) lo = mid;
+                    else hi = mid;
+                }
+                return (lo + hi) / 2;
+            }
+
+            function solvePeriod(target, start, annualRate, monthly, monthsPerYear = 12) {
+                const r = annualRate / 100,
+                    n = monthsPerYear;
+                const ratePerMonth = Math.pow(1 + r, 1 / n) - 1;
+                if (ratePerMonth === 0) {
+                    const needed = target - start;
+                    if (needed <= 0) return 0;
+                    return needed / monthly;
+                }
+                let lo = 0,
+                    hi = 1200;
+                for (let iter = 0; iter < 100; iter++) {
+                    const mid = (lo + hi) / 2;
+                    const fv = futureValueWithDCA(start, monthly, annualRate, mid / n, n);
+                    if (fv < target) lo = mid;
+                    else hi = mid;
+                }
+                return (lo + hi) / 2;
+            }
+
+            // ============================================================
+            // 8. 图表绑定 (沿用)
+            // ============================================================
+            let fChartInstance = null,
+                dChartInstance = null,
+                rChartInstance = null,
+                pChartInstance = null;
+
+            function renderChart(canvasId, data, years, label, existingInstance, setInstance) {
+                const canvas = $(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (existingInstance) existingInstance.destroy();
+                const labels = [];
+                const step = Math.max(1, Math.floor(data.length / 60));
+                for (let i = 0; i < data.length; i += step) {
+                    const month = i;
+                    labels.push((month / 12).toFixed(1) + 'y');
+                }
+                if (data.length > 0 && (data.length - 1) % step !== 0) {
+                    labels.push((data.length / 12).toFixed(1) + 'y');
+                }
+                const chartData = [];
+                for (let i = 0; i < data.length; i += step) chartData.push(data[i]);
+                if (data.length > 0 && (data.length - 1) % step !== 0) chartData.push(data[data.length - 1]);
+                const instance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{ label: label || '资产', data: chartData, borderColor: '#1a3a5c',
+                                backgroundColor: 'rgba(26,58,92,0.06)', fill: true, tension: 0.3, pointRadius: 0,
+                                borderWidth: 2.5 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { maxTicksLimit: 20, font: { size: 10 } } },
+                            y: {
+                                grid: { color: 'rgba(0,0,0,0.04)' },
+                                ticks: { callback: function(value) { if (value >= 10000) return (value / 10000)
+                                            .toFixed(0) + '万'; return value.toFixed(0); } }
+                            }
+                        }
+                    }
+                });
+                setInstance(instance);
+            }
+
+            function bindCalc(btnId, inputs, calcFn) {
+                const btn = $(btnId);
+                btn.addEventListener('click', calcFn);
+                inputs.forEach(id => $(id).addEventListener('input', calcFn));
+            }
+
+            function calcFinal() {
+                const start = parseFloat($('fStart').value) || 0,
+                    years = parseFloat($('fYears').value) || 1,
+                    rate = parseFloat($('fRate').value) || 0,
+                    dca = parseFloat($('fDCA').value) || 0;
+                const totalMonths = Math.round(12 * years);
+                const ratePerMonth = Math.pow(1 + rate / 100, 1 / 12) - 1;
+                let balance = start;
+                const data = [];
+                for (let i = 0; i <= totalMonths; i++) {
+                    data.push(balance);
+                    if (i < totalMonths) balance = balance * (1 + ratePerMonth) + dca;
+                }
+                const finalVal = balance;
+                const principal = start + dca * totalMonths;
+                const interest = finalVal - principal;
+                $('fFinal').textContent = finalVal.toFixed(2) + ' 元';
+                $('fPrincipal').textContent = principal.toFixed(2) + ' 元';
+                $('fInterest').textContent = interest.toFixed(2) + ' 元';
+                renderChart('fChart', data, years, '最终金额增长', fChartInstance, instance => { fChartInstance = instance; });
+            }
+
+            function calcDCA() {
+                const target = parseFloat($('dTarget').value) || 0,
+                    start = parseFloat($('dStart').value) || 0,
+                    years = parseFloat($('dYears').value) || 1,
+                    rate = parseFloat($('dRate').value) || 0;
+                const monthly = solveDCA(target, start, rate, years);
+                const totalMonths = Math.round(12 * years);
+                const principal = start + monthly * totalMonths;
+                const interest = target - principal;
+                $('dMonthly').textContent = monthly.toFixed(2) + ' 元';
+                $('dPrincipal').textContent = principal.toFixed(2) + ' 元';
+                $('dInterest').textContent = interest.toFixed(2) + ' 元';
+                const ratePerMonth = Math.pow(1 + rate / 100, 1 / 12) - 1;
+                let bal = start;
+                const data = [];
+                for (let i = 0; i <= totalMonths; i++) {
+                    data.push(bal);
+                    if (i < totalMonths) bal = bal * (1 + ratePerMonth) + monthly;
+                }
+                renderChart('dChart', data, years, '资产增长 (定投)', dChartInstance, instance => { dChartInstance = instance; });
+            }
+
+            function calcReturn() {
+                const target = parseFloat($('rTarget').value) || 0,
+                    start = parseFloat($('rStart').value) || 0,
+                    years = parseFloat($('rYears').value) || 1,
+                    dca = parseFloat($('rDCA').value) || 0;
+                const rate = solveRate(target, start, dca, years);
+                const ratePct = rate * 100;
+                const totalMonths = Math.round(12 * years);
+                const principal = start + dca * totalMonths;
+                const interest = target - principal;
+                $('rRequired').textContent = ratePct.toFixed(2) + '%';
+                $('rPrincipal').textContent = principal.toFixed(2) + ' 元';
+                $('rInterest').textContent = interest.toFixed(2) + ' 元';
+                const ratePerMonth = Math.pow(1 + rate, 1 / 12) - 1;
+                let bal = start;
+                const data = [];
+                for (let i = 0; i <= totalMonths; i++) {
+                    data.push(bal);
+                    if (i < totalMonths) bal = bal * (1 + ratePerMonth) + dca;
+                }
+                renderChart('rChart', data, years, '资产增长曲线', rChartInstance, instance => { rChartInstance = instance; });
+            }
+
+            function calcPeriod() {
+                const target = parseFloat($('pTarget').value) || 0,
+                    start = parseFloat($('pStart').value) || 0,
+                    rate = parseFloat($('pRate').value) || 0,
+                    dca = parseFloat($('pDCA').value) || 0;
+                const months = solvePeriod(target, start, rate, dca);
+                const years = months / 12;
+                const yearsInt = Math.floor(years);
+                const monthsRem = Math.round((years - yearsInt) * 12);
+                let periodStr = yearsInt + ' 年';
+                if (monthsRem > 0) periodStr += ' ' + monthsRem + ' 个月';
+                if (years < 0.01) periodStr = '已达成';
+                const totalMonths = Math.round(months);
+                const principal = start + dca * totalMonths;
+                const interest = target - principal;
+                $('pPeriod').textContent = periodStr;
+                $('pPrincipal').textContent = principal.toFixed(2) + ' 元';
+                $('pInterest').textContent = interest.toFixed(2) + ' 元';
+                const ratePerMonth = Math.pow(1 + rate / 100, 1 / 12) - 1;
+                let bal = start;
+                const data = [];
+                const steps = Math.max(1, Math.min(totalMonths, 240));
+                for (let i = 0; i <= steps; i++) {
+                    const idx = Math.floor((i / steps) * totalMonths);
+                    data.push(bal);
+                    if (idx < totalMonths) bal = bal * (1 + ratePerMonth) + dca;
+                }
+                renderChart('pChart', data, years, '资产增长', pChartInstance, instance => { pChartInstance = instance; });
+            }
+
+            bindCalc('fCalcBtn', ['fStart', 'fYears', 'fRate', 'fDCA'], calcFinal);
+            bindCalc('dCalcBtn', ['dTarget', 'dStart', 'dYears', 'dRate'], calcDCA);
+            bindCalc('rCalcBtn', ['rTarget', 'rStart', 'rYears', 'rDCA'], calcReturn);
+            bindCalc('pCalcBtn', ['pTarget', 'pStart', 'pRate', 'pDCA'], calcPeriod);
+
+            // ============================================================
+            // 9. 标的池 (沿用)
+            // ============================================================
+            const STORAGE_KEY = 'watchlist_data';
+
+            function getWatchlist() {
+                try {
+                    const data = localStorage.getItem(STORAGE_KEY);
+                    return data ? JSON.parse(data) : [];
+                } catch { return []; }
+            }
+
+            function saveWatchlist(list) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            }
+
+            function addWatchItem(name, type, status, price, note) {
+                const list = getWatchlist();
+                list.push({
+                    id: Date.now(),
+                    name: name.trim(),
+                    type: type,
+                    status: status,
+                    price: price.trim(),
+                    note: note.trim(),
+                    createdAt: new Date().toLocaleString()
+                });
+                saveWatchlist(list);
+                renderWatchlist();
+            }
+
+            function deleteWatchItem(id) {
+                let list = getWatchlist();
+                list = list.filter(item => item.id !== id);
+                saveWatchlist(list);
+                renderWatchlist();
+            }
+
+            function clearWatchlist() {
+                if (confirm('确定要清空所有标的吗？')) {
+                    saveWatchlist([]);
+                    renderWatchlist();
+                }
+            }
+
+            function renderWatchlist() {
+                const list = getWatchlist();
+                const filterType = $('filterType').value;
+                const filterStatus = $('filterStatus').value;
+                const filtered = list.filter(item => {
+                    const matchType = filterType === 'all' || item.type === filterType;
+                    const matchStatus = filterStatus === 'all' || item.status === filterStatus;
+                    return matchType && matchStatus;
+                });
+                $('watchCount').textContent = filtered.length;
+
+                const tbody = $('watchTableBody');
+                if (filtered.length === 0) {
+                    tbody.innerHTML =
+                        `<tr><td colspan="7" style="text-align:center;color:var(--text-light);">暂无匹配标的</td></tr>`;
+                    return;
+                }
+                const typeMap = {
+                    macro: '宏观指标',
+                    industry: '行业ETF',
+                    fund: '个股基金',
+                    bottom: '底仓标的'
+                };
+                const statusMap = {
+                    observe: '观察中',
+                    reserve: '储备',
+                    hold: '已持仓'
+                };
+                const badgeClass = {
+                    macro: 'macro',
+                    industry: 'industry',
+                    fund: 'fund',
+                    bottom: 'bottom'
+                };
+                const statusClass = {
+                    observe: 'observe',
+                    reserve: 'reserve',
+                    hold: 'hold'
+                };
+                let html = '';
+                filtered.forEach(item => {
+                    html += `
+                                <tr>
+                                    <td><strong>${item.name}</strong></td>
+                                    <td><span class="stock-badge ${badgeClass[item.type] || ''}">${typeMap[item.type] || item.type}</span></td>
+                                    <td><span class="stock-status ${statusClass[item.status] || ''}">${statusMap[item.status] || item.status}</span></td>
+                                    <td>${item.price || '—'}</td>
+                                    <td>${item.note || '—'}</td>
+                                    <td>${item.createdAt || '—'}</td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="deleteWatchItem(${item.id})">删除</button></td>
+                                </tr>
+                            `;
+                });
+                tbody.innerHTML = html;
+            }
+
+            $('addWatchBtn').addEventListener('click', function() {
+                const name = $('watchName').value.trim();
+                const type = $('watchType').value;
+                const status = $('watchStatus').value;
+                const price = $('watchPrice').value.trim();
+                const note = $('watchNote').value.trim();
+                if (!name) {
+                    alert('请输入标的名称');
+                    return;
+                }
+                addWatchItem(name, type, status, price, note);
+                $('watchName').value = '';
+                $('watchPrice').value = '';
+                $('watchNote').value = '';
+            });
+
+            $('clearWatchBtn').addEventListener('click', clearWatchlist);
+            $('filterType').addEventListener('change', renderWatchlist);
+            $('filterStatus').addEventListener('change', renderWatchlist);
+            window.deleteWatchItem = deleteWatchItem;
+
+            // ============================================================
+            // 10. 策略构建渲染函数
+            // ============================================================
+            function renderStrategyDetail() {
+                const container = $('strategyDetailContainer');
+                if (!container) return;
+                const detail = STRATEGY_DETAILS[currentStrategy];
+                if (!detail) return;
+                const targetPcts = getCurrentTargetPcts();
+                const showPcts = targetPcts || detail.baseConfig;
+                const pctStr =
+                    `现金 ${showPcts.cash}% · 债券 ${showPcts.bond}% · A股 ${showPcts.astock}% · 海外 ${showPcts.oversea}%`;
+
+                let casesHtml = '';
+                if (detail.cases && detail.cases.length) {
+                    casesHtml = detail.cases.map(c => `<span class="case-item">${c}</span>`).join(' ');
+                }
+
+                container.innerHTML = `
+                            <div class="strategy-card" style="border-left-color: var(--accent-green);">
+                                <div class="strategy-name">${detail.name}</div>
+                                <div class="strategy-tag">${detail.tag} ⭐ 当前策略</div>
+                                <div class="detail-grid">
+                                    <div class="detail-item"><span class="label">🎯 目标</span><span class="value">${detail.objective}</span></div>
+                                    <div class="detail-item"><span class="label">👤 适合人群</span><span class="value">${detail.suitablePeople}</span></div>
+                                    <div class="detail-item"><span class="label">📊 适合市场</span><span class="value">${detail.suitableMarket}</span></div>
+                                    <div class="detail-item"><span class="label">⏳ 投资期限</span><span class="value">${detail.horizon}</span></div>
+                                    <div class="detail-item"><span class="label">📉 历史最大回撤</span><span class="value">${detail.maxDrawdown}</span></div>
+                                    <div class="detail-item"><span class="label">📈 年化收益（参考）</span><span class="value">${detail.annualReturn}</span></div>
+                                    <div class="detail-item"><span class="label">🧮 比例计算方式</span><span class="value">${detail.calcMethod}</span></div>
+                                    <div class="detail-item" style="grid-column: 1 / -1;"><span class="label">⚙️ 具体参数</span><span class="value">${detail.params}</span></div>
+                                </div>
+                                <div class="config-result">
+                                    <span style="font-weight:600;">📈 配置结果：</span>
+                                    <span class="asset-pct">${pctStr}</span>
+                                    <span style="background:var(--accent-green);color:#fff;padding:0 12px;border-radius:30px;font-size:12px;margin-left:8px;">当前生效</span>
+                                </div>
+                                ${casesHtml ? `<div class="case-box"><div class="case-title">🌟 代表案例 / 投资机构 / 投资人</div><div>${casesHtml}</div></div>` : ''}
+                            </div>
+                        `;
+            }
+
+            function renderStrategySteps() {
+                const container = $('strategyStepsContainer');
+                if (!container) return;
+                const detail = STRATEGY_DETAILS[currentStrategy];
+                if (!detail) return;
+
+                // 将步骤文本转换为有序列表
+                const stepsList = detail.steps ? detail.steps.split('\n').filter(s => s.trim().length > 0).map(s => s.trim()) :
+                    [];
+                let stepsHtml = '';
+                if (stepsList.length) {
+                    stepsHtml = `<ul>${stepsList.map(s => `<li>${s.replace(/^[\d.]+/, '').trim()}</li>`).join('')}</ul>`;
+                } else {
+                    stepsHtml = '<p>暂无详细步骤</p>';
+                }
+
+                // 计算示例，保留换行
+                const calcExampleHtml = detail.calcExample ? `<pre style="white-space:pre-wrap;background:#f4f7fb;padding:12px;border-radius:6px;font-size:13px;line-height:1.5;">${detail.calcExample}</pre>` :
+                    '<p>暂无示例</p>';
+
+                container.innerHTML = `
+                            <div class="step-box">
+                                <h4>📋 实现步骤</h4>
+                                ${stepsHtml}
+                            </div>
+                            <div class="step-box">
+                                <h4>🧮 参数计算过程与示例</h4>
+                                ${calcExampleHtml}
+                            </div>
+                            <div style="margin-top:16px;padding:12px 16px;background:var(--primary-lighter);border-radius:var(--radius-sm);">
+                                <p style="font-size:14px;color:var(--text-light);">
+                                    <strong>💡 提示：</strong>以上步骤和参数为通用框架，实际应用需根据具体资产数据、风险偏好和市场环境进行调整。建议使用历史数据回测优化参数。
+                                </p>
+                            </div>
+                        `;
+            }
+
+            // 获取当前目标比例（从DOM读取）
+            function getCurrentTargetPcts() {
+                const tCash = parseFloat($('tCash')?.textContent || '0');
+                const tBond = parseFloat($('tBond')?.textContent || '0');
+                const tAStock = parseFloat($('tAStock')?.textContent || '0');
+                const tOversea = parseFloat($('tOversea')?.textContent || '0');
+                if (tCash === 0 && tBond === 0 && tAStock === 0 && tOversea === 0) return null;
+                return { cash: tCash, bond: tBond, astock: tAStock, oversea: tOversea };
+            }
+
+            // ============================================================
+            // 11. 策略构建子Tab切换
+            // ============================================================
+            const subTabBtns = $$('.sub-tab-btn');
+            const subPanels = {
+                subDetail: $('subDetail'),
+                subSteps: $('subSteps'),
+            };
+
+            subTabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    subTabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const target = this.dataset.subtab;
+                    Object.keys(subPanels).forEach(key => {
+                        subPanels[key].classList.toggle('active', key === target);
+                    });
+                    // 如果切换到步骤，重新渲染（可能内容已变）
+                    if (target === 'subSteps') renderStrategySteps();
+                });
+            });
+
+            // ============================================================
+            // 12. 初始化
+            // ============================================================
+            setStrategy('riskParity');
+            setTimeout(() => {
+                calcFinal();
+                calcDCA();
+                calcReturn();
+                calcPeriod();
+                renderWatchlist();
+                // 策略构建默认显示详情
+                renderStrategyDetail();
+                renderStrategySteps();
+            }, 100);
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.fChart) window.fChart.resize();
+                    if (window.dChart) window.dChart.resize();
+                    if (window.rChart) window.rChart.resize();
+                    if (window.pChart) window.pChart.resize();
+                }, 300);
+            });
+
+            Object.defineProperty(window, 'fChart', { get: () => fChartInstance });
+            Object.defineProperty(window, 'dChart', { get: () => dChartInstance });
+            Object.defineProperty(window, 'rChart', { get: () => rChartInstance });
+            Object.defineProperty(window, 'pChart', { get: () => pChartInstance });
+
+        })();
+    </script>
+
+</body>
+</html>
