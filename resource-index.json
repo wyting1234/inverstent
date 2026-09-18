@@ -1,10 +1,10 @@
 {
  "title": "投研资源工作台",
- "version": "V20260918 AA",
- "navVersion": "V20260918 aa",
+ "version": "V20260918 AB",
+ "navVersion": "V20260918 ab",
  "updated": "2026-09-18",
  "source": "favorites_2026_9_18.html（浏览器收藏夹导出）",
- "count": 267,
+ "count": 256,
  "tags": [
   "估值分位",
   "内容运营",
@@ -86,22 +86,22 @@
   {
    "cat": "社区论坛与人物",
    "icon": "💬",
-   "n": 26
+   "n": 25
   },
   {
    "cat": "量化回测与训练工具",
    "icon": "🧪",
-   "n": 9
+   "n": 8
   },
   {
    "cat": "投资书籍与书目",
    "icon": "📚",
-   "n": 47
+   "n": 45
   },
   {
    "cat": "电子书·网盘检索",
    "icon": "🔍",
-   "n": 38
+   "n": 36
   },
   {
    "cat": "投顾业务与财富管理",
@@ -111,7 +111,7 @@
   {
    "cat": "广发内部平台与展业",
    "icon": "🏢",
-   "n": 27
+   "n": 22
   },
   {
    "cat": "合规·报送·协会",
@@ -119,6 +119,8 @@
    "n": 3
   }
  ],
+ "mergedGroups": 9,
+ "mergedRemoved": 11,
  "fields": {
   "name": "短名（用于卡片标题）",
   "cat": "一级分类",
@@ -127,7 +129,8 @@
   "what": "主要内容",
   "use": "使用方向",
   "url": "链接",
-  "host": "域名"
+  "host": "域名",
+  "merged": "已合并的同类入口（列表，含 url 与合并理由）"
  },
  "items": [
   {
@@ -1781,26 +1784,20 @@
    "cat": "社区论坛与人物",
    "sub": "社区与社群",
    "tags": [
-    "社区论坛"
-   ],
-   "what": "雪球与付费社群",
-   "use": "看讨论、跟进社群内容",
-   "url": "https://www.zsxq.com/",
-   "host": "www.zsxq.com"
-  },
-  {
-   "id": "r122",
-   "name": "知识星球 (2)",
-   "cat": "社区论坛与人物",
-   "sub": "社区与社群",
-   "tags": [
     "社区论坛",
     "多入口"
    ],
    "what": "雪球与付费社群",
    "use": "看讨论、跟进社群内容",
-   "url": "https://wx.zsxq.com/dweb2/index/group/88858512824442",
-   "host": "wx.zsxq.com"
+   "url": "https://www.zsxq.com/",
+   "host": "www.zsxq.com",
+   "merged": [
+    {
+     "name": "知识星球",
+     "url": "https://wx.zsxq.com/dweb2/index/group/88858512824442",
+     "note": "知识星球 · 具体群组页（依赖登录与成员身份）"
+    }
+   ]
   },
   {
    "id": "r123",
@@ -1926,21 +1923,8 @@
    "host": "www.annualreviews.org"
   },
   {
-   "id": "r132",
-   "name": "BackTest 量化策略平台",
-   "cat": "量化回测与训练工具",
-   "sub": "量化与回测",
-   "tags": [
-    "量化回测"
-   ],
-   "what": "量化平台与回测环境",
-   "use": "验证策略想法、跑历史数据",
-   "url": "https://backtest.10jqka.com.cn/backtest/app.html#/strategysquare/457323",
-   "host": "backtest.10jqka.com.cn"
-  },
-  {
    "id": "r133",
-   "name": "BackTest 量化策略平台 (2)",
+   "name": "BackTest 量化策略平台",
    "cat": "量化回测与训练工具",
    "sub": "量化与回测",
    "tags": [
@@ -1950,7 +1934,14 @@
    "what": "量化平台与回测环境",
    "use": "验证策略想法、跑历史数据",
    "url": "https://backtest.10jqka.com.cn/backtest/app.html#/strategybacktest",
-   "host": "backtest.10jqka.com.cn"
+   "host": "backtest.10jqka.com.cn",
+   "merged": [
+    {
+     "name": "BackTest 量化策略平台",
+     "url": "https://backtest.10jqka.com.cn/backtest/app.html#/strategysquare/457323",
+     "note": "同一平台的单个策略页（策略易失效）"
+    }
+   ]
   },
   {
    "id": "r134",
@@ -2055,27 +2046,20 @@
    "cat": "投资书籍与书目",
    "sub": "书目",
    "tags": [
-    "投资书籍"
-   ],
-   "what": "具体投资书籍",
-   "use": "想系统学某方法时找这本",
-   "url": "https://www.7help.net/809.html",
-   "host": "www.7help.net"
-  },
-  {
-   "id": "r142",
-   "name": "K线黄金定律(书) (2)",
-   "cat": "投资书籍与书目",
-   "sub": "书目",
-   "tags": [
-    "电子书搜索",
     "投资书籍",
     "多入口"
    ],
    "what": "具体投资书籍",
    "use": "想系统学某方法时找这本",
-   "url": "https://www.shukui.net/book/266795.html",
-   "host": "www.shukui.net"
+   "url": "https://www.7help.net/809.html",
+   "host": "www.7help.net",
+   "merged": [
+    {
+     "name": "K线黄金定律(书)",
+     "url": "https://www.shukui.net/book/266795.html",
+     "note": "同一本书的另一个书站书目页"
+    }
+   ]
   },
   {
    "id": "r143",
@@ -2409,22 +2393,8 @@
    "host": "www.j9p.com"
   },
   {
-   "id": "r167",
-   "name": "渐行渐近的金融周期(书)",
-   "cat": "投资书籍与书目",
-   "sub": "书目",
-   "tags": [
-    "宏观政策",
-    "投资书籍"
-   ],
-   "what": "具体投资书籍",
-   "use": "想系统学某方法时找这本",
-   "url": "http://www.j9p.com/search.asp?keyword=%BD%A5%D0%D0%BD%A5%BD%FC%B5%C4%BD%F0%C8%DA%D6%DC%C6%DA&searchType=",
-   "host": "www.j9p.com"
-  },
-  {
    "id": "r168",
-   "name": "渐行渐近的金融周期(书) (2)",
+   "name": "渐行渐近的金融周期(书)",
    "cat": "投资书籍与书目",
    "sub": "书目",
    "tags": [
@@ -2436,7 +2406,14 @@
    "what": "具体投资书籍",
    "use": "想系统学某方法时找这本",
    "url": "https://ebook2.lorefree.com/book?account=&bookid=71216",
-   "host": "ebook2.lorefree.com"
+   "host": "ebook2.lorefree.com",
+   "merged": [
+    {
+     "name": "渐行渐近的金融周期(书)",
+     "url": "http://www.j9p.com/search.asp?keyword=%BD%A5%D0%D0%BD%A5%BD%FC%B5%C4%BD%F0%C8%DA%D6%DC%C6%DA&searchType=",
+     "note": "GBK 编码的搜索页（无长期价值）"
+    }
+   ]
   },
   {
    "id": "r169",
@@ -2752,26 +2729,20 @@
    "cat": "电子书·网盘检索",
    "sub": "电子书库",
    "tags": [
-    "电子书搜索"
-   ],
-   "what": "全球电子书库入口",
-   "use": "直接搜书名下书",
-   "url": "https://libgen.vc/",
-   "host": "libgen.vc"
-  },
-  {
-   "id": "r192",
-   "name": "Library Genesis (2)",
-   "cat": "电子书·网盘检索",
-   "sub": "电子书库",
-   "tags": [
     "电子书搜索",
     "多入口"
    ],
    "what": "全球电子书库入口",
    "use": "直接搜书名下书",
-   "url": "https://libgen.gl/index.php?req=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85&columns%5B%5D=t&columns%5B%5D=a&columns%5B%5D=s&columns%5B%5D=y&columns%5B%5D=p&columns%5B%5D=i&objects%5B%5D=f&objects%5B%5D=e&objects%5B%5D=s&objects%5B%5D=a&objects%5B%5D=p&objects%5B%5D=w&topics%5B%5D=l&topics%5B%5D=c&topics%5B%5D=f&topics%5B%5D=a&topics%5B%5D=m&topics%5B%5D=r&topics%5B%5D=s&res=25&filesuns=all",
-   "host": "libgen.gl"
+   "url": "https://libgen.vc/",
+   "host": "libgen.vc",
+   "merged": [
+    {
+     "name": "Library Genesis",
+     "url": "https://libgen.gl/index.php?req=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85&columns%5B%5D=t&columns%5B%5D=a&columns%5B%5D=s&columns%5B%5D=y&columns%5B%5D=p&columns%5B%5D=i&objects%5B%5D=f&objects%5B%5D=e&objects%5B%5D=s&objects%5B%5D=a&objects%5B%5D=p&objects%5B%5D=w&topics%5B%5D=l&topics%5B%5D=c&topics%5B%5D=f&topics%5B%5D=a&topics%5B%5D=m&topics%5B%5D=r&topics%5B%5D=s&res=25&filesuns=all",
+     "note": "libgen.gl 镜像的搜索结果页"
+    }
+   ]
   },
   {
    "id": "r193",
@@ -2994,27 +2965,20 @@
    "sub": "网盘搜索",
    "tags": [
     "资源站",
-    "电子书搜索"
-   ],
-   "what": "网盘资源搜索引擎",
-   "use": "找 PDF / 资料时换个来源",
-   "url": "https://www.toplinks.cc/s/?keyword=%E5%8F%8D%E5%B8%82%E5%9C%BA",
-   "host": "www.toplinks.cc"
-  },
-  {
-   "id": "r210",
-   "name": "淘链客 (2)",
-   "cat": "电子书·网盘检索",
-   "sub": "网盘搜索",
-   "tags": [
-    "资源站",
     "电子书搜索",
     "多入口"
    ],
    "what": "网盘资源搜索引擎",
    "use": "找 PDF / 资料时换个来源",
-   "url": "http://www.toplinks.cc/s/?keyword=%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88",
-   "host": "www.toplinks.cc"
+   "url": "https://www.toplinks.cc/s/?keyword=%E5%8F%8D%E5%B8%82%E5%9C%BA",
+   "host": "www.toplinks.cc",
+   "merged": [
+    {
+     "name": "淘链客",
+     "url": "http://www.toplinks.cc/s/?keyword=%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88",
+     "note": "同一站另一个关键词的搜索页"
+    }
+   ]
   },
   {
    "id": "r211",
@@ -3499,41 +3463,25 @@
    "sub": "投顾业务",
    "tags": [
     "投顾平台",
-    "内网办公"
-   ],
-   "what": "投顾业务管理平台",
-   "use": "日常投顾展业主入口",
-   "url": "http://ia.gf.com.cn/ia2-web/information/index",
-   "host": "ia.gf.com.cn"
-  },
-  {
-   "id": "r247",
-   "name": "广发投顾管理平台 (2)",
-   "cat": "广发内部平台与展业",
-   "sub": "投顾业务",
-   "tags": [
-    "投顾平台",
     "内网办公",
     "多入口"
    ],
    "what": "投顾业务管理平台",
    "use": "日常投顾展业主入口",
-   "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=74",
-   "host": "ia.gf.com.cn"
-  },
-  {
-   "id": "r248",
-   "name": "广发投顾管理平台2",
-   "cat": "广发内部平台与展业",
-   "sub": "投顾业务",
-   "tags": [
-    "投顾平台",
-    "内网办公"
-   ],
-   "what": "投顾业务管理平台(2)",
-   "use": "另一入口，按需切换",
-   "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=149",
-   "host": "ia.gf.com.cn"
+   "url": "http://ia.gf.com.cn/ia2-web/information/index",
+   "host": "ia.gf.com.cn",
+   "merged": [
+    {
+     "name": "广发投顾管理平台",
+     "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=74",
+     "note": "投顾平台 · categoryId=74"
+    },
+    {
+     "name": "广发投顾管理平台2",
+     "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=149",
+     "note": "投顾平台 · categoryId=149"
+    }
+   ]
   },
   {
    "id": "r249",
@@ -3598,27 +3546,20 @@
    "sub": "数据与报表",
    "tags": [
     "数据分析",
-    "内网办公"
-   ],
-   "what": "数字化智能中台",
-   "use": "取数、看经营指标",
-   "url": "https://aio.gf.com.cn/long/login?theme=pc&login_type=oa&client_id=support&redirect_uri=https://aio.gf.com.cn/api/auth/oa/callback?redirect=L2xvbmcvYWktcGVhay12Mg==",
-   "host": "aio.gf.com.cn"
-  },
-  {
-   "id": "r254",
-   "name": "数字化智能中台 (2)",
-   "cat": "广发内部平台与展业",
-   "sub": "数据与报表",
-   "tags": [
-    "数据分析",
     "内网办公",
     "多入口"
    ],
    "what": "数字化智能中台",
    "use": "取数、看经营指标",
-   "url": "https://aio.gf.com.cn/long/ai-peak-v2/137dd9b0-c251-4d0e-9095-ed2368a63afa",
-   "host": "aio.gf.com.cn"
+   "url": "https://aio.gf.com.cn/long/login?theme=pc&login_type=oa&client_id=support&redirect_uri=https://aio.gf.com.cn/api/auth/oa/callback?redirect=L2xvbmcvYWktcGVhay12Mg==",
+   "host": "aio.gf.com.cn",
+   "merged": [
+    {
+     "name": "数字化智能中台",
+     "url": "https://aio.gf.com.cn/long/ai-peak-v2/137dd9b0-c251-4d0e-9095-ed2368a63afa",
+     "note": "智能中台 · 具体看板 GUID 页"
+    }
+   ]
   },
   {
    "id": "r255",
@@ -3685,42 +3626,25 @@
    "sub": "业务与客户",
    "tags": [
     "财富管理",
-    "内网办公"
+    "内网办公",
+    "多入口"
    ],
    "what": "财富管理平台",
    "use": "配置方案与产品管理",
    "url": "http://wm.gf.com.cn/#/home/index",
-   "host": "wm.gf.com.cn"
-  },
-  {
-   "id": "r260",
-   "name": "财富管理平台 (2)",
-   "cat": "广发内部平台与展业",
-   "sub": "业务与客户",
-   "tags": [
-    "财富管理",
-    "内网办公",
-    "多入口"
-   ],
-   "what": "财富管理平台",
-   "use": "配置方案与产品管理",
-   "url": "http://wm.gf.com.cn/#/invest/simulatedInvestment",
-   "host": "wm.gf.com.cn"
-  },
-  {
-   "id": "r261",
-   "name": "财富管理平台 (3)",
-   "cat": "广发内部平台与展业",
-   "sub": "业务与客户",
-   "tags": [
-    "财富管理",
-    "内网办公",
-    "多入口"
-   ],
-   "what": "财富管理平台",
-   "use": "配置方案与产品管理",
-   "url": "http://wm.gf.com.cn/v2/#/v1/invest/simulatedInvestment",
-   "host": "wm.gf.com.cn"
+   "host": "wm.gf.com.cn",
+   "merged": [
+    {
+     "name": "财富管理平台",
+     "url": "http://wm.gf.com.cn/#/invest/simulatedInvestment",
+     "note": "财富管理平台 · 模拟投资路由"
+    },
+    {
+     "name": "财富管理平台",
+     "url": "http://wm.gf.com.cn/v2/#/v1/invest/simulatedInvestment",
+     "note": "财富管理平台 · v2 模拟投资路由"
+    }
+   ]
   },
   {
    "id": "r262",
