@@ -1,0 +1,3806 @@
+{
+ "title": "投研资源工作台",
+ "version": "V20260918 AA",
+ "navVersion": "V20260918 aa",
+ "updated": "2026-09-18",
+ "source": "favorites_2026_9_18.html（浏览器收藏夹导出）",
+ "count": 267,
+ "tags": [
+  "估值分位",
+  "内容运营",
+  "内网办公",
+  "合规报送",
+  "培训投教",
+  "基金ETF",
+  "复盘",
+  "外挂定制",
+  "多入口",
+  "大宗商品",
+  "宏观政策",
+  "展业客户",
+  "情绪指标",
+  "投资书籍",
+  "投顾平台",
+  "指数",
+  "指标公式",
+  "教程",
+  "数据分析",
+  "新股IPO",
+  "时政权威",
+  "板块题材",
+  "涨跌停情绪",
+  "电子书搜索",
+  "电子报",
+  "看盘训练",
+  "研报机构",
+  "社区论坛",
+  "竞价盘口",
+  "网盘搜索",
+  "行情数据",
+  "财富管理",
+  "财报基本面",
+  "资源站",
+  "资讯快讯",
+  "资金流",
+  "跟踪人物",
+  "通达信",
+  "量化回测",
+  "龙虎榜游资"
+ ],
+ "categories": [
+  {
+   "cat": "行情·估值·数据源",
+   "icon": "📊",
+   "n": 14
+  },
+  {
+   "cat": "通达信数据口",
+   "icon": "🔌",
+   "n": 35
+  },
+  {
+   "cat": "通达信外挂与定制",
+   "icon": "🧩",
+   "n": 15
+  },
+  {
+   "cat": "复盘与情绪博弈",
+   "icon": "🌡️",
+   "n": 3
+  },
+  {
+   "cat": "财经资讯与电子报",
+   "icon": "📰",
+   "n": 23
+  },
+  {
+   "cat": "宏观政策与时政参考",
+   "icon": "🏛️",
+   "n": 9
+  },
+  {
+   "cat": "研报与机构观点",
+   "icon": "📑",
+   "n": 4
+  },
+  {
+   "cat": "社区论坛与人物",
+   "icon": "💬",
+   "n": 26
+  },
+  {
+   "cat": "量化回测与训练工具",
+   "icon": "🧪",
+   "n": 9
+  },
+  {
+   "cat": "投资书籍与书目",
+   "icon": "📚",
+   "n": 47
+  },
+  {
+   "cat": "电子书·网盘检索",
+   "icon": "🔍",
+   "n": 38
+  },
+  {
+   "cat": "投顾业务与财富管理",
+   "icon": "💼",
+   "n": 14
+  },
+  {
+   "cat": "广发内部平台与展业",
+   "icon": "🏢",
+   "n": 27
+  },
+  {
+   "cat": "合规·报送·协会",
+   "icon": "📮",
+   "n": 3
+  }
+ ],
+ "fields": {
+  "name": "短名（用于卡片标题）",
+  "cat": "一级分类",
+  "sub": "二级分类",
+  "tags": "检索标签（便于按用途调取）",
+  "what": "主要内容",
+  "use": "使用方向",
+  "url": "链接",
+  "host": "域名"
+ },
+ "items": [
+  {
+   "id": "r001",
+   "name": "CoQuant 科宽",
+   "cat": "行情·估值·数据源",
+   "sub": "选股与智能投研",
+   "tags": [
+    "行情数据"
+   ],
+   "what": "选股与智能投研工具",
+   "use": "找标的、跑条件筛选",
+   "url": "http://112.74.178.199/indices.html?sessionid=874709598",
+   "host": "112.74.178.199"
+  },
+  {
+   "id": "r002",
+   "name": "价值投资导航(Value500)",
+   "cat": "行情·估值·数据源",
+   "sub": "资源导航",
+   "tags": [
+    "行情数据"
+   ],
+   "what": "价值投资资源导航",
+   "use": "找价值投资资料时的入口",
+   "url": "http://value500.com/",
+   "host": "value500.com"
+  },
+  {
+   "id": "r003",
+   "name": "基金筛选",
+   "cat": "行情·估值·数据源",
+   "sub": "基金与产品",
+   "tags": [
+    "基金ETF",
+    "行情数据"
+   ],
+   "what": "基金评级与筛选",
+   "use": "挑基金、做产品对比",
+   "url": "http://cn.morningstar.com/fundselect/default.aspx",
+   "host": "cn.morningstar.com"
+  },
+  {
+   "id": "r004",
+   "name": "指数估值",
+   "cat": "行情·估值·数据源",
+   "sub": "估值与分位",
+   "tags": [
+    "估值分位",
+    "指数",
+    "行情数据"
+   ],
+   "what": "估值分位与股债性价比",
+   "use": "判断当前贵不贵，做逆向参考",
+   "url": "https://www.funddb.cn/site/index",
+   "host": "www.funddb.cn"
+  },
+  {
+   "id": "r005",
+   "name": "新股发行一览",
+   "cat": "行情·估值·数据源",
+   "sub": "新股与打新",
+   "tags": [
+    "新股IPO",
+    "行情数据"
+   ],
+   "what": "新股发行与申购信息",
+   "use": "打新与新股时点跟踪",
+   "url": "https://www.sse.com.cn/ipo/listing/",
+   "host": "www.sse.com.cn"
+  },
+  {
+   "id": "r006",
+   "name": "晨星网",
+   "cat": "行情·估值·数据源",
+   "sub": "基金与产品",
+   "tags": [
+    "基金ETF",
+    "行情数据"
+   ],
+   "what": "基金评级与筛选",
+   "use": "挑基金、做产品对比",
+   "url": "https://www.morningstar.cn/main/default.aspx",
+   "host": "www.morningstar.cn"
+  },
+  {
+   "id": "r007",
+   "name": "同花顺爱问财",
+   "cat": "行情·估值·数据源",
+   "sub": "选股与智能投研",
+   "tags": [
+    "行情数据"
+   ],
+   "what": "选股与智能投研工具",
+   "use": "找标的、跑条件筛选",
+   "url": "http://www.iwencai.com/stockpick/search?tid=stockpick&qs=sl_box_main_ths&w=pe%3C10%E5%80%8D%E4%B8%94pe%3E0%EF%BC%8C%E6%B6%A8%E5%B9%85%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%E5%BA%8F",
+   "host": "www.iwencai.com"
+  },
+  {
+   "id": "r008",
+   "name": "生意社(大宗商品)",
+   "cat": "行情·估值·数据源",
+   "sub": "大宗商品",
+   "tags": [
+    "大宗商品",
+    "行情数据"
+   ],
+   "what": "大宗商品价格与产业景气",
+   "use": "看上游成本与周期品价格",
+   "url": "https://www.100ppi.com/",
+   "host": "www.100ppi.com"
+  },
+  {
+   "id": "r009",
+   "name": "申万行业估值一览(乐咕乐股)",
+   "cat": "行情·估值·数据源",
+   "sub": "估值与分位",
+   "tags": [
+    "估值分位",
+    "行情数据"
+   ],
+   "what": "估值分位与股债性价比",
+   "use": "判断当前贵不贵，做逆向参考",
+   "url": "https://legulegu.com/stockdata/sw-industry-overview",
+   "host": "legulegu.com"
+  },
+  {
+   "id": "r010",
+   "name": "股债比 · 大盘PE(看财报)",
+   "cat": "行情·估值·数据源",
+   "sub": "估值与分位",
+   "tags": [
+    "估值分位",
+    "财报基本面",
+    "指数",
+    "行情数据"
+   ],
+   "what": "估值分位与股债性价比",
+   "use": "判断当前贵不贵，做逆向参考",
+   "url": "https://www.kancaibao.com/ep",
+   "host": "www.kancaibao.com"
+  },
+  {
+   "id": "r011",
+   "name": "股票魔法师",
+   "cat": "行情·估值·数据源",
+   "sub": "选股与智能投研",
+   "tags": [
+    "行情数据"
+   ],
+   "what": "选股与智能投研工具",
+   "use": "找标的、跑条件筛选",
+   "url": "http://www.shareswizard.com/",
+   "host": "www.shareswizard.com"
+  },
+  {
+   "id": "r012",
+   "name": "萝卜投资 Datayes!Pro",
+   "cat": "行情·估值·数据源",
+   "sub": "选股与智能投研",
+   "tags": [
+    "基金ETF",
+    "行情数据"
+   ],
+   "what": "选股与智能投研工具",
+   "use": "找标的、跑条件筛选",
+   "url": "https://r.datayes.com/",
+   "host": "r.datayes.com"
+  },
+  {
+   "id": "r013",
+   "name": "量化数据导航",
+   "cat": "行情·估值·数据源",
+   "sub": "量化数据",
+   "tags": [
+    "量化回测",
+    "行情数据"
+   ],
+   "what": "量化数据与因子口径",
+   "use": "跑量化前先查数据字典",
+   "url": "https://legulegu.com/stockdata/box",
+   "host": "legulegu.com"
+  },
+  {
+   "id": "r014",
+   "name": "韭圈儿",
+   "cat": "行情·估值·数据源",
+   "sub": "选股与智能投研",
+   "tags": [
+    "行情数据"
+   ],
+   "what": "选股与智能投研工具",
+   "use": "找标的、跑条件筛选",
+   "url": "https://www.funddb.cn/",
+   "host": "www.funddb.cn"
+  },
+  {
+   "id": "r015",
+   "name": "通达信外链 · jgnc 页",
+   "cat": "通达信数据口",
+   "sub": "外链页",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信内置外链数据页",
+   "use": "在通达信客户端内点开",
+   "url": "http://hot.icfqs.com:7615/site/tdx-pc-hqpage/page-jgnc.html?color=##tdxbk##&bkcolor=##tdxbkcolor##",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r016",
+   "name": "通达信外链 · bxb(000001)",
+   "cat": "通达信数据口",
+   "sub": "外链页",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信内置外链数据页",
+   "use": "在通达信客户端内点开",
+   "url": "http://page1.tdx.com.cn:7615/site/pcwebcall_static/bxb/bxb.html?code=000001&color=0",
+   "host": "page1.tdx.com.cn:7615"
+  },
+  {
+   "id": "r017",
+   "name": "通达信外链 · bxb(300310)",
+   "cat": "通达信数据口",
+   "sub": "外链页",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信内置外链数据页",
+   "use": "在通达信客户端内点开",
+   "url": "http://page3.tdx.com.cn:7615/site/pcwebcall_static/bxb/bxb.html?code=300310&color=0",
+   "host": "page3.tdx.com.cn:7615"
+  },
+  {
+   "id": "r018",
+   "name": "主题投资库",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "http://hot.icfqs.com:7615/site/pcwebcall/html/pc_zttzk_zttzk.html",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r019",
+   "name": "价值分析",
+   "cat": "通达信数据口",
+   "sub": "财务与研报",
+   "tags": [
+    "通达信"
+   ],
+   "what": "财报数据与业绩解读",
+   "use": "做基本面核查与排雷",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_jzfx_jzfx.html?canescape=1",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r020",
+   "name": "发现-最新发现",
+   "cat": "通达信数据口",
+   "sub": "盘面与日历",
+   "tags": [
+    "通达信"
+   ],
+   "what": "盘面发现与异动追踪",
+   "use": "找当天异动线索",
+   "url": "http://hot.icfqs.com:7615/site/kggx/tk_fx_zxfx.html?nomenu=1",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r021",
+   "name": "境外资金",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "资金流",
+    "通达信"
+   ],
+   "what": "沪深港通资金流向",
+   "use": "看外资偏好与仓位变化",
+   "url": "http://calc2.tdx.com.cn:7616/site/jwzj_ggt.html?nomenu=1&color=0&bkcolor=141212",
+   "host": "calc2.tdx.com.cn:7616"
+  },
+  {
+   "id": "r022",
+   "name": "大宗交易",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "资金流",
+    "通达信"
+   ],
+   "what": "大宗交易明细与折溢价",
+   "use": "看机构与股东的大额转让",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_dzjy_dzjy.html?canescape=1",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r023",
+   "name": "市场统计",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "通达信"
+   ],
+   "what": "市场统计与成交结构",
+   "use": "看量能与涨跌家数",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_sctj_sctj.html",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r024",
+   "name": "投资日历",
+   "cat": "通达信数据口",
+   "sub": "盘面与日历",
+   "tags": [
+    "通达信"
+   ],
+   "what": "投资日历与事件时点",
+   "use": "把握新股/解禁/财报时点",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_tzrl_tzrl.html",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r025",
+   "name": "持股变动",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "通达信"
+   ],
+   "what": "股东与机构持股变动",
+   "use": "看筹码集中度与机构动向",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_cgbd_cgbd.html",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r026",
+   "name": "机构持股",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "通达信"
+   ],
+   "what": "股东与机构持股变动",
+   "use": "看筹码集中度与机构动向",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_jgcg_jgcg.html?canescape=1",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r027",
+   "name": "板块云图-通达信",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "https://data.tdx.com.cn/www/pages/tdx-yuntu/page-dp.html",
+   "host": "data.tdx.com.cn"
+  },
+  {
+   "id": "r028",
+   "name": "板块周期表",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "http://page.tdx.com.cn:7615/site/pcwebcall/html/pc_tcld_bkzqb.html",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r029",
+   "name": "板块资讯和行业资讯",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "资讯快讯",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "http://page.tdx.com.cn:7615/site/pcwebcall/html/pc_tcld_bkzx.html",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r030",
+   "name": "每日盘面分析",
+   "cat": "通达信数据口",
+   "sub": "情绪与短线",
+   "tags": [
+    "通达信"
+   ],
+   "what": "短线情绪与盘面强弱",
+   "use": "判断情绪冰点与退潮",
+   "url": "http://hot.icfqs.com:7615/site/kggx/tk_mrfp.html",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r031",
+   "name": "沪深港通资金流向(历史)",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "资金流",
+    "通达信"
+   ],
+   "what": "沪深港通资金流向",
+   "use": "看外资偏好与仓位变化",
+   "url": "http://page.tdx.com.cn:7615/site/kggx/tk_sc_hsgt_lszjlx.html?nomenu=1",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r032",
+   "name": "涨跌停分析",
+   "cat": "通达信数据口",
+   "sub": "情绪与短线",
+   "tags": [
+    "涨跌停情绪",
+    "通达信"
+   ],
+   "what": "涨停梯队与连板统计",
+   "use": "判断情绪强弱、找当日主线",
+   "url": "http://hot.icfqs.com:7615/site/pcwebcall/html/pc_cbl_zdtfx.html?gpcode=002277",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r033",
+   "name": "游资复盘",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "龙虎榜游资",
+    "复盘",
+    "通达信"
+   ],
+   "what": "龙虎榜与游资席位明细",
+   "use": "复盘时看资金接力、谁在买",
+   "url": "http://hot.icfqs.com:7615/site/tdx-pc-find/page_yzfp.html",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r034",
+   "name": "游资明细",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "龙虎榜游资",
+    "通达信"
+   ],
+   "what": "龙虎榜与游资席位明细",
+   "use": "复盘时看资金接力、谁在买",
+   "url": "http://page.tdx.com.cn:7615/site/kggx/tk_yzlhb_yz_yz.html?flag=yzxq&code=%E7%82%92%E8%82%A1%E5%85%BB%E5%AE%B6&color=undefined&bkcolor=undefined",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r035",
+   "name": "游资龙虎榜",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "龙虎榜游资",
+    "通达信"
+   ],
+   "what": "龙虎榜与游资席位明细",
+   "use": "复盘时看资金接力、谁在买",
+   "url": "http://page.tdx.com.cn:7615/site/kggx/tk_yzlhb_yz.html",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r036",
+   "name": "热点板块涨跌幅",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "http://page.tdx.com.cn:7615/site/pcwebcall/html/pc_tcld_rdbk_new.html",
+   "host": "page.tdx.com.cn:7615"
+  },
+  {
+   "id": "r037",
+   "name": "热点题材",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "通达信"
+   ],
+   "what": "行业板块强弱与题材热度",
+   "use": "做板块轮动、找强势方向",
+   "url": "http://page1.tdx.com.cn:7615/site/tdxf10/gg_rdtc.html?gp=000002",
+   "host": "page1.tdx.com.cn:7615"
+  },
+  {
+   "id": "r038",
+   "name": "短线情绪",
+   "cat": "通达信数据口",
+   "sub": "情绪与短线",
+   "tags": [
+    "情绪指标",
+    "通达信"
+   ],
+   "what": "短线情绪与盘面强弱",
+   "use": "判断情绪冰点与退潮",
+   "url": "http://hot.icfqs.com:7615/site/tdx-pc-pcwebcall/page-qxzb.html?color=0&bkcolor=000000",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r039",
+   "name": "研报",
+   "cat": "通达信数据口",
+   "sub": "财务与研报",
+   "tags": [
+    "研报机构",
+    "通达信"
+   ],
+   "what": "研报与机构观点",
+   "use": "找机构观点和行业深度",
+   "url": "http://page1.tdx.com.cn:7615/site/yjbg/yb_index.htm?ispc=1",
+   "host": "page1.tdx.com.cn:7615"
+  },
+  {
+   "id": "r040",
+   "name": "股东研究",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "通达信"
+   ],
+   "what": "股东与机构持股变动",
+   "use": "看筹码集中度与机构动向",
+   "url": "http://page1.tdx.com.cn:7615/site/tdxf10/gg_gdyj.html?gp=000001",
+   "host": "page1.tdx.com.cn:7615"
+  },
+  {
+   "id": "r041",
+   "name": "脱水研报组",
+   "cat": "通达信数据口",
+   "sub": "财务与研报",
+   "tags": [
+    "研报机构",
+    "通达信"
+   ],
+   "what": "研报与机构观点",
+   "use": "找机构观点和行业深度",
+   "url": "http://hot.icfqs.com:7615/site/tdx-pc-hqpage/page-tsyb-group.html?kx=1&color=##tdxbk##&bkcolor=##tdxbkcolor##",
+   "host": "hot.icfqs.com:7615"
+  },
+  {
+   "id": "r042",
+   "name": "融资融券",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "资金流",
+    "通达信"
+   ],
+   "what": "两融余额与标的明细",
+   "use": "判断杠杆资金方向与拥挤度",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_rzrq_rzrq.html?canescape=1",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r043",
+   "name": "行情底部-短线分析",
+   "cat": "通达信数据口",
+   "sub": "情绪与短线",
+   "tags": [
+    "通达信"
+   ],
+   "what": "短线情绪与盘面强弱",
+   "use": "判断情绪冰点与退潮",
+   "url": "http://calc.tdx.com.cn:7616/site/pcwebcall/html/pc_hqbottom_dxfx.html?nomenu=1&stock=xxxxxx&color=0&bkcolor=000001",
+   "host": "calc.tdx.com.cn:7616"
+  },
+  {
+   "id": "r044",
+   "name": "要闻直播",
+   "cat": "通达信数据口",
+   "sub": "资讯与直播",
+   "tags": [
+    "资讯快讯",
+    "通达信"
+   ],
+   "what": "要闻直播流",
+   "use": "盘中快速扫资讯",
+   "url": "http://fast1.tdx.com.cn:7615/site/tdx_zxts/page_main.html#ywbb",
+   "host": "fast1.tdx.com.cn:7615"
+  },
+  {
+   "id": "r045",
+   "name": "财报解读",
+   "cat": "通达信数据口",
+   "sub": "财务与研报",
+   "tags": [
+    "财报基本面",
+    "通达信"
+   ],
+   "what": "财报数据与业绩解读",
+   "use": "做基本面核查与排雷",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_cbjd_cbjd.html",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r046",
+   "name": "轮动趋势回测-波动研判",
+   "cat": "通达信数据口",
+   "sub": "板块与题材",
+   "tags": [
+    "板块题材",
+    "量化回测",
+    "通达信"
+   ],
+   "what": "板块轮动回测研判",
+   "use": "验证轮动节奏与波动",
+   "url": "http://calc2.tdx.com.cn:7616/site/tdx-pc-pcwebcall/page-bdyp.html?color=0&bkcolor=000000",
+   "host": "calc2.tdx.com.cn:7616"
+  },
+  {
+   "id": "r047",
+   "name": "通达信帮助中心",
+   "cat": "通达信数据口",
+   "sub": "通达信帮助",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信官方帮助与答疑",
+   "use": "查功能用法、快捷键与报错",
+   "url": "https://help.tdx.com.cn/book.html",
+   "host": "help.tdx.com.cn"
+  },
+  {
+   "id": "r048",
+   "name": "通达信问小达",
+   "cat": "通达信数据口",
+   "sub": "通达信帮助",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信官方帮助与答疑",
+   "use": "查功能用法、快捷键与报错",
+   "url": "https://wenda.tdx.com.cn/site/wenda/index.html",
+   "host": "wenda.tdx.com.cn"
+  },
+  {
+   "id": "r049",
+   "name": "龙虎榜单",
+   "cat": "通达信数据口",
+   "sub": "资金与席位",
+   "tags": [
+    "龙虎榜游资",
+    "通达信"
+   ],
+   "what": "龙虎榜与游资席位明细",
+   "use": "复盘时看资金接力、谁在买",
+   "url": "http://page2.tdx.com.cn:7615/site/tdxsj/html/tdxsj_lhbd.html?canescape=1",
+   "host": "page2.tdx.com.cn:7615"
+  },
+  {
+   "id": "r050",
+   "name": "通达信DIY添加扫雷宝",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制",
+    "复盘"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://www.freesion.com/article/18171548859/",
+   "host": "www.freesion.com"
+  },
+  {
+   "id": "r051",
+   "name": "【呆呆兔精品】外部链接地址汇总",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://www.55188.com/thread-15205858-1-1.html",
+   "host": "www.55188.com"
+  },
+  {
+   "id": "r052",
+   "name": "一组通达信的外挂网址",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://www.55188.com/thread-9515588-1-1.html",
+   "host": "www.55188.com"
+  },
+  {
+   "id": "r053",
+   "name": "小白也能精简",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信界面精简与界面定制",
+   "use": "改造顶栏/底栏/左侧栏",
+   "url": "https://m.55188.com/thread-9797976-1-1.html",
+   "host": "m.55188.com"
+  },
+  {
+   "id": "r054",
+   "name": "左边透明自定义链接添加",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://www.55188.com/thread-10533203-1-1.html",
+   "host": "www.55188.com"
+  },
+  {
+   "id": "r055",
+   "name": "通达信VIP增值功能链接",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信界面精简与界面定制",
+   "use": "改造顶栏/底栏/左侧栏",
+   "url": "https://www.55188.com/thread-31851834-1-1.html?_dsign=19d7f074",
+   "host": "www.55188.com"
+  },
+  {
+   "id": "r056",
+   "name": "指标公式精选(通达信)",
+   "cat": "通达信外挂与定制",
+   "sub": "指标与公式",
+   "tags": [
+    "通达信",
+    "指标公式"
+   ],
+   "what": "指标公式源码与用法",
+   "use": "导入自定义指标、改选股公式",
+   "url": "http://www.360doc.com/content/11/0930/18/4146959_152459993.shtml",
+   "host": "www.360doc.com"
+  },
+  {
+   "id": "r057",
+   "name": "通达信10个插件",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://www.157110.cn/duanxian/z1028.html",
+   "host": "www.157110.cn"
+  },
+  {
+   "id": "r058",
+   "name": "通达信FINVALUE专业财务数据函数",
+   "cat": "通达信外挂与定制",
+   "sub": "公式函数",
+   "tags": [
+    "财报基本面",
+    "通达信"
+   ],
+   "what": "通达信公式函数说明",
+   "use": "写财务类指标时查函数",
+   "url": "http://blog.sina.com.cn/s/blog_19d791b9b01030864.html",
+   "host": "blog.sina.com.cn"
+  },
+  {
+   "id": "r059",
+   "name": "通达信 TreeID 链接大全",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "https://max.book118.com/html/2016/1209/70095504.shtm",
+   "host": "max.book118.com"
+  },
+  {
+   "id": "r060",
+   "name": "通达信VIP增值功能的链接地址",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "http://www.10huang.cn/level2/54391.html",
+   "host": "www.10huang.cn"
+  },
+  {
+   "id": "r061",
+   "name": "通达信 · 专项分析挂顶栏",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信界面精简与界面定制",
+   "use": "改造顶栏/底栏/左侧栏",
+   "url": "https://m.guhai.com.cn/html/FX/tong-da-xin/141531.html",
+   "host": "m.guhai.com.cn"
+  },
+  {
+   "id": "r062",
+   "name": "通达信外链",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信外挂与外链整合",
+   "use": "加外链、装插件，扩展通达信功能",
+   "url": "http://iamgssg.cn/tdxlink.html",
+   "host": "iamgssg.cn"
+  },
+  {
+   "id": "r063",
+   "name": "通达信 · 底栏加扫雷宝/涨停基因",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信",
+    "外挂定制"
+   ],
+   "what": "通达信界面精简与界面定制",
+   "use": "改造顶栏/底栏/左侧栏",
+   "url": "https://m.guhai.com.cn/html/FX/tong-da-xin/147676.html",
+   "host": "m.guhai.com.cn"
+  },
+  {
+   "id": "r064",
+   "name": "通达信板块周期表",
+   "cat": "通达信外挂与定制",
+   "sub": "外挂与界面定制",
+   "tags": [
+    "通达信"
+   ],
+   "what": "板块周期表挂接改造",
+   "use": "把板块周期表挂到底栏调用",
+   "url": "https://www.jiminzhijia.com/info/990.html",
+   "host": "www.jiminzhijia.com"
+  },
+  {
+   "id": "r065",
+   "name": "天罡竞价 · 选强指标(通达信)",
+   "cat": "复盘与情绪博弈",
+   "sub": "盘口与竞价",
+   "tags": [
+    "情绪指标",
+    "竞价盘口",
+    "通达信",
+    "指标公式"
+   ],
+   "what": "竞价排序与分时主图指标",
+   "use": "开盘前排出强弱顺序",
+   "url": "https://www.logic88.cn/763.html",
+   "host": "www.logic88.cn"
+  },
+  {
+   "id": "r066",
+   "name": "复盘神器",
+   "cat": "复盘与情绪博弈",
+   "sub": "复盘工具",
+   "tags": [
+    "复盘",
+    "情绪指标"
+   ],
+   "what": "复盘工具与流程",
+   "use": "收盘后整理当日交易与思路",
+   "url": "https://pro.gw.com.cn/newfpsq/index.html#/",
+   "host": "pro.gw.com.cn"
+  },
+  {
+   "id": "r067",
+   "name": "市场-多空指标PCR",
+   "cat": "复盘与情绪博弈",
+   "sub": "情绪与复盘",
+   "tags": [
+    "情绪指标",
+    "指标公式"
+   ],
+   "what": "复盘与情绪指标工具",
+   "use": "盘前盘后判断多空温度",
+   "url": "https://www.touzid.com/model/pcr.html#/",
+   "host": "www.touzid.com"
+  },
+  {
+   "id": "r068",
+   "name": "21世纪经济报道",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.21jingji.com/",
+   "host": "www.21jingji.com"
+  },
+  {
+   "id": "r069",
+   "name": "Covid-19 与全球主要股指(英文)",
+   "cat": "财经资讯与电子报",
+   "sub": "外部参考",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "英文财经图表资讯",
+   "use": "看海外视角时用",
+   "url": "https://howmuch.net/articles/index-drops-amid-covid19-outbreak",
+   "host": "howmuch.net"
+  },
+  {
+   "id": "r070",
+   "name": "Banber 数据看板",
+   "cat": "财经资讯与电子报",
+   "sub": "数据看板",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "收藏的数据看板",
+   "use": "看别人做好的图表看板",
+   "url": "https://www.banber.com/library#id=5d6f13f485278219004eff4f&top=0&showPreview=true",
+   "host": "www.banber.com"
+  },
+  {
+   "id": "r071",
+   "name": "三大报(股票资讯网)",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "资讯快讯",
+    "电子报"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "http://8.guminxuexiao.cn/nc/sdb",
+   "host": "8.guminxuexiao.cn"
+  },
+  {
+   "id": "r072",
+   "name": "上海证券报·中国证券网",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "资讯快讯",
+    "电子报",
+    "新股IPO"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://www.cnstock.com/",
+   "host": "www.cnstock.com"
+  },
+  {
+   "id": "r073",
+   "name": "上海证券报电子版",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "电子报",
+    "资讯快讯"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://paper.cnstock.com/",
+   "host": "paper.cnstock.com"
+  },
+  {
+   "id": "r074",
+   "name": "东方财富",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://www.eastmoney.com/",
+   "host": "www.eastmoney.com"
+  },
+  {
+   "id": "r075",
+   "name": "东方财富门户",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "基金ETF",
+    "资讯快讯",
+    "社区论坛"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.eastmoney.com/",
+   "host": "www.eastmoney.com"
+  },
+  {
+   "id": "r076",
+   "name": "中国证券报 · 要闻",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "资讯快讯",
+    "电子报"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://epaper.cs.com.cn/zgzqb/html/2021-05/26/nbs.D110000zgzqb_A01.htm",
+   "host": "epaper.cs.com.cn"
+  },
+  {
+   "id": "r077",
+   "name": "中国证券网",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "http://www.cnstock.com/",
+   "host": "www.cnstock.com"
+  },
+  {
+   "id": "r078",
+   "name": "中国金融新闻网",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.financialnews.com.cn/",
+   "host": "www.financialnews.com.cn"
+  },
+  {
+   "id": "r079",
+   "name": "中证网",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.cs.com.cn/",
+   "host": "www.cs.com.cn"
+  },
+  {
+   "id": "r080",
+   "name": "中金在线",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://www.cnfol.com/",
+   "host": "www.cnfol.com"
+  },
+  {
+   "id": "r081",
+   "name": "同花顺",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://www.10jqka.com.cn/",
+   "host": "www.10jqka.com.cn"
+  },
+  {
+   "id": "r082",
+   "name": "和讯财经",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://www.hexun.com/",
+   "host": "www.hexun.com"
+  },
+  {
+   "id": "r083",
+   "name": "投资日历(同花顺)",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://stock.10jqka.com.cn/fincalendar.shtml##",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r084",
+   "name": "斐波那契计算器(英为财情)",
+   "cat": "财经资讯与电子报",
+   "sub": "数据小工具",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "行情计算小工具",
+   "use": "算黄金分割等关键位置",
+   "url": "https://cn.investing.com/tools/fibonacci-calculator",
+   "host": "cn.investing.com"
+  },
+  {
+   "id": "r085",
+   "name": "中国基金报电子报",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "基金ETF",
+    "电子报",
+    "资讯快讯"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://www.chnfund.com/view-paper?file=https%3A%2F%2Fwww.chnfund.com%2Fupload%2Fepaper%2F2025-04-07%2FA0120250407C.pdf",
+   "host": "www.chnfund.com"
+  },
+  {
+   "id": "r086",
+   "name": "英为财情 Investing.com",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "宏观政策",
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://cn.investing.com/",
+   "host": "cn.investing.com"
+  },
+  {
+   "id": "r087",
+   "name": "证券日报网",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "http://www.zqrb.cn/",
+   "host": "www.zqrb.cn"
+  },
+  {
+   "id": "r088",
+   "name": "证券时报电子报",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "资讯快讯",
+    "电子报"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://epaper.stcn.com/col/202504/09/node_A001.html",
+   "host": "epaper.stcn.com"
+  },
+  {
+   "id": "r089",
+   "name": "财新网",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.caixin.com/",
+   "host": "www.caixin.com"
+  },
+  {
+   "id": "r090",
+   "name": "金十数据",
+   "cat": "财经资讯与电子报",
+   "sub": "快讯与直播",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "快讯与实时资讯流",
+   "use": "盘中快速扫资讯",
+   "url": "https://www.jin10.com/",
+   "host": "www.jin10.com"
+  },
+  {
+   "id": "r091",
+   "name": "《求是》2023年第24期",
+   "cat": "宏观政策与时政参考",
+   "sub": "时政与权威",
+   "tags": [
+    "时政权威",
+    "宏观政策"
+   ],
+   "what": "党报与半月谈的权威口径",
+   "use": "需要权威表述时引用",
+   "url": "http://www.qstheory.cn/dukan/qs/2014/2023-12/16/c_1130027187.htm",
+   "host": "www.qstheory.cn"
+  },
+  {
+   "id": "r092",
+   "name": "CMF 中国宏观经济论坛",
+   "cat": "宏观政策与时政参考",
+   "sub": "智库与宏观研究",
+   "tags": [
+    "宏观政策"
+   ],
+   "what": "智库观点与宏观研究",
+   "use": "找专业宏观判断时用",
+   "url": "http://ier.ruc.edu.cn/",
+   "host": "ier.ruc.edu.cn"
+  },
+  {
+   "id": "r093",
+   "name": "人民日报评论 · 新发展理念",
+   "cat": "宏观政策与时政参考",
+   "sub": "时政与权威",
+   "tags": [
+    "时政权威",
+    "宏观政策"
+   ],
+   "what": "党报与半月谈的权威口径",
+   "use": "需要权威表述时引用",
+   "url": "http://opinion.people.com.cn/n1/2021/0204/c1003-32021863.html",
+   "host": "opinion.people.com.cn"
+  },
+  {
+   "id": "r094",
+   "name": "人民网",
+   "cat": "宏观政策与时政参考",
+   "sub": "时政与权威",
+   "tags": [
+    "时政权威",
+    "宏观政策"
+   ],
+   "what": "党报与半月谈的权威口径",
+   "use": "需要权威表述时引用",
+   "url": "http://www.people.com.cn/",
+   "host": "www.people.com.cn"
+  },
+  {
+   "id": "r095",
+   "name": "全历史",
+   "cat": "宏观政策与时政参考",
+   "sub": "外部参考",
+   "tags": [
+    "宏观政策"
+   ],
+   "what": "历史与境外中文媒体",
+   "use": "找背景资料时用",
+   "url": "https://www.allhistory.com/",
+   "host": "www.allhistory.com"
+  },
+  {
+   "id": "r096",
+   "name": "半月谈",
+   "cat": "宏观政策与时政参考",
+   "sub": "时政与权威",
+   "tags": [
+    "时政权威",
+    "宏观政策"
+   ],
+   "what": "党报与半月谈的权威口径",
+   "use": "需要权威表述时引用",
+   "url": "http://www.banyuetan.org/",
+   "host": "www.banyuetan.org"
+  },
+  {
+   "id": "r097",
+   "name": "新华网",
+   "cat": "宏观政策与时政参考",
+   "sub": "时政与权威",
+   "tags": [
+    "时政权威",
+    "宏观政策"
+   ],
+   "what": "党报与半月谈的权威口径",
+   "use": "需要权威表述时引用",
+   "url": "http://m.news.cn/",
+   "host": "m.news.cn"
+  },
+  {
+   "id": "r098",
+   "name": "联合早报中文网",
+   "cat": "宏观政策与时政参考",
+   "sub": "外部参考",
+   "tags": [
+    "宏观政策"
+   ],
+   "what": "历史与境外中文媒体",
+   "use": "找背景资料时用",
+   "url": "http://www.uzbcn.com/",
+   "host": "www.uzbcn.com"
+  },
+  {
+   "id": "r099",
+   "name": "首席经济学家论坛",
+   "cat": "宏观政策与时政参考",
+   "sub": "智库与宏观研究",
+   "tags": [
+    "宏观政策"
+   ],
+   "what": "智库观点与宏观研究",
+   "use": "找专业宏观判断时用",
+   "url": "http://chinacef.cn/index.php/index/index",
+   "host": "chinacef.cn"
+  },
+  {
+   "id": "r100",
+   "name": "申万宏源研报合集(BigQuant)",
+   "cat": "研报与机构观点",
+   "sub": "研报合集",
+   "tags": [
+    "研报机构",
+    "量化回测"
+   ],
+   "what": "研报合集与分享帖",
+   "use": "批量找历史研报",
+   "url": "https://bigquant.com/community/t/topic/113525",
+   "host": "bigquant.com"
+  },
+  {
+   "id": "r101",
+   "name": "白云机场研报一览(中财网)",
+   "cat": "研报与机构观点",
+   "sub": "个股研报",
+   "tags": [
+    "研报机构"
+   ],
+   "what": "个股研报一览",
+   "use": "看某只票的机构观点",
+   "url": "http://quote.cfi.cn/ybyl/870/600004.html",
+   "host": "quote.cfi.cn"
+  },
+  {
+   "id": "r102",
+   "name": "行业研究报告库",
+   "cat": "研报与机构观点",
+   "sub": "行业研报",
+   "tags": [
+    "研报机构"
+   ],
+   "what": "行业深度报告库",
+   "use": "做行业研究时查",
+   "url": "http://www.nxny.com/stype_hy/",
+   "host": "www.nxny.com"
+  },
+  {
+   "id": "r103",
+   "name": "证券分析师评价排行(萝卜投研)",
+   "cat": "研报与机构观点",
+   "sub": "分析师库",
+   "tags": [
+    "研报机构"
+   ],
+   "what": "分析师评价与排行",
+   "use": "挑分析报告看谁更准",
+   "url": "https://robo.datayes.com/v1.5/information/external/evaluation/analyst",
+   "host": "robo.datayes.com"
+  },
+  {
+   "id": "r104",
+   "name": "上证早知道(2018)",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://www.92zhiniu.com/gushihangqing/201805282042.html",
+   "host": "www.92zhiniu.com"
+  },
+  {
+   "id": "r105",
+   "name": "MACD 股票论坛",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "http://bbs.macd.cn/",
+   "host": "bbs.macd.cn"
+  },
+  {
+   "id": "r106",
+   "name": "CDP 指标详解",
+   "cat": "社区论坛与人物",
+   "sub": "指标与用法",
+   "tags": [
+    "指标公式",
+    "社区论坛"
+   ],
+   "what": "指标公式与用法",
+   "use": "学指标怎么读、怎么用",
+   "url": "http://www.southmoney.com/zhishi/cdp/",
+   "host": "www.southmoney.com"
+  },
+  {
+   "id": "r107",
+   "name": "淘股吧 · 文章 1883095",
+   "cat": "社区论坛与人物",
+   "sub": "社区与人物",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "社区论坛与个人跟踪对象",
+   "use": "看讨论、跟常看的人",
+   "url": "https://www.taoguba.com.cn/Article/1883095/1",
+   "host": "www.taoguba.com.cn"
+  },
+  {
+   "id": "r108",
+   "name": "《程老湿爱吐槽》版权文章目录2018版",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "https://weibo.com/ttarticle/p/show?id=2309404342490323917287&comment=1",
+   "host": "weibo.com"
+  },
+  {
+   "id": "r109",
+   "name": "《程老湿爱吐槽》股市随笔目录2017版",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "https://weibo.com/ttarticle/p/show?id=2309404127658144356840&infeed=1",
+   "host": "weibo.com"
+  },
+  {
+   "id": "r110",
+   "name": "MACD 学院",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛",
+    "教程"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "http://bbs.macd.cn/forum.php?gid=40",
+   "host": "bbs.macd.cn"
+  },
+  {
+   "id": "r111",
+   "name": "北狼题材",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "板块题材",
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://www.zf826.com/",
+   "host": "www.zf826.com"
+  },
+  {
+   "id": "r112",
+   "name": "股吧求助帖 · 跌停怎么办",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "http://guba.eastmoney.com/news,gmxx,225955116.html",
+   "host": "guba.eastmoney.com"
+  },
+  {
+   "id": "r113",
+   "name": "幽兰行天下(雪球)",
+   "cat": "社区论坛与人物",
+   "sub": "社区与社群",
+   "tags": [
+    "社区论坛",
+    "跟踪人物"
+   ],
+   "what": "雪球与付费社群",
+   "use": "看讨论、跟进社群内容",
+   "url": "https://xueqiu.com/u/2303311871",
+   "host": "xueqiu.com"
+  },
+  {
+   "id": "r114",
+   "name": "幽兰行天下(中金博客)",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "资讯快讯",
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://blog.cnfol.com/cybtaojinba/article/1517986935-115484023.html",
+   "host": "blog.cnfol.com"
+  },
+  {
+   "id": "r115",
+   "name": "指标公式分享交流论坛-指标公式论坛",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛",
+    "指标公式"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "https://www.55188.com/forum-48-1.html",
+   "host": "www.55188.com"
+  },
+  {
+   "id": "r116",
+   "name": "欢迎来到鲁衡军的个人主页",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://petercn.51.net/",
+   "host": "petercn.51.net"
+  },
+  {
+   "id": "r117",
+   "name": "潘益兵的东方财富网博客",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://blog.eastmoney.com/xiyiyi2007/",
+   "host": "blog.eastmoney.com"
+  },
+  {
+   "id": "r118",
+   "name": "淘股吧(首页)",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "https://www.taoguba.com.cn/index?blockID=1",
+   "host": "www.taoguba.com.cn"
+  },
+  {
+   "id": "r119",
+   "name": "猫否股票网",
+   "cat": "社区论坛与人物",
+   "sub": "社区与人物",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "社区论坛与个人跟踪对象",
+   "use": "看讨论、跟常看的人",
+   "url": "http://www.maofou.com/",
+   "host": "www.maofou.com"
+  },
+  {
+   "id": "r120",
+   "name": "盛京剑客(语雀)",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "https://www.yuque.com/jiyuan-kbh1a/thzeqn",
+   "host": "www.yuque.com"
+  },
+  {
+   "id": "r121",
+   "name": "知识星球",
+   "cat": "社区论坛与人物",
+   "sub": "社区与社群",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "雪球与付费社群",
+   "use": "看讨论、跟进社群内容",
+   "url": "https://www.zsxq.com/",
+   "host": "www.zsxq.com"
+  },
+  {
+   "id": "r122",
+   "name": "知识星球 (2)",
+   "cat": "社区论坛与人物",
+   "sub": "社区与社群",
+   "tags": [
+    "社区论坛",
+    "多入口"
+   ],
+   "what": "雪球与付费社群",
+   "use": "看讨论、跟进社群内容",
+   "url": "https://wx.zsxq.com/dweb2/index/group/88858512824442",
+   "host": "wx.zsxq.com"
+  },
+  {
+   "id": "r123",
+   "name": "股吧帖 · 私募操盘教程",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛",
+    "教程"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "http://guba.eastmoney.com/news,gmxx,238230935.html",
+   "host": "guba.eastmoney.com"
+  },
+  {
+   "id": "r124",
+   "name": "缠中说禅",
+   "cat": "社区论坛与人物",
+   "sub": "跟踪人物",
+   "tags": [
+    "跟踪人物",
+    "社区论坛"
+   ],
+   "what": "长期跟踪的博主与专栏",
+   "use": "跟特定人物的持续观点",
+   "url": "http://blog.sina.com.cn/chzhshch",
+   "host": "blog.sina.com.cn"
+  },
+  {
+   "id": "r125",
+   "name": "股票教程-入门股票教程-新手股票教程",
+   "cat": "社区论坛与人物",
+   "sub": "教程与课程",
+   "tags": [
+    "教程",
+    "社区论坛"
+   ],
+   "what": "炒股教程与入门内容",
+   "use": "补基础时看",
+   "url": "https://www.91to.net/coclass.asp?id=20",
+   "host": "www.91to.net"
+  },
+  {
+   "id": "r126",
+   "name": "股票资源网(教程)",
+   "cat": "社区论坛与人物",
+   "sub": "教程与课程",
+   "tags": [
+    "教程",
+    "资源站",
+    "社区论坛"
+   ],
+   "what": "炒股教程与入门内容",
+   "use": "补基础时看",
+   "url": "https://www.gupiao918.net/forum.php",
+   "host": "www.gupiao918.net"
+  },
+  {
+   "id": "r127",
+   "name": "阿尔法对冲讨论帖",
+   "cat": "社区论坛与人物",
+   "sub": "问答帖子",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "论坛提问与讨论帖",
+   "use": "参考别人的解题思路",
+   "url": "http://www.oceantribe.org/xf/index.php?threads/29637/",
+   "host": "www.oceantribe.org"
+  },
+  {
+   "id": "r128",
+   "name": "赵老哥",
+   "cat": "社区论坛与人物",
+   "sub": "论坛与股吧",
+   "tags": [
+    "社区论坛",
+    "跟踪人物"
+   ],
+   "what": "论坛与股吧讨论",
+   "use": "看民间观点与市场情绪",
+   "url": "https://www.xiarj.com/category/mingrentang/zhaolaoge",
+   "host": "www.xiarj.com"
+  },
+  {
+   "id": "r129",
+   "name": "雪球",
+   "cat": "社区论坛与人物",
+   "sub": "社区与社群",
+   "tags": [
+    "社区论坛"
+   ],
+   "what": "雪球与付费社群",
+   "use": "看讨论、跟进社群内容",
+   "url": "https://xueqiu.com/",
+   "host": "xueqiu.com"
+  },
+  {
+   "id": "r130",
+   "name": "AI 实盘交易(英文站)",
+   "cat": "量化回测与训练工具",
+   "sub": "英文资料",
+   "tags": [
+    "量化回测"
+   ],
+   "what": "量化方向英文论文与资料",
+   "use": "看方法论原文",
+   "url": "https://nof1.ai/",
+   "host": "nof1.ai"
+  },
+  {
+   "id": "r131",
+   "name": "张量时间序列分析(英文论文)",
+   "cat": "量化回测与训练工具",
+   "sub": "英文资料",
+   "tags": [
+    "量化回测"
+   ],
+   "what": "量化方向英文论文与资料",
+   "use": "看方法论原文",
+   "url": "https://www.annualreviews.org/content/journals/10.1146/annurev-statistics-042424-063308",
+   "host": "www.annualreviews.org"
+  },
+  {
+   "id": "r132",
+   "name": "BackTest 量化策略平台",
+   "cat": "量化回测与训练工具",
+   "sub": "量化与回测",
+   "tags": [
+    "量化回测"
+   ],
+   "what": "量化平台与回测环境",
+   "use": "验证策略想法、跑历史数据",
+   "url": "https://backtest.10jqka.com.cn/backtest/app.html#/strategysquare/457323",
+   "host": "backtest.10jqka.com.cn"
+  },
+  {
+   "id": "r133",
+   "name": "BackTest 量化策略平台 (2)",
+   "cat": "量化回测与训练工具",
+   "sub": "量化与回测",
+   "tags": [
+    "量化回测",
+    "多入口"
+   ],
+   "what": "量化平台与回测环境",
+   "use": "验证策略想法、跑历史数据",
+   "url": "https://backtest.10jqka.com.cn/backtest/app.html#/strategybacktest",
+   "host": "backtest.10jqka.com.cn"
+  },
+  {
+   "id": "r134",
+   "name": "SuperMind 量化平台",
+   "cat": "量化回测与训练工具",
+   "sub": "量化与回测",
+   "tags": [
+    "量化回测"
+   ],
+   "what": "量化平台与回测环境",
+   "use": "验证策略想法、跑历史数据",
+   "url": "https://quant.10jqka.com.cn/view/",
+   "host": "quant.10jqka.com.cn"
+  },
+  {
+   "id": "r135",
+   "name": "Time Series Lab 文章系列",
+   "cat": "量化回测与训练工具",
+   "sub": "英文资料",
+   "tags": [
+    "量化回测"
+   ],
+   "what": "量化方向英文论文与资料",
+   "use": "看方法论原文",
+   "url": "https://www.timeserieslab.com/research#articles",
+   "host": "www.timeserieslab.com"
+  },
+  {
+   "id": "r136",
+   "name": "量化课堂",
+   "cat": "量化回测与训练工具",
+   "sub": "量化与回测",
+   "tags": [
+    "量化回测",
+    "教程"
+   ],
+   "what": "量化平台与回测环境",
+   "use": "验证策略想法、跑历史数据",
+   "url": "https://www.joinquant.com/study",
+   "host": "www.joinquant.com"
+  },
+  {
+   "id": "r137",
+   "name": "爆竹K线训练助手(PC版)",
+   "cat": "量化回测与训练工具",
+   "sub": "看盘训练",
+   "tags": [
+    "看盘训练",
+    "网盘搜索",
+    "量化回测"
+   ],
+   "what": "K线训练与模拟练习",
+   "use": "练盘感、回看历史行情",
+   "url": "https://pansou.cc/s/%E7%88%86%E7%AB%B9k%E7%BA%BF%E8%AE%AD%E7%BB%83%E5%8A%A9%E6%89%8Bpc%E7%89%88-2-0.html",
+   "host": "pansou.cc"
+  },
+  {
+   "id": "r138",
+   "name": "爆竹K线训练助手(破解版)",
+   "cat": "量化回测与训练工具",
+   "sub": "看盘训练",
+   "tags": [
+    "看盘训练",
+    "网盘搜索",
+    "量化回测"
+   ],
+   "what": "K线训练与模拟练习",
+   "use": "练盘感、回看历史行情",
+   "url": "https://aliso.cc/s/%E7%88%86%E7%AB%B9k%E7%BA%BF%E8%AE%AD%E7%BB%83%E5%8A%A9%E6%89%8B%E7%A0%B4%E8%A7%A3%E7%89%88-3-0.html",
+   "host": "aliso.cc"
+  },
+  {
+   "id": "r139",
+   "name": "30本交易员必读书单",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.jingweikong.com/finance/30%E6%9C%AC%E4%BA%A4%E6%98%93%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E4%BA%A4%E6%98%93%E4%B9%A6%E7%B1%8D/",
+   "host": "www.jingweikong.com"
+  },
+  {
+   "id": "r140",
+   "name": "987股票书籍网",
+   "cat": "投资书籍与书目",
+   "sub": "书籍下载站",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "投资书籍下载与书目站",
+   "use": "找书时的站点级入口",
+   "url": "http://www.gp987.com/",
+   "host": "www.gp987.com"
+  },
+  {
+   "id": "r141",
+   "name": "K线黄金定律(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.7help.net/809.html",
+   "host": "www.7help.net"
+  },
+  {
+   "id": "r142",
+   "name": "K线黄金定律(书) (2)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍",
+    "多入口"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.shukui.net/book/266795.html",
+   "host": "www.shukui.net"
+  },
+  {
+   "id": "r143",
+   "name": "SOP 一次上手技术分析(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.ynjie.com/thread-17344-1-1.html",
+   "host": "www.ynjie.com"
+  },
+  {
+   "id": "r144",
+   "name": "CFA 固定收益证券分析(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://item.jd.com/11824612.html",
+   "host": "item.jd.com"
+  },
+  {
+   "id": "r145",
+   "name": "交易游戏 · 资金管理策略(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://mtoou.info/6yuan/114606.html",
+   "host": "mtoou.info"
+  },
+  {
+   "id": "r146",
+   "name": "如何打造顶尖理财顾问团队(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍",
+    "财富管理"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://yabook.blog/post/9653.html",
+   "host": "yabook.blog"
+  },
+  {
+   "id": "r147",
+   "name": "投资分析 · 考试重点(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "网盘搜索",
+    "资源站",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.soyunpan.com/search/%E3%80%8A%E6%8A%95%E8%B5%84%E5%88%86%E6%9E%90%E3%80%8B%E8%80%83%E8%AF%95%E9%87%8D%E7%82%B9%E6%A0%87%E8%AE%B0%E7%89%88-0-%E5%85%A8%E9%83%A8-0.html",
+   "host": "www.soyunpan.com"
+  },
+  {
+   "id": "r148",
+   "name": "缠论108课详解(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.integrity.com.cn/article/14498.html",
+   "host": "www.integrity.com.cn"
+  },
+  {
+   "id": "r149",
+   "name": "书生意气(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.xueba521.com/",
+   "host": "www.xueba521.com"
+  },
+  {
+   "id": "r150",
+   "name": "交易圣经(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/soft/softdown.asp?softid=49116",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r151",
+   "name": "交易情绪密码(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "情绪指标",
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.j9p.com/down/525521.html",
+   "host": "www.j9p.com"
+  },
+  {
+   "id": "r152",
+   "name": "交易游戏 · 资金管理策略(书·来源2)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/soft/gupiaobook/down-57149.html",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r153",
+   "name": "职业操盘手手册(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子报",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.xz7.com/downinfo/345711.html",
+   "host": "www.xz7.com"
+  },
+  {
+   "id": "r154",
+   "name": "华章经典 · 金融投资系列(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://kindleer.com/hzjdjrtzxlx.html",
+   "host": "kindleer.com"
+  },
+  {
+   "id": "r155",
+   "name": "经济学电子书合集",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.chinavalue.net/General/Blog/2010-9-2/461193.aspx",
+   "host": "www.chinavalue.net"
+  },
+  {
+   "id": "r156",
+   "name": "好股网(公式平台)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "指标公式",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/?",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r157",
+   "name": "如何成为令人信赖的理财顾问",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍",
+    "财富管理"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.zhishikoo.com/?s=%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%BB%A4%E4%BA%BA%E4%BF%A1%E8%B5%96%E7%9A%84%E7%90%86%E8%B4%A2%E9%A1%BE%E9%97%AE",
+   "host": "www.zhishikoo.com"
+  },
+  {
+   "id": "r158",
+   "name": "威科夫操盘法(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/soft/gupiaobook/down-53277.html",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r159",
+   "name": "好股网 · 安装帮助",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/support/setuphelp.asp",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r160",
+   "name": "宏观经济数据分析手册(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "宏观政策",
+    "电子书搜索",
+    "网盘搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.read678.com/JdBook/index/30379",
+   "host": "www.read678.com"
+  },
+  {
+   "id": "r161",
+   "name": "巴菲特的投资组合(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.gucuan.com/lbyrm/783.html",
+   "host": "www.gucuan.com"
+  },
+  {
+   "id": "r162",
+   "name": "市场择时新技术(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子报",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://gp987.com/gupiaoshuji/858.html",
+   "host": "gp987.com"
+  },
+  {
+   "id": "r163",
+   "name": "投资高手系列经典著作(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.tianlangbooks.com/6527.html",
+   "host": "www.tianlangbooks.com"
+  },
+  {
+   "id": "r164",
+   "name": "期货交易策略(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.7help.net/2783.html",
+   "host": "www.7help.net"
+  },
+  {
+   "id": "r165",
+   "name": "民间股神(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.goodgupiao.com/soft/softdown.asp?softid=45690",
+   "host": "www.goodgupiao.com"
+  },
+  {
+   "id": "r166",
+   "name": "沃伦巴菲特如是说(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子报",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.j9p.com/down/528630.html",
+   "host": "www.j9p.com"
+  },
+  {
+   "id": "r167",
+   "name": "渐行渐近的金融周期(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "宏观政策",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.j9p.com/search.asp?keyword=%BD%A5%D0%D0%BD%A5%BD%FC%B5%C4%BD%F0%C8%DA%D6%DC%C6%DA&searchType=",
+   "host": "www.j9p.com"
+  },
+  {
+   "id": "r168",
+   "name": "渐行渐近的金融周期(书) (2)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "宏观政策",
+    "电子书搜索",
+    "投资书籍",
+    "多入口"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://ebook2.lorefree.com/book?account=&bookid=71216",
+   "host": "ebook2.lorefree.com"
+  },
+  {
+   "id": "r169",
+   "name": "游资情绪交易系统(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "龙虎榜游资",
+    "情绪指标",
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://topbester.com/ebook/view/128091.html",
+   "host": "topbester.com"
+  },
+  {
+   "id": "r170",
+   "name": "炒外汇书籍(书单)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.mt4.org.cn/book/",
+   "host": "www.mt4.org.cn"
+  },
+  {
+   "id": "r171",
+   "name": "盘口解读技术(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "竞价盘口",
+    "网盘搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.sopanbar.com/s/e4444f8367a01e11/",
+   "host": "www.sopanbar.com"
+  },
+  {
+   "id": "r172",
+   "name": "私人财富管理(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "网盘搜索",
+    "投资书籍",
+    "财富管理"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://yunpanzhushou.com/f/3v775",
+   "host": "yunpanzhushou.com"
+  },
+  {
+   "id": "r173",
+   "name": "私人银行理论与实务(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书籍下载站",
+   "tags": [
+    "投资书籍",
+    "财富管理"
+   ],
+   "what": "投资书籍下载与书目站",
+   "use": "找书时的站点级入口",
+   "url": "https://windowsfront.com/books/26281717172",
+   "host": "windowsfront.com"
+  },
+  {
+   "id": "r174",
+   "name": "经典技术分析(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.gucuan.com/lbyrm/6454.html",
+   "host": "www.gucuan.com"
+  },
+  {
+   "id": "r175",
+   "name": "经济运行的逻辑(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "宏观政策",
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://pdfzj.cn/2015/jinjix_0930/153.html",
+   "host": "pdfzj.cn"
+  },
+  {
+   "id": "r176",
+   "name": "股市趋势技术分析(书·来源1)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.xiangshibook.com/down/1188231",
+   "host": "www.xiangshibook.com"
+  },
+  {
+   "id": "r177",
+   "name": "股市趋势技术分析(书·来源2)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "网盘搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.j9p.com/down/528574.html",
+   "host": "www.j9p.com"
+  },
+  {
+   "id": "r178",
+   "name": "股票作手回忆录(书·来源1)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍",
+    "资源站"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.downcc.com/soft/319443.html",
+   "host": "www.downcc.com"
+  },
+  {
+   "id": "r179",
+   "name": "股票作手回忆录(书·来源2)",
+   "cat": "投资书籍与书目",
+   "sub": "书籍下载站",
+   "tags": [
+    "电子报",
+    "投资书籍"
+   ],
+   "what": "投资书籍下载与书目站",
+   "use": "找书时的站点级入口",
+   "url": "http://www.cxfeng.com/soft/56707.html",
+   "host": "www.cxfeng.com"
+  },
+  {
+   "id": "r180",
+   "name": "饭香网(资源站)",
+   "cat": "投资书籍与书目",
+   "sub": "书籍下载站",
+   "tags": [
+    "资源站",
+    "投资书籍"
+   ],
+   "what": "投资书籍下载与书目站",
+   "use": "找书时的站点级入口",
+   "url": "http://www.fxw123.net/fz/",
+   "host": "www.fxw123.net"
+  },
+  {
+   "id": "r181",
+   "name": "蚂蚁搬书",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://book.mybanshu.win/book/list2?kw=%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88&type=2",
+   "host": "book.mybanshu.win"
+  },
+  {
+   "id": "r182",
+   "name": "解密职业操盘手的盈利策略(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "网盘搜索",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://www.xiaobaipan.com/file-34103434.html",
+   "host": "www.xiaobaipan.com"
+  },
+  {
+   "id": "r183",
+   "name": "财务报表分析与证券估值(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "估值分位",
+    "财报基本面",
+    "投资书籍",
+    "数据分析"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.gucuan.com/lbyrm/13022.html",
+   "host": "www.gucuan.com"
+  },
+  {
+   "id": "r184",
+   "name": "趋势跟踪(书)",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "电子书搜索",
+    "投资书籍",
+    "教程"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "http://www.yuanfangcj.com/archives/34293.html",
+   "host": "www.yuanfangcj.com"
+  },
+  {
+   "id": "r185",
+   "name": "通向财务自由之路",
+   "cat": "投资书籍与书目",
+   "sub": "书目",
+   "tags": [
+    "财报基本面",
+    "投资书籍"
+   ],
+   "what": "具体投资书籍",
+   "use": "想系统学某方法时找这本",
+   "url": "https://sobooks.cc/books/1053.html",
+   "host": "sobooks.cc"
+  },
+  {
+   "id": "r186",
+   "name": "免费电子书站推荐(2025)",
+   "cat": "电子书·网盘检索",
+   "sub": "经验帖",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "找书经验与方法帖",
+   "use": "扩充找书渠道",
+   "url": "https://www.rymdh.com/sites/10964.html",
+   "host": "www.rymdh.com"
+  },
+  {
+   "id": "r187",
+   "name": "24h搜书",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://24hbook.daohangxie.com/",
+   "host": "24hbook.daohangxie.com"
+  },
+  {
+   "id": "r188",
+   "name": "Anna’s Archive",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://annas-archive.li/",
+   "host": "annas-archive.li"
+  },
+  {
+   "id": "r189",
+   "name": "Anna's Archive 综合入口",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://annas-archive.gl/",
+   "host": "annas-archive.gl"
+  },
+  {
+   "id": "r190",
+   "name": "Free eBooks",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://www.gutenberg.org/",
+   "host": "www.gutenberg.org"
+  },
+  {
+   "id": "r191",
+   "name": "Library Genesis",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://libgen.vc/",
+   "host": "libgen.vc"
+  },
+  {
+   "id": "r192",
+   "name": "Library Genesis (2)",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索",
+    "多入口"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://libgen.gl/index.php?req=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85&columns%5B%5D=t&columns%5B%5D=a&columns%5B%5D=s&columns%5B%5D=y&columns%5B%5D=p&columns%5B%5D=i&objects%5B%5D=f&objects%5B%5D=e&objects%5B%5D=s&objects%5B%5D=a&objects%5B%5D=p&objects%5B%5D=w&topics%5B%5D=l&topics%5B%5D=c&topics%5B%5D=f&topics%5B%5D=a&topics%5B%5D=m&topics%5B%5D=r&topics%5B%5D=s&res=25&filesuns=all",
+   "host": "libgen.gl"
+  },
+  {
+   "id": "r193",
+   "name": "Library Genesis 可用网址",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://www.sssam.com/tool/libgen/",
+   "host": "www.sssam.com"
+  },
+  {
+   "id": "r194",
+   "name": "电子书格式下载帮助",
+   "cat": "电子书·网盘检索",
+   "sub": "经验帖",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "找书经验与方法帖",
+   "use": "扩充找书渠道",
+   "url": "http://www.pdffx.com/a/qitafenlei/2020/0211/652.html",
+   "host": "www.pdffx.com"
+  },
+  {
+   "id": "r195",
+   "name": "Z-Library",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://cn1lib.is/",
+   "host": "cn1lib.is"
+  },
+  {
+   "id": "r196",
+   "name": "cfa资源",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.sopanpan.com/search/cfa-0-0.html",
+   "host": "www.sopanpan.com"
+  },
+  {
+   "id": "r197",
+   "name": "ePUBee电子书库",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索",
+    "投资书籍"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "http://cn.epubee.com/books/",
+   "host": "cn.epubee.com"
+  },
+  {
+   "id": "r198",
+   "name": "书伴 – 为静心阅读而生",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://bookfere.com/",
+   "host": "bookfere.com"
+  },
+  {
+   "id": "r199",
+   "name": "不死鸟 · 电子书站推荐",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://iui.su/3454/",
+   "host": "iui.su"
+  },
+  {
+   "id": "r200",
+   "name": "在线图书馆",
+   "cat": "电子书·网盘检索",
+   "sub": "文库与文献",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "文库与学术文献库",
+   "use": "找文献、模板与扫描资料",
+   "url": "http://mk.luobolibrary.cn/#/",
+   "host": "mk.luobolibrary.cn"
+  },
+  {
+   "id": "r201",
+   "name": "电子书格式转换器",
+   "cat": "电子书·网盘检索",
+   "sub": "格式工具",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "电子书格式转换",
+   "use": "转格式喂 Kindle / 阅读器",
+   "url": "http://cn.epubee.com/",
+   "host": "cn.epubee.com"
+  },
+  {
+   "id": "r202",
+   "name": "坤乾泰(简书)",
+   "cat": "电子书·网盘检索",
+   "sub": "经验帖",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "找书经验与方法帖",
+   "use": "扩充找书渠道",
+   "url": "https://www.jianshu.com/u/b88733776ddf",
+   "host": "www.jianshu.com"
+  },
+  {
+   "id": "r203",
+   "name": "安娜的档案 · 论坛讨论帖",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://forum.freemdict.com/t/topic/17099/65",
+   "host": "forum.freemdict.com"
+  },
+  {
+   "id": "r204",
+   "name": "数字资源---浙江图书馆",
+   "cat": "电子书·网盘检索",
+   "sub": "文库与文献",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "文库与学术文献库",
+   "use": "找文献、模板与扫描资料",
+   "url": "http://www.zjlib.cn/zyszzy/index.htm?li_id=1",
+   "host": "www.zjlib.cn"
+  },
+  {
+   "id": "r205",
+   "name": "文库-文档",
+   "cat": "电子书·网盘检索",
+   "sub": "文库与文献",
+   "tags": [
+    "网盘搜索",
+    "培训投教",
+    "电子书搜索"
+   ],
+   "what": "文库与学术文献库",
+   "use": "找文献、模板与扫描资料",
+   "url": "https://www.baogaoting.com/infolibrary/index",
+   "host": "www.baogaoting.com"
+  },
+  {
+   "id": "r206",
+   "name": "找电子书的八个网站(简书)",
+   "cat": "电子书·网盘检索",
+   "sub": "经验帖",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "找书经验与方法帖",
+   "use": "扩充找书渠道",
+   "url": "https://www.jianshu.com/p/314cab13cdd8/",
+   "host": "www.jianshu.com"
+  },
+  {
+   "id": "r207",
+   "name": "栏目分类",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "http://www.baiduyunsousou.com/channel",
+   "host": "www.baiduyunsousou.com"
+  },
+  {
+   "id": "r208",
+   "name": "毕业助手-免费中文文献库",
+   "cat": "电子书·网盘检索",
+   "sub": "文库与文献",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "文库与学术文献库",
+   "use": "找文献、模板与扫描资料",
+   "url": "https://www.060193.top/",
+   "host": "www.060193.top"
+  },
+  {
+   "id": "r209",
+   "name": "淘链客",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "资源站",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.toplinks.cc/s/?keyword=%E5%8F%8D%E5%B8%82%E5%9C%BA",
+   "host": "www.toplinks.cc"
+  },
+  {
+   "id": "r210",
+   "name": "淘链客 (2)",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "资源站",
+    "电子书搜索",
+    "多入口"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "http://www.toplinks.cc/s/?keyword=%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88",
+   "host": "www.toplinks.cc"
+  },
+  {
+   "id": "r211",
+   "name": "熊猫搜书",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "电子书搜索",
+    "投资书籍",
+    "资源站"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://xmsoushu.com/#/",
+   "host": "xmsoushu.com"
+  },
+  {
+   "id": "r212",
+   "name": "电子书",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://ebook2.lorefree.com/",
+   "host": "ebook2.lorefree.com"
+  },
+  {
+   "id": "r213",
+   "name": "电子书最新地址",
+   "cat": "电子书·网盘检索",
+   "sub": "电子书库",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "全球电子书库入口",
+   "use": "直接搜书名下书",
+   "url": "https://book.clouds.pp.ua/",
+   "host": "book.clouds.pp.ua"
+  },
+  {
+   "id": "r214",
+   "name": "电子资源平台",
+   "cat": "电子书·网盘检索",
+   "sub": "文库与文献",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "文库与学术文献库",
+   "use": "找文献、模板与扫描资料",
+   "url": "https://res.gxlib.org.cn/ermsClient/browse.do",
+   "host": "res.gxlib.org.cn"
+  },
+  {
+   "id": "r215",
+   "name": "百度网盘搜索关键词",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "http://www.xiaobaipan.com/s-p1.html",
+   "host": "www.xiaobaipan.com"
+  },
+  {
+   "id": "r216",
+   "name": "盘大师",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.pandashi8.com/",
+   "host": "www.pandashi8.com"
+  },
+  {
+   "id": "r217",
+   "name": "盘搜啦",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "http://www.pansoula.com/",
+   "host": "www.pansoula.com"
+  },
+  {
+   "id": "r218",
+   "name": "磁力宝",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.ziyuanm.com/zywz/cilibao/",
+   "host": "www.ziyuanm.com"
+  },
+  {
+   "id": "r219",
+   "name": "天天搜索(网盘)",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "http://www.daysou.com/",
+   "host": "www.daysou.com"
+  },
+  {
+   "id": "r220",
+   "name": "西林街搜索",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.ziyuanm.com/zywz/xlj/",
+   "host": "www.ziyuanm.com"
+  },
+  {
+   "id": "r221",
+   "name": "超能搜",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.chaonengso.com/",
+   "host": "www.chaonengso.com"
+  },
+  {
+   "id": "r222",
+   "name": "冷门电子书站(简书)",
+   "cat": "电子书·网盘检索",
+   "sub": "经验帖",
+   "tags": [
+    "电子书搜索"
+   ],
+   "what": "找书经验与方法帖",
+   "use": "扩充找书渠道",
+   "url": "https://www.jianshu.com/p/91d81cd021d7",
+   "host": "www.jianshu.com"
+  },
+  {
+   "id": "r223",
+   "name": "飞猪盘",
+   "cat": "电子书·网盘检索",
+   "sub": "网盘搜索",
+   "tags": [
+    "网盘搜索",
+    "电子书搜索"
+   ],
+   "what": "网盘资源搜索引擎",
+   "use": "找 PDF / 资料时换个来源",
+   "url": "https://www.feizhupan.com/#/main/search?restype=1",
+   "host": "www.feizhupan.com"
+  },
+  {
+   "id": "r224",
+   "name": "麦肯锡 · 拥抱Z世代(券商年轻化)",
+   "cat": "投顾业务与财富管理",
+   "sub": "行业与展业",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "财富管理与投顾展业参考",
+   "use": "做方案与客户材料时用",
+   "url": "https://www.mckinsey.com.cn/%e6%8b%a5%e6%8a%b1z%e4%b8%96%e4%bb%a3-%e5%88%b8%e5%95%86%e5%b9%b4%e8%bd%bb%e5%8c%96%e8%bd%ac%e5%9e%8b%e6%8e%a2%e7%b4%a2/",
+   "host": "www.mckinsey.com.cn"
+  },
+  {
+   "id": "r225",
+   "name": "贝塔牛(广发选股机器人)",
+   "cat": "投顾业务与财富管理",
+   "sub": "内部产品",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "广发贝塔牛智能选股",
+   "use": "给客户演示时用",
+   "url": "https://www.yangqiu.cn/pufengwaihui/1219373.html",
+   "host": "www.yangqiu.cn"
+  },
+  {
+   "id": "r226",
+   "name": "德勤 · 中国财富管理行业观察(上)",
+   "cat": "投顾业务与财富管理",
+   "sub": "行业研究",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "咨询机构财富管理研究",
+   "use": "写材料时的行业依据",
+   "url": "https://www2.deloitte.com/cn/zh/pages/financial-services/articles/keep-up-with-market-trends-and-cultivate-wealth-management-capabilities.html",
+   "host": "www2.deloitte.com"
+  },
+  {
+   "id": "r227",
+   "name": "工商银行官网",
+   "cat": "投顾业务与财富管理",
+   "sub": "同业与投教",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "同业理财与投资者教育",
+   "use": "做客户投教素材",
+   "url": "https://www.icbc.com.cn/column/1438058386850988570.html",
+   "host": "www.icbc.com.cn"
+  },
+  {
+   "id": "r228",
+   "name": "MacroMicro 财经M平方",
+   "cat": "投顾业务与财富管理",
+   "sub": "行业与展业",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "财富管理与投顾展业参考",
+   "use": "做方案与客户材料时用",
+   "url": "https://sc.macromicro.me/industry-intelligence-hub/artificial-intelligence?sort=1&tag=377&chartPremiss=0,1&page=1",
+   "host": "sc.macromicro.me"
+  },
+  {
+   "id": "r229",
+   "name": "从卖方到买方 · 投顾转型(设计稿)",
+   "cat": "投顾业务与财富管理",
+   "sub": "内容与工具",
+   "tags": [
+    "内容运营",
+    "财富管理"
+   ],
+   "what": "展业内容制作工具",
+   "use": "做图文/课程时用",
+   "url": "https://www.x-design.com/design/?from=&id=affeb9e6d33d0e1d37282d9d44858e50&type=ppt",
+   "host": "www.x-design.com"
+  },
+  {
+   "id": "r230",
+   "name": "小鹅通(内容工具)",
+   "cat": "投顾业务与财富管理",
+   "sub": "内容与工具",
+   "tags": [
+    "内容运营",
+    "财富管理"
+   ],
+   "what": "展业内容制作工具",
+   "use": "做图文/课程时用",
+   "url": "https://admin.xiaoe-tech.com/t/login?reg_source=0101&src_page=A#/wx",
+   "host": "admin.xiaoe-tech.com"
+  },
+  {
+   "id": "r231",
+   "name": "市场动态(详情页)",
+   "cat": "投顾业务与财富管理",
+   "sub": "行情观点",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "行情与投资观点页",
+   "use": "看机构对市场的判断",
+   "url": "https://wm.icbc.com.cn/marketTrendsDetails?id=2025122616041700000011",
+   "host": "wm.icbc.com.cn"
+  },
+  {
+   "id": "r232",
+   "name": "投资视点",
+   "cat": "投顾业务与财富管理",
+   "sub": "行情观点",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "行情与投资观点页",
+   "use": "看机构对市场的判断",
+   "url": "https://cmbchina.com/privatebank/privateBankInfo?guid=30195439-73fe-408d-b7f6-19a0e43242b8",
+   "host": "cmbchina.com"
+  },
+  {
+   "id": "r233",
+   "name": "招银理财官网",
+   "cat": "投顾业务与财富管理",
+   "sub": "同业与投教",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "同业理财与投资者教育",
+   "use": "做客户投教素材",
+   "url": "https://www.cmbchinawm.com/cdmArticleDetail?articleId=12011&type=MRSCDP&current=1",
+   "host": "www.cmbchinawm.com"
+  },
+  {
+   "id": "r234",
+   "name": "理财100问(飞慕课)",
+   "cat": "投顾业务与财富管理",
+   "sub": "同业与投教",
+   "tags": [
+    "展业客户",
+    "财富管理"
+   ],
+   "what": "同业理财与投资者教育",
+   "use": "做客户投教素材",
+   "url": "https://www.feimooc.com/article/category/news2?page=2",
+   "host": "www.feimooc.com"
+  },
+  {
+   "id": "r235",
+   "name": "理财100问 · 基金风险(知乎)",
+   "cat": "投顾业务与财富管理",
+   "sub": "同业与投教",
+   "tags": [
+    "基金ETF",
+    "展业客户",
+    "财富管理"
+   ],
+   "what": "同业理财与投资者教育",
+   "use": "做客户投教素材",
+   "url": "https://zhuanlan.zhihu.com/p/446639826",
+   "host": "zhuanlan.zhihu.com"
+  },
+  {
+   "id": "r236",
+   "name": "华泰 · 证券公司内训方案",
+   "cat": "投顾业务与财富管理",
+   "sub": "培训与转型",
+   "tags": [
+    "培训投教",
+    "财富管理"
+   ],
+   "what": "券商培训与投顾转型参考",
+   "use": "做团队培训与转型参考",
+   "url": "https://www.21tb.com/h-col-329.html",
+   "host": "www.21tb.com"
+  },
+  {
+   "id": "r237",
+   "name": "麦肯锡 · 中国Z世代特刊",
+   "cat": "投顾业务与财富管理",
+   "sub": "行业研究",
+   "tags": [
+    "财富管理"
+   ],
+   "what": "咨询机构财富管理研究",
+   "use": "写材料时的行业依据",
+   "url": "https://www.mckinsey.com.cn/%e9%ba%a6%e8%82%af%e9%94%a1%e4%b8%ad%e5%9b%bd%e6%b6%88%e8%b4%b9%e8%80%85%e7%89%b9%e5%88%8a-%e4%b8%ad%e5%9b%bdz%e4%b8%96%e4%bb%a3%e5%88%9d%e9%95%bf%e6%88%90%ef%bc%8c%e5%a6%82%e4%bd%95%e4%bf%98/",
+   "host": "www.mckinsey.com.cn"
+  },
+  {
+   "id": "r238",
+   "name": "AI写作平台",
+   "cat": "广发内部平台与展业",
+   "sub": "内容与运营",
+   "tags": [
+    "内容运营",
+    "内网办公"
+   ],
+   "what": "内部 AI 写作平台",
+   "use": "写材料、出初稿时用",
+   "url": "https://aiwrite.gf.com.cn/home",
+   "host": "aiwrite.gf.com.cn"
+  },
+  {
+   "id": "r239",
+   "name": "AUM资产包管理系统",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "数据分析",
+    "内网办公"
+   ],
+   "what": "AUM 资产包管理系统",
+   "use": "看客户资产包与配置情况",
+   "url": "http://aum.gf.com.cn/#/login",
+   "host": "aum.gf.com.cn"
+  },
+  {
+   "id": "r240",
+   "name": "GFOA",
+   "cat": "广发内部平台与展业",
+   "sub": "内部系统",
+   "tags": [
+    "内网办公"
+   ],
+   "what": "GFOA 内部系统",
+   "use": "内网办公入口",
+   "url": "http://ioa.gf.com.cn/#/page/home",
+   "host": "ioa.gf.com.cn"
+  },
+  {
+   "id": "r241",
+   "name": "IPTV",
+   "cat": "广发内部平台与展业",
+   "sub": "内容与运营",
+   "tags": [
+    "内容运营",
+    "内网办公"
+   ],
+   "what": "内部 IPTV 内容平台",
+   "use": "直播/视频内容相关",
+   "url": "http://10.2.89.95/iptv/",
+   "host": "10.2.89.95"
+  },
+  {
+   "id": "r242",
+   "name": "个人档案",
+   "cat": "广发内部平台与展业",
+   "sub": "内部行政",
+   "tags": [
+    "内网办公"
+   ],
+   "what": "个人档案信息",
+   "use": "查个人人事信息",
+   "url": "http://learning.gf.com.cn/profiles/html/profileView.do?key=bb97c7ac-e265-4ad8-8a15-95a15ab6cf29",
+   "host": "learning.gf.com.cn"
+  },
+  {
+   "id": "r243",
+   "name": "企业门户",
+   "cat": "广发内部平台与展业",
+   "sub": "内部行政",
+   "tags": [
+    "内网办公"
+   ],
+   "what": "企业门户首页",
+   "use": "内网第一入口",
+   "url": "http://portal.gf.com.cn/gfwps/LoginPluginModule/staticPages/jsp/GFIndex.jsp?random=57620",
+   "host": "portal.gf.com.cn"
+  },
+  {
+   "id": "r244",
+   "name": "分析中心",
+   "cat": "广发内部平台与展业",
+   "sub": "数据与报表",
+   "tags": [
+    "数据分析",
+    "内网办公"
+   ],
+   "what": "数据分析中心",
+   "use": "做数据查询与分析",
+   "url": "https://bsc.gf.com.cn/jyfx_new/spring/loginFromPortal.do",
+   "host": "bsc.gf.com.cn"
+  },
+  {
+   "id": "r245",
+   "name": "OTC 客户准入流程",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "内网办公",
+    "合规报送"
+   ],
+   "what": "OTC 客户准入流程",
+   "use": "办理客户准入审核",
+   "url": "http://gfotcm.gf.com.cn/sps/#/customer_access_process?documentId=docid%3A52B3139D53114D28A17B62A59EA94AE2&from=bpm",
+   "host": "gfotcm.gf.com.cn"
+  },
+  {
+   "id": "r246",
+   "name": "广发投顾管理平台",
+   "cat": "广发内部平台与展业",
+   "sub": "投顾业务",
+   "tags": [
+    "投顾平台",
+    "内网办公"
+   ],
+   "what": "投顾业务管理平台",
+   "use": "日常投顾展业主入口",
+   "url": "http://ia.gf.com.cn/ia2-web/information/index",
+   "host": "ia.gf.com.cn"
+  },
+  {
+   "id": "r247",
+   "name": "广发投顾管理平台 (2)",
+   "cat": "广发内部平台与展业",
+   "sub": "投顾业务",
+   "tags": [
+    "投顾平台",
+    "内网办公",
+    "多入口"
+   ],
+   "what": "投顾业务管理平台",
+   "use": "日常投顾展业主入口",
+   "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=74",
+   "host": "ia.gf.com.cn"
+  },
+  {
+   "id": "r248",
+   "name": "广发投顾管理平台2",
+   "cat": "广发内部平台与展业",
+   "sub": "投顾业务",
+   "tags": [
+    "投顾平台",
+    "内网办公"
+   ],
+   "what": "投顾业务管理平台(2)",
+   "use": "另一入口，按需切换",
+   "url": "http://ia.gf.com.cn/ia2-web/information/editInfo?categoryId=149",
+   "host": "ia.gf.com.cn"
+  },
+  {
+   "id": "r249",
+   "name": "广发研究",
+   "cat": "广发内部平台与展业",
+   "sub": "投研支持",
+   "tags": [
+    "内网办公",
+    "研报机构"
+   ],
+   "what": "内部研究观点与研报",
+   "use": "取内部研究成果",
+   "url": "https://research.gf.com.cn/home",
+   "host": "research.gf.com.cn"
+  },
+  {
+   "id": "r250",
+   "name": "金管家综合服务系统",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "投顾平台",
+    "内网办公"
+   ],
+   "what": "金管家综合服务系统",
+   "use": "客户服务与业务办理",
+   "url": "http://crm.gf.com.cn/portal/micro/external/stock",
+   "host": "crm.gf.com.cn"
+  },
+  {
+   "id": "r251",
+   "name": "我的档案",
+   "cat": "广发内部平台与展业",
+   "sub": "内部行政",
+   "tags": [
+    "内网办公"
+   ],
+   "what": "个人档案信息",
+   "use": "查个人人事信息",
+   "url": "http://ishare.gf.com.cn/pc/user/detail/ad0c6244767f11e6b9f81c98ec2a706f",
+   "host": "ishare.gf.com.cn"
+  },
+  {
+   "id": "r252",
+   "name": "数据综合平台 · 报表",
+   "cat": "广发内部平台与展业",
+   "sub": "数据与报表",
+   "tags": [
+    "财报基本面",
+    "数据分析",
+    "内网办公"
+   ],
+   "what": "数据综合管理平台 · 报表检索",
+   "use": "取数、下载报表",
+   "url": "https://data.gf.com.cn/portal/#/shop/reportCenterResult/all-report/%E5%88%9B%E6%94%B6",
+   "host": "data.gf.com.cn"
+  },
+  {
+   "id": "r253",
+   "name": "数字化智能中台",
+   "cat": "广发内部平台与展业",
+   "sub": "数据与报表",
+   "tags": [
+    "数据分析",
+    "内网办公"
+   ],
+   "what": "数字化智能中台",
+   "use": "取数、看经营指标",
+   "url": "https://aio.gf.com.cn/long/login?theme=pc&login_type=oa&client_id=support&redirect_uri=https://aio.gf.com.cn/api/auth/oa/callback?redirect=L2xvbmcvYWktcGVhay12Mg==",
+   "host": "aio.gf.com.cn"
+  },
+  {
+   "id": "r254",
+   "name": "数字化智能中台 (2)",
+   "cat": "广发内部平台与展业",
+   "sub": "数据与报表",
+   "tags": [
+    "数据分析",
+    "内网办公",
+    "多入口"
+   ],
+   "what": "数字化智能中台",
+   "use": "取数、看经营指标",
+   "url": "https://aio.gf.com.cn/long/ai-peak-v2/137dd9b0-c251-4d0e-9095-ed2368a63afa",
+   "host": "aio.gf.com.cn"
+  },
+  {
+   "id": "r255",
+   "name": "数据综合平台 · 文件",
+   "cat": "广发内部平台与展业",
+   "sub": "数据与报表",
+   "tags": [
+    "数据分析",
+    "内网办公"
+   ],
+   "what": "数据综合管理平台 · 文件管理",
+   "use": "找平台上的文件资料",
+   "url": "http://data.gf.com.cn/portal/#/operations/fileManage",
+   "host": "data.gf.com.cn"
+  },
+  {
+   "id": "r256",
+   "name": "期权学习管理系统",
+   "cat": "广发内部平台与展业",
+   "sub": "培训与学习",
+   "tags": [
+    "教程",
+    "内网办公",
+    "培训投教"
+   ],
+   "what": "期权学习管理系统",
+   "use": "学期权业务与考试",
+   "url": "http://kss.gf.com.cn/WebRoot/package.do?m=info&packageId=836001&ticket=ST-22308-5q35ImQ8hrCEcsaDqLJi-m-128",
+   "host": "kss.gf.com.cn"
+  },
+  {
+   "id": "r257",
+   "name": "网络学院",
+   "cat": "广发内部平台与展业",
+   "sub": "培训与学习",
+   "tags": [
+    "教程",
+    "内网办公",
+    "培训投教"
+   ],
+   "what": "网络学院在线课程",
+   "use": "内训课程与学习任务",
+   "url": "https://gf.21tb.com/os/html/deskTop.init.do",
+   "host": "gf.21tb.com"
+  },
+  {
+   "id": "r258",
+   "name": "理财网店",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "展业客户",
+    "内网办公"
+   ],
+   "what": "理财网店(对客展业页)",
+   "use": "给客户发产品链接",
+   "url": "https://sell.gf.com.cn/#/warehouse/index",
+   "host": "sell.gf.com.cn"
+  },
+  {
+   "id": "r259",
+   "name": "财富管理平台",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "财富管理",
+    "内网办公"
+   ],
+   "what": "财富管理平台",
+   "use": "配置方案与产品管理",
+   "url": "http://wm.gf.com.cn/#/home/index",
+   "host": "wm.gf.com.cn"
+  },
+  {
+   "id": "r260",
+   "name": "财富管理平台 (2)",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "财富管理",
+    "内网办公",
+    "多入口"
+   ],
+   "what": "财富管理平台",
+   "use": "配置方案与产品管理",
+   "url": "http://wm.gf.com.cn/#/invest/simulatedInvestment",
+   "host": "wm.gf.com.cn"
+  },
+  {
+   "id": "r261",
+   "name": "财富管理平台 (3)",
+   "cat": "广发内部平台与展业",
+   "sub": "业务与客户",
+   "tags": [
+    "财富管理",
+    "内网办公",
+    "多入口"
+   ],
+   "what": "财富管理平台",
+   "use": "配置方案与产品管理",
+   "url": "http://wm.gf.com.cn/v2/#/v1/invest/simulatedInvestment",
+   "host": "wm.gf.com.cn"
+  },
+  {
+   "id": "r262",
+   "name": "金创翼全媒体内容运营中心",
+   "cat": "广发内部平台与展业",
+   "sub": "内容与运营",
+   "tags": [
+    "内容运营",
+    "内网办公"
+   ],
+   "what": "金创翼全媒体内容运营中心",
+   "use": "直播/短视频素材与发布",
+   "url": "https://gwings.gf.com.cn/nbd-video-edit-ui/index",
+   "host": "gwings.gf.com.cn"
+  },
+  {
+   "id": "r263",
+   "name": "预览发文",
+   "cat": "广发内部平台与展业",
+   "sub": "内容与运营",
+   "tags": [
+    "内容运营",
+    "内网办公"
+   ],
+   "what": "发文预览页",
+   "use": "发稿前预览校对",
+   "url": "http://flow.gf.com.cn/bpm/previewText/fw/docid:811B09E520C54895A9CAB35228EB224A",
+   "host": "flow.gf.com.cn"
+  },
+  {
+   "id": "r264",
+   "name": "ADMIN 后台首页",
+   "cat": "广发内部平台与展业",
+   "sub": "内部行政",
+   "tags": [
+    "内网办公"
+   ],
+   "what": "后台管理首页",
+   "use": "后台管理入口",
+   "url": "https://gfzqtest.alldobetter.com/#/login?redirect=%2F",
+   "host": "gfzqtest.alldobetter.com"
+  },
+  {
+   "id": "r265",
+   "name": "吉林数据报送",
+   "cat": "合规·报送·协会",
+   "sub": "合规与报送",
+   "tags": [
+    "合规报送"
+   ],
+   "what": "协会与监管报送入口",
+   "use": "按时点完成数据报送与合规自查",
+   "url": "http://www.jilinsac.cn/base/client/user/toLogin",
+   "host": "www.jilinsac.cn"
+  },
+  {
+   "id": "r266",
+   "name": "吉林省证券业协会",
+   "cat": "合规·报送·协会",
+   "sub": "合规与报送",
+   "tags": [
+    "合规报送"
+   ],
+   "what": "协会与监管报送入口",
+   "use": "按时点完成数据报送与合规自查",
+   "url": "http://www.jilinsac.cn/base/client/index/toIndex",
+   "host": "www.jilinsac.cn"
+  },
+  {
+   "id": "r267",
+   "name": "黑龙江省证券业协会数据报送系统",
+   "cat": "合规·报送·协会",
+   "sub": "合规与报送",
+   "tags": [
+    "合规报送"
+   ],
+   "what": "协会与监管报送入口",
+   "use": "按时点完成数据报送与合规自查",
+   "url": "http://sah.ishop.lcweb03.cn/user/infolist/index.html",
+   "host": "sah.ishop.lcweb03.cn"
+  }
+ ]
+}
