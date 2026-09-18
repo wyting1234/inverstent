@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>数据同步 · Gitee 云备份 · Inverstent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0f1a; --bg2:#131a2b; --card:#1a2338; --cardh:#212e4a;
+  --line:#2a3a5c; --tx:#e8edf5; --tx2:#8ba0c7; --txm:#5d7699;
+  --gold:#f7b731; --blue:#4d9eff; --green:#00e396; --red:#ff6b6b;
+  --radius:14px; --shadow:0 8px 32px rgba(0,0,0,.45);
+}
+body.theme-light{
+  --bg:#eef1f7; --bg2:#ffffff; --card:#ffffff; --cardh:#f3f6fc;
+  --line:#dde4f0; --tx:#16203a; --tx2:#4b5b7a; --txm:#8b9ab4;
+  --gold:#b8860b; --blue:#2a72d4; --green:#0a9e6e; --red:#d64545;
+  --shadow:0 6px 20px rgba(20,35,70,.08);
+}
+body{
+  background:var(--bg); color:var(--tx); min-height:100vh;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Roboto,sans-serif;
+  padding:22px 26px 70px; transition:background .3s,color .3s;
+}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--txm)}
+a{color:var(--blue)}
+.wrap{max-width:1000px;margin:0 auto}
+
+/* ---- 头部 ---- */
+.hdr{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:18px 24px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;
+}
+.hdr-l{display:flex;align-items:center;gap:16px;min-width:0}
+.logo{
+  font-size:24px;width:46px;height:46px;flex:0 0 auto;border-radius:12px;display:flex;
+  align-items:center;justify-content:center;background:rgba(247,183,49,.12);color:var(--gold);
+}
+.hdr h1{font-size:19px;font-weight:700;letter-spacing:-.2px;color:var(--gold)}
+.hdr .sub{font-size:12.5px;color:var(--tx2);margin-top:3px}
+.hdr-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--line);background:transparent;color:var(--tx2);cursor:pointer;
+  padding:8px 14px;border-radius:9px;font-size:13px;font-family:inherit;font-weight:600;
+  transition:.2s ease;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.btn:hover:not(:disabled){background:var(--cardh);color:var(--gold);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#20180a}
+.btn.primary:hover:not(:disabled){filter:brightness(1.1);color:#20180a;background:var(--gold)}
+.btn.danger{border-color:rgba(255,107,107,.5);color:var(--red)}
+.btn.danger:hover:not(:disabled){background:rgba(255,107,107,.12);color:var(--red);border-color:var(--red)}
+.btn.mini{padding:5px 10px;font-size:12px;border-radius:7px}
+
+/* ---- 卡片 ---- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.card-h{
+  padding:14px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bg2);
+}
+.card-h .t{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:9px}
+.card-h .t .n{
+  font-size:11px;font-weight:700;width:20px;height:20px;border-radius:6px;display:inline-flex;
+  align-items:center;justify-content:center;background:rgba(247,183,49,.14);color:var(--gold);
+}
+.card-h .hint{font-size:12px;color:var(--txm)}
+.card-b{padding:20px 22px}
+.card-b.tight{padding:0}
+
+/* ---- 表单 ---- */
+.frow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:12px;font-weight:600;color:var(--tx2);letter-spacing:.2px}
+.field .tip{font-size:11.5px;color:var(--txm);line-height:1.5}
+input[type=text],input[type=password],select{
+  width:100%;padding:9px 12px;border-radius:9px;border:1px solid var(--line);
+  background:var(--bg);color:var(--tx);font-size:13.5px;font-family:inherit;outline:none;transition:.2s;
+}
+input:focus,select:focus{border-color:var(--gold)}
+input::placeholder{color:var(--txm)}
+.acts{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+
+/* ---- 状态 ---- */
+.state{
+  margin-top:16px;padding:12px 15px;border-radius:10px;font-size:13px;line-height:1.65;
+  border:1px solid var(--line);background:var(--bg);color:var(--tx2);
+}
+.state.ok{border-color:rgba(0,227,150,.4);background:rgba(0,227,150,.07);color:var(--tx)}
+.state.warn{border-color:rgba(247,183,49,.45);background:rgba(247,183,49,.08);color:var(--tx)}
+.state.err{border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.08);color:var(--tx)}
+.state .k{font-weight:700;color:var(--gold)}
+.state code{
+  font-family:ui-monospace,Consolas,monospace;font-size:12px;background:rgba(127,127,127,.16);
+  padding:1px 6px;border-radius:5px;
+}
+
+/* ---- 横幅 ---- */
+.banner{
+  display:none;padding:13px 18px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;line-height:1.7;
+  border:1px solid rgba(247,183,49,.5);background:rgba(247,183,49,.1);color:var(--tx);
+  align-items:center;gap:14px;flex-wrap:wrap;
+}
+.banner.show{display:flex}
+.banner .g{flex:1;min-width:200px}
+.banner b{color:var(--gold)}
+
+/* ---- 数据盘点表 ---- */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11.5px;color:var(--txm);font-weight:700;letter-spacing:.4px;text-transform:uppercase;background:var(--bg2)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--cardh)}
+td.k{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--tx2);word-break:break-all}
+td.name{font-weight:600}
+td.name .d{display:block;font-weight:400;font-size:11.5px;color:var(--txm);margin-top:2px;line-height:1.5}
+td.sz{text-align:right;font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--tx2);white-space:nowrap}
+td.ck{text-align:center;width:56px}
+input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);cursor:pointer}
+.grp{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.4px}
+.tfoot{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:13px 22px;border-top:1px solid var(--line);background:var(--bg2);font-size:12.5px;color:var(--tx2);
+}
+.chip{
+  display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;
+  background:rgba(77,158,255,.14);color:var(--blue);margin-left:6px;white-space:nowrap;
+}
+.chip.g{background:rgba(0,227,150,.14);color:var(--green)}
+.chip.m{background:rgba(127,127,127,.16);color:var(--txm)}
+
+/* ---- 操作区 ---- */
+.ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:14px}
+.op{
+  border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg);
+  display:flex;flex-direction:column;gap:9px;position:relative;transition:.2s;
+}
+.op:hover{border-color:var(--txm)}
+.op.rec{border-color:rgba(247,183,49,.55);background:rgba(247,183,49,.05)}
+.op.rec::after{
+  content:'推荐';position:absolute;top:-1px;right:-1px;font-size:10.5px;font-weight:700;
+  background:var(--gold);color:#20180a;padding:3px 9px;border-radius:0 12px 0 10px;
+}
+.op h4{font-size:14px;display:flex;align-items:center;gap:8px}
+.op p{font-size:12px;color:var(--tx2);line-height:1.6;flex:1}
+.op .warn-t{color:var(--red);font-weight:600}
+
+/* ---- 日志 ---- */
+.log{
+  margin-top:16px;border:1px solid var(--line);border-radius:11px;background:var(--bg);
+  max-height:260px;overflow:auto;font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.75;
+}
+.log .ln{padding:5px 14px;border-bottom:1px solid rgba(127,127,127,.1);white-space:pre-wrap;word-break:break-word}
+.log .ln:last-child{border-bottom:none}
+.log .ln .tm{color:var(--txm);margin-right:9px}
+.log .ln.ok{color:var(--green)} .log .ln.err{color:var(--red)}
+.log .ln.warn{color:var(--gold)} .log .ln.info{color:var(--tx2)}
+.log:empty::after{content:'（尚无操作记录）';display:block;padding:14px;color:var(--txm)}
+
+/* ---- 规则表 ---- */
+.rules{font-size:13px;line-height:1.75;color:var(--tx2)}
+.rules table{font-size:12.5px;margin:6px 0 14px}
+.rules td{padding:8px 12px}
+.rules h4{font-size:13.5px;color:var(--tx);margin:16px 0 6px}
+.rules h4:first-child{margin-top:0}
+.rules ul{margin:4px 0 10px 20px}
+.rules li{margin:3px 0}
+.rules b{color:var(--gold)}
+.rules .danger{color:var(--red);font-weight:600}
+
+/* ---- 弹窗 ---- */
+.mask{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:99;
+  align-items:center;justify-content:center;padding:20px;
+}
+.mask.show{display:flex}
+.dlg{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  max-width:460px;width:100%;padding:24px;box-shadow:var(--shadow);
+}
+.dlg h3{font-size:16px;margin-bottom:12px;color:var(--gold)}
+.dlg .bd{font-size:13.5px;line-height:1.75;color:var(--tx2);margin-bottom:20px}
+.dlg .bd b{color:var(--tx)}
+.dlg .ft{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+@media(max-width:640px){
+  body{padding:14px 14px 60px}
+  .card-b{padding:16px}
+  th,td{padding:9px 10px}
+  th.hm,td.hm{display:none}
+  .hdr{padding:15px 16px}
+  .hdr h1{font-size:16.5px}
+}
+</style>
+</head>
+<body class="theme-dark">
+<div class="wrap">
+
+  <div class="hdr">
+    <div class="hdr-l">
+      <div class="logo">☁️</div>
+      <div>
+        <h1>数据同步 · Gitee 云备份</h1>
+        <div class="sub">把本机的交易记录与投研数据备份到你的 Gitee 私有仓库，多台设备共用一份</div>
+      </div>
+    </div>
+    <div class="hdr-r">
+      <button class="btn mini" id="themeBtn" title="切换深浅色">🌓 主题</button>
+      <a class="btn mini" href="../index.html">← 返回导航</a>
+    </div>
+  </div>
+
+  <div class="banner" id="banner">
+    <div class="g" id="bannerTxt"></div>
+    <button class="btn mini primary" id="bannerGo">立即合并</button>
+    <button class="btn mini" id="bannerX">稍后</button>
+  </div>
+
+  <!-- 1 连接配置 -->
+  <div class="card">
+    <div class="card-h">
+      <div class="t"><span class="n">1</span>连接配置</div>
+      <div class="hint">令牌只存本机浏览器，绝不写入页面源码</div>
+    </div>
+    <div class="card-b">
+      <div class="frow">
+        <div class="field" style="grid-column:1/-1">
+          <label for="token">Gitee 私人令牌（access_token）</label>
+          <input type="password" id="token" placeholder="粘贴你的 Gitee 私人令牌，形如 8d1f…（不会上传到任何第三方）" autocomplete="off" spellcheck="false" />
+          <div class="tip">
+            在 <a href="https://gitee.com/profile/personal_access_tokens" target="_blank" rel="noopener">gitee.com → 设置 → 私人令牌</a> 生成，
+            勾选 <code>projects</code> 权限即可。令牌保存在本机 <code>localStorage</code>，页面源码里没有它。
+          </div>
+        </div>
+      </div>
+      <div class="frow" style="margin-top:14px">
+        <div class="field">
+          <label for="repo">数据仓库名</label>
+          <input type="text" id="repo" placeholder="inverstent-data" />
+          <div class="tip">不存在会自动创建为<b>私有</b>仓库</div>
+        </div>
+        <div class="field">
+          <label for="space">同步空间</label>
+          <input type="text" id="space" placeholder="default" />
+          <div class="tip">不同空间互不干扰；多台设备填同一个才能看到同一份数据</div>
+        </div>
+        <div class="field">
+          <label for="branch">分支</label>
+          <input type="text" id="branch" placeholder="master" />
+          <div class="tip">留空则自动读取仓库默认分支</div>
+        </div>
+      </div>
+      <div class="acts">
+        <button class="btn primary" id="btnTest">🔌 测试连接</button>
+        <button class="btn" id="btnSave">💾 保存配置</button>
+        <button class="btn danger" id="btnClear">🗑 清除本机配置</button>
+      </div>
+      <div class="state" id="cfgState">
+        尚未配置。填入令牌后点「测试连接」——会顺带检查数据仓库是否存在，不存在则自动创建。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 数据盘点 -->
+  <div class="card">
+    <div class="card-h">
+      <div class="t"><span class="n">2</span>数据盘点</div>
+      <div class="hint">勾选要纳入同步的项</div>
+    </div>
+    <div class="card-b tight">
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>数据项</th>
+              <th class="hm">存储键</th>
+              <th>大小</th>
+              <th>状态</th>
+              <th class="ck">同步</th>
+            </tr>
+          </thead>
+          <tbody id="invBody"></tbody>
+        </table>
+      </div>
+      <div class="tfoot">
+        <div id="invSum">—</div>
+        <div>
+          <button class="btn mini" id="btnAll">全选</button>
+          <button class="btn mini" id="btnNone">全不选</button>
+          <button class="btn mini" id="btnDef">恢复默认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 同步操作 -->
+  <div class="card">
+    <div class="card-h">
+      <div class="t"><span class="n">3</span>同步操作</div>
+      <div class="hint" id="lastSync">尚未同步过</div>
+    </div>
+    <div class="card-b">
+      <div class="ops">
+        <div class="op">
+          <h4>⬆️ 上传到云端</h4>
+          <p>把本机数据整体覆盖到云端。本机数据不受影响，云端旧版本会被替换。</p>
+          <button class="btn primary" id="btnUp" disabled>上传</button>
+        </div>
+        <div class="op rec">
+          <h4>🔄 下载并合并</h4>
+          <p>把云端与本机数据合并，两边新增的记录都会保留。日常推荐用这个。</p>
+          <button class="btn primary" id="btnMerge" disabled>下载并合并</button>
+        </div>
+        <div class="op">
+          <h4>⬇️ 下载并覆盖本机</h4>
+          <p>用云端数据整体替换本机。<span class="warn-t">本机未同步的改动会丢失</span>，建议先上传备份。</p>
+          <button class="btn danger" id="btnDown" disabled>覆盖本机</button>
+        </div>
+        <div class="op">
+          <h4>🧨 删除云端备份</h4>
+          <p>删除云端的同步文件。本机数据不受影响，但其它设备将读不到云端数据。</p>
+          <button class="btn danger" id="btnDel" disabled>删除云端</button>
+        </div>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+  <!-- 4 说明 -->
+  <div class="card">
+    <div class="card-h">
+      <div class="t"><span class="n">4</span>合并规则与安全说明</div>
+    </div>
+    <div class="card-b">
+      <div class="rules">
+        <h4>「下载并合并」怎么判断冲突</h4>
+        <p>本页会记住上次同步时的数据指纹，因此能分辨「只有一方改过」和「两边都改过」：</p>
+        <table>
+          <tr><td>只有本机改过</td><td>直接保留本机</td></tr>
+          <tr><td>只有云端改过</td><td>采用云端</td></tr>
+          <tr><td>两边都改过（列表）</td><td>按记录 <code>id</code> 取并集；同一条记录比 <code>updatedAt</code>，较新者胜，平局保留本机</td></tr>
+          <tr><td>两边都改过（对象）</td><td>逐字段合并，同一字段冲突时保留本机</td></tr>
+          <tr><td>两边都改过（普通值）</td><td>保留本机</td></tr>
+          <tr><td>仅一方存在该键</td><td>有的一方胜出（不会因为另一端没这个键就删掉）</td></tr>
+        </table>
+        <p>所以<b>合并只会让数据变多，不会让记录凭空消失</b>；同一条记录被两台设备改过时，才会发生「一边覆盖另一边」，此时以时间较新的为准。</p>
+
+        <h4>多设备怎么用</h4>
+        <ul>
+          <li>各设备打开同一个网址，填入<b>同一个令牌 + 同一个仓库名 + 同一个空间名</b>；</li>
+          <li>都点一次「下载并合并」，数据即对齐；</li>
+          <li>之后每次换设备前在旧设备点「上传」，在新设备点「下载并合并」；</li>
+          <li>本页打开时会自动比对云端时间，发现云端更新会顶部提示（<b>只提示，不自动覆盖</b>）。</li>
+        </ul>
+
+        <h4>安全</h4>
+        <ul>
+          <li>令牌保存在<b>本机浏览器的 localStorage</b>，页面源码中不含任何令牌；</li>
+          <li>数据写入你的 Gitee <b>私有</b>仓库，只有持令牌者能读；</li>
+          <li>换机器或怀疑令牌泄露，点「清除本机配置」，并到 Gitee 后台吊销该令牌；</li>
+          <li>云端文件名形如 <code>data-default.json</code>，改「同步空间」名即可隔离出多套互不干扰的数据。</li>
+        </ul>
+
+        <h4>说明</h4>
+        <ul>
+          <li>本站页面同源，所以本页能读写其它工具的数据；但<b>同步后请到对应页面刷新一次</b>，界面才会显示新数据。</li>
+          <li>「下载并覆盖本机」与「删除云端备份」是不可逆操作，都会先弹确认。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mask" id="mask">
+  <div class="dlg">
+    <h3 id="dlgT">确认</h3>
+    <div class="bd" id="dlgB"></div>
+    <div class="ft">
+      <button class="btn" id="dlgN">取消</button>
+      <button class="btn danger" id="dlgY">确定</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+/* ============================================================
+   0. 常量
+   ============================================================ */
+var GITEE = 'https://gitee.com/api/v5';
+var CFG_KEY  = 'invs_sync_cfg_v1';
+var BASE_KEY = 'invs_sync_base_v1';
+var PKG      = 'inverstent-sync';
+var PKG_VER  = 1;
+
+/* 已知数据项：名称 / 说明 / 分组 / 默认是否勾选 */
+var KNOWN = {
+  'tw_trades_v2':        { name: '交易记录',        desc: '成功交易者工作台 · 交易明细、计划、复盘',        grp: '交易工作台', on: true  },
+  'tw_workspace_v2':     { name: '投研工作台数据',  desc: '书签 / 笔记 / 研报 / 模型 / 个股 / 技术 / 想法 / 习惯', grp: '交易工作台', on: true },
+  'watchlist_data':      { name: '资产配置观察池',  desc: '资产配置百宝箱 · 自选标的与备注',              grp: '其它工具',   on: true  },
+  'msgSourceBoard_v1':   { name: '消息源清单',      desc: '消息源巡检工作台 · 信息源与今日已看状态',        grp: '其它工具',   on: true  },
+  'tw_theme_v2':         { name: '界面主题',        desc: '深色 / 浅色偏好 —— 每台设备各设各的，不该同步', grp: '设备偏好',   on: false },
+  'tw_backup_v2':        { name: '自动备份快照',    desc: '导入 / 清空前自动留存的一份副本，体积大且可重建', grp: '设备偏好',   on: false },
+  'trade_journal_data':  { name: '旧版交易数据',    desc: 'v1 迁移来源，新数据已落到 tw_trades_v2',       grp: '历史遗留',   on: false },
+  'trader_workspace_data':{ name: '旧版工作台数据', desc: 'v1 迁移来源，新数据已落到 tw_workspace_v2',    grp: '历史遗留',   on: false }
+};
+
+var GRP_ORDER = ['交易工作台', '其它工具', '设备偏好', '历史遗留', '未归类'];
+
+/* ============================================================
+   1. 小工具
+   ============================================================ */
+function $(s) { return document.querySelector(s); }
+function esc(v) {
+  if (v === null || v === undefined) return '';
+  return String(v).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function bytes(n) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  if (n < 1024) return n + ' B';
+  if (n < 1024 * 1024) return (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
+  return (n / 1048576).toFixed(2) + ' MB';
+}
+function nowStr() {
+  var d = new Date();
+  function p(n) { return String(n).padStart(2, '0'); }
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+         ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+}
+function timeStr(t) {
+  if (!t) return '—';
+  var d = new Date(typeof t === 'number' ? t : Date.parse(t));
+  if (isNaN(d.getTime())) return '—';
+  function p(n) { return String(n).padStart(2, '0'); }
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+         ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+}
+function readJSON(k, fb) {
+  try { var s = localStorage.getItem(k); return s ? JSON.parse(s) : fb; } catch (e) { return fb; }
+}
+function writeJSON(k, v) {
+  try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+  catch (e) { log('写入本机失败：' + (e && e.message ? e.message : e), 'err'); return false; }
+}
+
+/* ---- UTF-8 安全的 base64（中文必需）---- */
+function b64encode(str) {
+  var bytes = new TextEncoder().encode(str);
+  var bin = '', CH = 0x8000, i;
+  for (i = 0; i < bytes.length; i += CH) {
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CH));
+  }
+  return btoa(bin);
+}
+function b64decode(b64) {
+  var bin = atob(String(b64).replace(/\s/g, ''));
+  var bytes = new Uint8Array(bin.length), i;
+  for (i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+/* ---- 稳定序列化 + 指纹（键序无关）---- */
+function stableStringify(v) {
+  if (v === null || typeof v !== 'object') return JSON.stringify(v === undefined ? null : v);
+  if (Array.isArray(v)) {
+    var a = [], i;
+    for (i = 0; i < v.length; i++) a.push(stableStringify(v[i]));
+    return '[' + a.join(',') + ']';
+  }
+  var ks = Object.keys(v).sort(), o = [], k;
+  for (k = 0; k < ks.length; k++) o.push(JSON.stringify(ks[k]) + ':' + stableStringify(v[ks[k]]));
+  return '{' + o.join(',') + '}';
+}
+function hashStr(s) {
+  var h1 = 0x811c9dc5, h2 = 0x9e3779b9, i, c;
+  for (i = 0; i < s.length; i++) {
+    c = s.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 16777619) >>> 0;
+    h2 = Math.imul(h2 ^ c, 2246822519) >>> 0;
+  }
+  return h1.toString(16) + '-' + h2.toString(16) + '-' + s.length.toString(16);
+}
+
+/* ============================================================
+   2. 界面：日志 / 状态 / 弹窗
+   ============================================================ */
+function log(msg, kind) {
+  var box = $('#log');
+  var d = document.createElement('div');
+  d.className = 'ln ' + (kind || 'info');
+  d.innerHTML = '<span class="tm">' + nowStr().slice(11) + '</span>' + esc(msg);
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+function setCfgState(html, kind) {
+  var el = $('#cfgState');
+  el.className = 'state' + (kind ? ' ' + kind : '');
+  el.innerHTML = html;
+}
+var dlgResolve = null;
+function confirmDlg(title, bodyHtml, okLabel) {
+  $('#dlgT').textContent = title;
+  $('#dlgB').innerHTML = bodyHtml;
+  $('#dlgY').textContent = okLabel || '确定';
+  $('#mask').classList.add('show');
+  return new Promise(function (res) { dlgResolve = res; });
+}
+function closeDlg(v) {
+  $('#mask').classList.remove('show');
+  if (dlgResolve) { var r = dlgResolve; dlgResolve = null; r(v); }
+}
+$('#dlgY').addEventListener('click', function () { closeDlg(true); });
+$('#dlgN').addEventListener('click', function () { closeDlg(false); });
+$('#mask').addEventListener('click', function (e) { if (e.target === $('#mask')) closeDlg(false); });
+
+/* ============================================================
+   3. 主题（跟随交易工作台的偏好）
+   ============================================================ */
+function applyTheme(t) {
+  document.body.classList.toggle('theme-light', t === 'light');
+}
+$('#themeBtn').addEventListener('click', function () {
+  var next = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+  try { localStorage.setItem('tw_theme_v2', next); } catch (e) {}
+  applyTheme(next);
+});
+
+/* ============================================================
+   4. 配置
+   ============================================================ */
+var cfg = { token: '', owner: '', repo: 'inverstent-data', space: 'default', branch: '', authMode: 'bearer' };
+
+function loadCfg() {
+  var c = readJSON(CFG_KEY, null);
+  if (c && typeof c === 'object') {
+    cfg.token    = c.token || '';
+    cfg.owner    = c.owner || '';
+    cfg.repo     = c.repo || 'inverstent-data';
+    cfg.space    = c.space || 'default';
+    cfg.branch   = c.branch || '';
+    cfg.authMode = (c.authMode === 'bearer' || c.authMode === 'token') ? c.authMode : 'query';
+  }
+  $('#token').value  = cfg.token;
+  $('#repo').value   = cfg.repo;
+  $('#space').value  = cfg.space;
+  $('#branch').value = cfg.branch;
+}
+function saveCfg() {
+  writeJSON(CFG_KEY, cfg);
+}
+function pullForm() {
+  cfg.token  = $('#token').value.trim();
+  cfg.repo   = ($('#repo').value.trim() || 'inverstent-data').replace(/[^\w.\-]/g, '');
+  cfg.space  = ($('#space').value.trim() || 'default').replace(/[^\w.\-]/g, '');
+  cfg.branch = $('#branch').value.trim();
+  $('#repo').value  = cfg.repo;
+  $('#space').value = cfg.space;
+}
+
+/* ============================================================
+   5. Gitee API
+   ============================================================ */
+function filePath() { return 'data-' + cfg.space + '.json'; }
+
+/**
+ * 统一的 Gitee 请求。
+ * 认证方式：CORS 预检显示 contents 接口放行 authorization 头，
+ * 而 user/repos 建仓接口只放行 content-type —— 所以建仓必须走 access_token 参数。
+ * 这里按端点自动选择，并在 401 时自动回退到参数方式。
+ */
+function gsFetch(method, path, opt) {
+  opt = opt || {};
+  var q = Object.assign({}, opt.query || {});
+  var headers = {};
+  var body = null;
+  var forceQuery = !!opt.forceQuery;
+
+  if (opt.body !== undefined && opt.form) {
+    var usp = new URLSearchParams();
+    Object.keys(opt.body).forEach(function (k) {
+      if (opt.body[k] !== undefined && opt.body[k] !== null) usp.append(k, opt.body[k]);
+    });
+    body = usp.toString();
+    headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+    // 表单体里已经带了 access_token
+  } else if (opt.body !== undefined) {
+    headers['Content-Type'] = 'application/json;charset=UTF-8';
+    body = JSON.stringify(opt.body);
+  }
+
+  var useHeader = cfg.authMode !== 'query' && cfg.token && !forceQuery;
+  if (useHeader) {
+    // Gitee 基于 OAuth2，Bearer 为标准形式；部分文档也用 token 前缀，两者都试
+    headers['Authorization'] = (cfg.authMode === 'bearer' ? 'Bearer ' : 'token ') + cfg.token;
+  }
+  else if (cfg.token) q.access_token = cfg.token;
+
+  var url = GITEE + path;
+  var qs = new URLSearchParams();
+  Object.keys(q).forEach(function (k) {
+    if (q[k] !== undefined && q[k] !== null) qs.append(k, q[k]);
+  });
+  var s = qs.toString();
+  if (s) url += (url.indexOf('?') >= 0 ? '&' : '?') + s;
+
+  return fetch(url, { method: method, headers: headers, body: body }).then(function (res) {
+    return res.text().then(function (txt) {
+      // raw 端点返回纯文本，不能先 JSON.parse（否则文件内容本身是 JSON 时会被吃掉）
+      if (opt.asText) return { status: res.status, ok: res.ok, text: txt, data: null };
+      var data = null;
+      try { data = txt ? JSON.parse(txt) : null; } catch (e) { data = { _raw: txt }; }
+      return { status: res.status, ok: res.ok, data: data };
+    });
+  });
+}
+
+function giteeErr(r) {
+  if (r && !r.data && typeof r.text === 'string' && r.text) return r.text.slice(0, 200);
+  var d = r && r.data;
+  if (d && typeof d === 'object') {
+    if (d.message) return d.message;
+    if (d.error) {
+      if (typeof d.error === 'string') return d.error;
+      // Gitee 部分接口返回 {"error":{"base":["已存在同地址仓库"]}}
+      var flat = [];
+      (function walk(v) {
+        if (typeof v === 'string') { flat.push(v); return; }
+        if (Array.isArray(v)) { v.forEach(walk); return; }
+        if (v && typeof v === 'object') { Object.keys(v).forEach(function (k) { walk(v[k]); }); return; }
+      })(d.error);
+      return flat.length ? flat.join('；') : JSON.stringify(d.error);
+    }
+    if (d.errors && d.errors.length) {
+      var e0 = d.errors[0];
+      return typeof e0 === 'string' ? e0 : (e0.message || e0.field || JSON.stringify(e0));
+    }
+    if (d._raw) return String(d._raw).slice(0, 200);
+  }
+  return 'HTTP ' + (r ? r.status : '?');
+}
+
+/** 探测可用认证方式：先试 header，401 则回退到 query */
+function probeAuth() {
+  if (!cfg.token) return Promise.resolve(false);
+  var prev = cfg.authMode;
+  var modes = ['bearer', 'token', 'query'];   // 逐级退化：头优先（令牌不进 URL），最后才用参数
+  var lastErr = '';
+  function step(i) {
+    if (i >= modes.length) {
+      cfg.authMode = prev;
+      throw new Error('令牌无效或权限不足：' + (lastErr || '请检查令牌是否正确、是否已过期'));
+    }
+    cfg.authMode = modes[i];
+    return gsFetch('GET', '/user').then(function (r) {
+      if (r.ok) return true;
+      if (r.status === 401 || r.status === 403) { lastErr = giteeErr(r); return step(i + 1); }
+      cfg.authMode = prev;
+      throw new Error('无法访问 Gitee：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+    });
+  }
+  return step(0);
+}
+
+function apiUser() {
+  return gsFetch('GET', '/user').then(function (r) {
+    if (!r.ok) throw new Error('读取账号信息失败：' + giteeErr(r));
+    return r.data;
+  });
+}
+function apiRepo() {
+  return gsFetch('GET', '/repos/' + cfg.owner + '/' + cfg.repo);
+}
+function apiCreateRepo() {
+  var body = {
+    access_token: cfg.token,
+    name: cfg.repo,
+    description: 'Inverstent 投资管理系统 · 数据同步仓库（自动创建）',
+    'private': true,
+    auto_init: true,
+    has_issues: false,
+    has_wiki: false,
+    can_comment: false
+  };
+  // 建仓端点不放行 authorization 头，必须用 access_token 参数 + 表单体
+  return gsFetch('POST', '/user/repos', { body: body, form: true, forceQuery: true });
+}
+function apiGetFile() {
+  return gsFetch('GET', '/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + encodeURIComponent(filePath()),
+    { query: cfg.branch ? { ref: cfg.branch } : {} });
+}
+function apiRawFile() {
+  // 大文件时 contents 会返回 encoding:"none" 且 content 为空，回退到 raw。
+  // 实测：raw 无条件要鉴权（公开仓库也返 401），且返回纯文本。
+  return gsFetch('GET', '/repos/' + cfg.owner + '/' + cfg.repo + '/raw/' + encodeURIComponent(filePath()),
+    { query: cfg.branch ? { ref: cfg.branch } : {}, asText: true }).then(function (r) {
+    if (!r.ok || typeof r.text !== 'string' || !r.text.length) {
+      throw new Error('读取云端文件失败：' + giteeErr(r));
+    }
+    return r.text;
+  });
+}
+function apiPutFile(b64, message, sha) {
+  var body = { content: b64, message: message };
+  if (cfg.branch) body.branch = cfg.branch;
+  if (sha) body.sha = sha;
+  // 已存在 -> PUT 更新（需 sha）；不存在 -> POST 新建
+  if (sha) {
+    return gsFetch('PUT', '/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + encodeURIComponent(filePath()), { body: body });
+  }
+  return gsFetch('POST', '/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + encodeURIComponent(filePath()), { body: body });
+}
+function apiDeleteFile(sha, message) {
+  // Gitee 删除接口的分支参数名是 branch（只有读取接口才用 ref）
+  // 已核对官方 swagger 与 go-gitee SDK 源码确认
+  var q = { sha: sha, message: message };
+  if (cfg.branch) q.branch = cfg.branch;
+  return gsFetch('DELETE', '/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + encodeURIComponent(filePath()), { query: q });
+}
+
+/** 取云端快照：{ exists, snap, sha, bytes } */
+function fetchRemote() {
+  return apiGetFile().then(function (r) {
+    if (r.status === 404) return { exists: false };
+    if (!r.ok) throw new Error('读取云端文件失败：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+    var d = r.data || {};
+    /* ★ Gitee 对「仓库存在、文件不存在」返回 HTTP 200 + 空数组 []，而不是 404。
+       （已用公开仓库 oschina/git-osc 实测确认；目录路径也返回数组）
+       若只认 404，首次上传会错走 raw 回退分支并报错。*/
+    if (Array.isArray(d) || d.type !== 'file' || !d.sha) return { exists: false };
+    var txt = null;
+    if (d.content && d.encoding !== 'none') {
+      try { txt = b64decode(d.content); } catch (e) { txt = null; }
+    }
+    if (txt === null) return apiRawFile().then(parseSnap);
+    return parseSnap(txt);
+
+    function parseSnap(t) {
+      var snap = null;
+      try { snap = JSON.parse(t); } catch (e) { throw new Error('云端文件不是合法 JSON（可能被别的内容占用）'); }
+      return { exists: true, snap: snap, sha: d.sha, bytes: (t || '').length };
+    }
+  });
+}
+
+/* ============================================================
+   6. 快照 / 数据盘点
+   ============================================================ */
+function scanKeys() {
+  var out = [], seen = {}, i, k;
+  try {
+    for (i = 0; i < localStorage.length; i++) {
+      k = localStorage.key(i);
+      if (!k || seen[k]) continue;
+      seen[k] = 1;
+      if (k.indexOf('invs_sync_') === 0) continue;   // 自己的配置与基线
+      var raw = localStorage.getItem(k) || '';
+      var meta = KNOWN[k] || { name: k, desc: '本机其它数据（未登记）', grp: '未归类', on: false };
+      out.push({ key: k, name: meta.name, desc: meta.desc, grp: meta.grp, def: meta.on, size: raw.length, raw: raw });
+    }
+  } catch (e) {}
+  out.sort(function (a, b) {
+    var ga = GRP_ORDER.indexOf(a.grp), gb = GRP_ORDER.indexOf(b.grp);
+    if (ga < 0) ga = 99; if (gb < 0) gb = 99;
+    if (ga !== gb) return ga - gb;
+    return a.name.localeCompare(b.name, 'zh');
+  });
+  return out;
+}
+
+var selection = {};
+function renderInventory() {
+  var items = scanKeys();
+  var body = $('#invBody');
+  var h = '', lastGrp = null, i;
+  var prevSel = selection;
+  selection = {};
+  for (i = 0; i < items.length; i++) {
+    var it = items[i];
+    selection[it.key] = (it.key in prevSel) ? prevSel[it.key] : it.def;
+    if (it.grp !== lastGrp) {
+      h += '<tr><td colspan="5" class="grp" style="background:var(--bg2);padding:9px 14px">' + esc(it.grp) + '</td></tr>';
+      lastGrp = it.grp;
+    }
+    var sel = selection[it.key];
+    h += '<tr>' +
+      '<td class="name">' + esc(it.name) + '<span class="d">' + esc(it.desc) + '</span></td>' +
+      '<td class="k hm">' + esc(it.key) + '</td>' +
+      '<td class="sz">' + bytes(it.size) + '</td>' +
+      '<td>' + (sel ? '<span class="chip g">将同步</span>' : '<span class="chip m">不参与</span>') + '</td>' +
+      '<td class="ck"><input type="checkbox" data-k="' + esc(it.key) + '"' + (sel ? ' checked' : '') + '></td>' +
+      '</tr>';
+  }
+  if (!items.length) {
+    h = '<tr><td colspan="5" style="text-align:center;color:var(--txm);padding:26px">本机没有任何数据</td></tr>';
+  }
+  body.innerHTML = h;
+  Array.prototype.forEach.call(body.querySelectorAll('input[type=checkbox]'), function (cb) {
+    cb.addEventListener('change', function () {
+      selection[cb.dataset.k] = cb.checked;
+      renderSum();
+      renderInventory();
+    });
+  });
+  renderSum();
+}
+function renderSum() {
+  var total = 0, n = 0, k;
+  for (k in selection) {
+    if (!selection[k]) continue;
+    var raw = localStorage.getItem(k);
+    if (raw === null) continue;
+    total += raw.length; n++;
+  }
+  $('#invSum').innerHTML = '已选 <b style="color:var(--gold)">' + n + '</b> 项，估算 <b style="color:var(--gold)">' +
+    bytes(total) + '</b>' + (total > 700000 ? '<span class="chip" style="background:rgba(255,107,107,.14);color:var(--red)">接近 1MB 上限</span>' : '');
+}
+function selKeys() {
+  return Object.keys(selection).filter(function (k) { return selection[k] && localStorage.getItem(k) !== null; });
+}
+
+function buildSnapshot() {
+  var data = {}, ks = selKeys(), i;
+  for (i = 0; i < ks.length; i++) {
+    var raw = localStorage.getItem(ks[i]);
+    try { data[ks[i]] = JSON.parse(raw); } catch (e) { data[ks[i]] = { __raw: raw }; }
+  }
+  return {
+    format: PKG,
+    snapshotVersion: PKG_VER,
+    space: cfg.space,
+    site: 'wyting1234.github.io/inverstent',
+    savedAt: Date.now(),
+    device: deviceInfo(),
+    keys: ks,
+    data: data
+  };
+}
+function deviceInfo() {
+  var ua = navigator.userAgent;
+  var os = /Windows/.test(ua) ? 'Windows' : /Mac/.test(ua) ? 'macOS' : /Android/.test(ua) ? 'Android'
+         : /iPhone|iPad/.test(ua) ? 'iOS' : /Linux/.test(ua) ? 'Linux' : '未知系统';
+  var br = /Edg\//.test(ua) ? 'Edge' : /Chrome\//.test(ua) ? 'Chrome' : /Firefox\//.test(ua) ? 'Firefox'
+         : /Safari\//.test(ua) ? 'Safari' : '浏览器';
+  var d = '';
+  try { d = (window.screen && window.screen.width) ? window.screen.width + '×' + window.screen.height : ''; }
+  catch (e) {}
+  return { label: br + ' on ' + os, screen: d };
+}
+
+/* ============================================================
+   7. 合并
+   ============================================================ */
+function isPlainObject(v) {
+  return v !== null && typeof v === 'object' && !Array.isArray(v);
+}
+function tsOf(o) {
+  if (!isPlainObject(o)) return 0;
+  var cands = ['updatedAt', 'updated_at', '_ts', 'modifiedAt', 'createdAt', 'created_at', 'date', 'time'];
+  for (var i = 0; i < cands.length; i++) {
+    var v = o[cands[i]];
+    if (v === null || v === undefined || v === '') continue;
+    var t = typeof v === 'number' ? v : Date.parse(v);
+    if (!isNaN(t)) return t;
+  }
+  return 0;
+}
+function idOf(o) {
+  if (!isPlainObject(o)) return null;
+  var v = o.id || o._id || o.key || o.uid;
+  return (v === null || v === undefined || v === '') ? null : String(v);
+}
+
+/** 数组并集：按 id 去重，同 id 取 updatedAt 较新者；平局保留本机 */
+function unionArray(local, remote) {
+  var order = [], map = {}, i, it, key;
+  function pushOne(arr, isRemote) {
+    for (var j = 0; j < arr.length; j++) {
+      it = arr[j];
+      key = idOf(it);
+      if (key === null) key = '\u0000anon:' + hashStr(stableStringify(it));
+      if (!(key in map)) { map[key] = it; order.push(key); continue; }
+      var prev = map[key];
+      if (isRemote && tsOf(it) > tsOf(prev)) map[key] = it;   // 云端较新才覆盖
+    }
+  }
+  pushOne(local, false);
+  pushOne(remote, true);
+  var out = [];
+  for (i = 0; i < order.length; i++) out.push(map[order[i]]);
+  return out;
+}
+
+/** 深度合并：本机为底，云端补进来 */
+function deepMerge(local, remote) {
+  if (Array.isArray(local) && Array.isArray(remote)) return unionArray(local, remote);
+  if (isPlainObject(local) && isPlainObject(remote)) {
+    var out = {}, k;
+    for (k in local) out[k] = local[k];
+    for (k in remote) {
+      out[k] = Object.prototype.hasOwnProperty.call(local, k) ? deepMerge(local[k], remote[k]) : remote[k];
+    }
+    return out;
+  }
+  return local;   // 普通值冲突：保留本机
+}
+
+/** 单个键的决策 */
+function resolveKey(key, lv, rv, baseHash) {
+  var hasL = lv !== undefined, hasR = rv !== undefined;
+  if (!hasL && !hasR) return { act: 'skip' };
+  if (hasL && !hasR) return { act: 'local' };
+  if (!hasL && hasR) return { act: 'remote', value: rv };
+  var hl = hashStr(stableStringify(lv)), hr = hashStr(stableStringify(rv));
+  if (hl === hr) return { act: 'same' };
+  var lChanged = baseHash ? (hl !== baseHash) : true;
+  var rChanged = baseHash ? (hr !== baseHash) : true;
+  if (lChanged && !rChanged) return { act: 'local' };
+  if (!lChanged && rChanged) return { act: 'remote', value: rv };
+  return { act: 'merge', value: deepMerge(lv, rv) };
+}
+function hashesOf(dataMap) {
+  var o = {}, k;
+  for (k in dataMap) o[k] = hashStr(stableStringify(dataMap[k]));
+  return o;
+}
+function saveBase(dataMap) {
+  writeJSON(BASE_KEY, { savedAt: Date.now(), space: cfg.space, repo: cfg.repo, hashes: hashesOf(dataMap) });
+}
+function readBase() {
+  var b = readJSON(BASE_KEY, null);
+  if (!b || b.space !== cfg.space || b.repo !== cfg.repo) return null;
+  return b;
+}
+
+/* ============================================================
+   8. 操作
+   ============================================================ */
+var busy = false;
+function setBusy(on, which) {
+  busy = on;
+  ['#btnTest', '#btnSave', '#btnClear', '#btnUp', '#btnMerge', '#btnDown', '#btnDel',
+   '#btnAll', '#btnNone', '#btnDef', '#bannerGo'].forEach(function (s) { $(s).disabled = on; });
+  if (!on) refreshOpState();
+}
+function refreshOpState() {
+  var ready = !!cfg.token && !!cfg.owner;
+  ['#btnUp', '#btnMerge', '#btnDown', '#btnDel'].forEach(function (s) { $(s).disabled = !ready || busy; });
+}
+
+function ensureReady() {
+  pullForm();
+  if (!cfg.token) { setCfgState('请先填入 Gitee 私人令牌。', 'err'); return Promise.reject(new Error('缺少令牌')); }
+  if (!cfg.owner) { setCfgState('尚未识别到你的 Gitee 账号，请先点「测试连接」。', 'err'); return Promise.reject(new Error('缺少账号')); }
+  return Promise.resolve();
+}
+
+/** 测试连接 + 确保仓库存在 */
+function testConnection() {
+  pullForm();
+  if (!cfg.token) { setCfgState('请先填入 Gitee 私人令牌。', 'err'); return Promise.resolve(false); }
+  setBusy(true);
+  setCfgState('正在连接 Gitee …');
+  log('开始测试连接 …');
+  return probeAuth().then(function () {
+    return apiUser();
+  }).then(function (u) {
+    cfg.owner = u.login || u.name || '';
+    saveCfg();
+    log('令牌有效，账号 = ' + cfg.owner + '（认证方式：' + cfg.authMode + '）', 'ok');
+    return apiRepo().then(function (r) {
+      if (r.ok) {
+        // 实测 ref 参数不可靠，分支一律以仓库默认分支为准
+        cfg.branch = r.data.default_branch || cfg.branch || 'master';
+        $('#branch').value = cfg.branch;
+        saveCfg();
+        var vis = r.data['private'] ? '私有' : '⚠️ 公开';
+        setCfgState('已连接 <span class="k">' + esc(cfg.owner) + '</span>，数据仓库 <span class="k">' + esc(cfg.repo) +
+          '</span> 已存在（' + vis + '，默认分支 <span class="k">' + esc(cfg.branch) + '</span>）。可以开始同步了。',
+          r.data['private'] ? 'ok' : 'warn');
+        if (!r.data['private']) log('警告：仓库 ' + cfg.repo + ' 是公开的，数据可被他人读取，建议在 Gitee 改为私有。', 'warn');
+        log('仓库就绪，同步文件路径：' + filePath(), 'ok');
+        return true;
+      }
+      if (r.status === 404) {
+        log('仓库 ' + cfg.repo + ' 不存在，正在创建私有仓库 …');
+        setCfgState('仓库不存在，正在为你创建私有仓库 <span class="k">' + esc(cfg.repo) + '</span> …');
+        return apiCreateRepo().then(function (c) {
+          if (!c.ok) {
+            // 400/422 常见于「同名仓库已存在」
+            var m = giteeErr(c);
+            if (/exist|已存在|already/i.test(m)) {
+              log('仓库已存在（接口返回：' + m + '），继续使用。', 'warn');
+            } else {
+              throw new Error('创建仓库失败：' + m + '（HTTP ' + c.status + '）。若你的 Gitee 账号尚未实名认证，可能无法创建仓库，请先在 Gitee 网页端手动新建一个私有仓库。');
+            }
+          } else {
+            log('已创建私有仓库 ' + cfg.repo, 'ok');
+          }
+          cfg.branch = (c.data && c.data.default_branch) || cfg.branch || 'master';
+          $('#branch').value = cfg.branch;
+          saveCfg();
+          setCfgState('已连接 <span class="k">' + esc(cfg.owner) + '</span>，私有数据仓库 <span class="k">' + esc(cfg.repo) +
+            '</span> 就绪（分支 <span class="k">' + esc(cfg.branch) + '</span>）。可以开始同步了。', 'ok');
+          return true;
+        });
+      }
+      throw new Error('检查仓库失败：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+    });
+  }).then(function (ok) {
+    setBusy(false);
+    if (ok) refreshOpState();
+    return ok;
+  }).catch(function (e) {
+    setBusy(false);
+    setCfgState('连接失败：<span class="k">' + esc(e.message || e) + '</span>', 'err');
+    log('连接失败：' + (e.message || e), 'err');
+    return false;
+  });
+}
+
+function uploadToCloud() {
+  return ensureReady().then(function () {
+    var snap = buildSnapshot();
+    var ks = Object.keys(snap.data);
+    if (!ks.length) { log('没有勾选任何数据项，已取消。', 'warn'); return; }
+    var json = JSON.stringify(snap);
+    var b64 = b64encode(json);
+    if (json.length > 900000) {
+      return confirmDlg('数据偏大', '<b>本次快照约 ' + bytes(json.length) + '</b>，已接近 Gitee 单个文件 1MB 的读取上限。' +
+        '建议在「数据盘点」里取消勾选体积大的项（如自动备份快照）后再上传。<br><br>仍要继续吗？', '仍然上传')
+        .then(function (y) { if (!y) { log('用户取消上传。', 'warn'); return; } return doPut(snap, b64); });
+    }
+    return doPut(snap, b64);
+  });
+}
+function doPut(snap, b64) {
+  setBusy(true);
+  log('读取云端现状 …');
+  return fetchRemote().then(function (rem) {
+    var sha = rem.exists ? rem.sha : null;
+    log('上传 ' + Object.keys(snap.data).length + ' 项，' + bytes(JSON.stringify(snap).length) +
+        (sha ? '（覆盖云端已有文件）' : '（新建云端文件）'));
+    return apiPutFile(b64, 'sync: 上传本机数据 ' + nowStr() + ' @ ' + (snap.device.label || ''), sha).then(function (r) {
+      if (!r.ok) throw new Error('上传失败：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+      saveBase(snap.data);
+      log('✔ 上传完成，云端 savedAt = ' + timeStr(snap.savedAt), 'ok');
+      renderLastSync();
+      setCfgState('最近一次操作：<span class="k">上传到云端</span>（' + timeStr(snap.savedAt) + '），共 ' +
+        Object.keys(snap.data).length + ' 项。', 'ok');
+    });
+  }).catch(function (e) {
+    log('上传失败：' + (e.message || e), 'err');
+  }).then(function () { setBusy(false); });
+}
+
+function downloadMerge() {
+  return ensureReady().then(function () {
+    setBusy(true);
+    log('读取云端数据 …');
+    return fetchRemote().then(function (rem) {
+      if (!rem.exists) {
+        log('云端还没有同步文件。若这是第一台设备，请改用「上传到云端」。', 'warn');
+        setCfgState('云端暂无数据。首次使用请点「上传到云端」建立基线。', 'warn');
+        return;
+      }
+      var base = readBase();
+      var rdata = (rem.snap && rem.snap.data) || {};
+      var keys = {}, k;
+      for (k in rdata) keys[k] = 1;
+      for (k in selection) if (selection[k] && localStorage.getItem(k) !== null) keys[k] = 1;
+
+      var applied = {}, stat = { local: 0, remote: 0, merge: 0, same: 0, skip: 0 }, details = [];
+      Object.keys(keys).sort().forEach(function (key) {
+        if (!(key in selection) || !selection[key]) return;   // 只处理勾选项
+        var raw = localStorage.getItem(key);
+        var lv;
+        if (raw === null) lv = undefined;
+        else { try { lv = JSON.parse(raw); } catch (e) { lv = { __raw: raw }; } }
+        var bh = (base && base.hashes) ? base.hashes[key] : undefined;
+        var dec = resolveKey(key, lv, rdata[key], bh);
+        if (dec.act === 'skip') { stat.skip++; return; }
+        if (dec.act === 'same') { stat.same++; applied[key] = lv; return; }
+        if (dec.act === 'local') { stat.local++; applied[key] = lv; return; }
+        if (dec.act === 'remote') { stat.remote++; applied[key] = dec.value; writeJSON(key, dec.value); details.push(key + ' ← 云端'); return; }
+        stat.merge++;
+        var before = lv;
+        var after = dec.value;
+        applied[key] = after;
+        writeJSON(key, after);
+        var nb = countItems(before), na = countItems(after);
+        details.push(key + ' ⇄ 合并' + (nb !== null && na !== null ? '（' + nb + ' → ' + na + ' 条）' : ''));
+      });
+
+      if (Object.keys(applied).length) saveBase(applied);
+      log('合并完成：云端采用 ' + stat.remote + ' 项 / 深度合并 ' + stat.merge + ' 项 / 保留本机 ' +
+          stat.local + ' 项 / 无差异 ' + stat.same + ' 项', 'ok');
+      details.forEach(function (d) { log('  · ' + d); });
+      if (!Object.keys(applied).length && !stat.skip) log('没有任何可应用的数据。', 'warn');
+      renderInventory();
+      renderLastSync();
+      setCfgState('最近一次操作：<span class="k">下载并合并</span>（' + timeStr(Date.now()) + '）。' +
+        '云端快照时间 ' + timeStr(rem.snap && rem.snap.savedAt) +
+        (rem.snap && rem.snap.device ? '，来自 ' + esc(rem.snap.device.label || '') : '') +
+        '。<br>本机数据已更新，<b>请到对应工具页刷新一次</b>（F5）即可看到新数据。', 'ok');
+    }).catch(function (e) {
+      log('合并失败：' + (e.message || e), 'err');
+    }).then(function () { setBusy(false); });
+  });
+}
+
+function countItems(v) {
+  if (Array.isArray(v)) return v.length;
+  if (isPlainObject(v)) {
+    var n = 0, k, any = false;
+    for (k in v) { if (Array.isArray(v[k])) { n += v[k].length; any = true; } }
+    return any ? n : null;
+  }
+  return null;
+}
+
+function downloadOverwrite() {
+  return ensureReady().then(function () {
+    return fetchRemote().then(function (rem) {
+      if (!rem.exists) { log('云端还没有同步文件，无法覆盖。', 'warn'); return; }
+      var n = rem.snap && rem.snap.data ? Object.keys(rem.snap.data).length : 0;
+      return confirmDlg('用云端覆盖本机？',
+        '将用云端快照（<b>' + timeStr(rem.snap && rem.snap.savedAt) + '</b>' +
+        (rem.snap && rem.snap.device ? '，来自 <b>' + esc(rem.snap.device.label || '') + '</b>' : '') +
+        '，共 <b>' + n + ' 项</b>）整体替换本机。<br><br>' +
+        '<span style="color:var(--red);font-weight:600">本机未上传的改动会永久丢失。</span><br>' +
+        '如果不确定，请改用「下载并合并」。', '确认覆盖').then(function (y) {
+        if (!y) { log('用户取消覆盖。', 'warn'); return; }
+        setBusy(true);
+        var d = rem.snap.data || {}, applied = {};
+        Object.keys(d).forEach(function (k) { writeJSON(k, d[k]); applied[k] = d[k]; });
+        saveBase(applied);
+        log('✔ 已用云端数据覆盖本机，共 ' + Object.keys(d).length + ' 项。请到对应工具页刷新查看。', 'ok');
+        renderInventory(); renderLastSync();
+        setCfgState('最近一次操作：<span class="k">下载并覆盖本机</span>（' + timeStr(Date.now()) + '）。', 'warn');
+        setBusy(false);
+      });
+    }).catch(function (e) {
+      log('覆盖失败：' + (e.message || e), 'err');
+    });
+  });
+}
+
+function deleteRemote() {
+  return ensureReady().then(function () {
+    return fetchRemote().then(function (rem) {
+      if (!rem.exists) { log('云端本来就没有同步文件。', 'warn'); return; }
+      return confirmDlg('删除云端备份？',
+        '将从 Gitee 仓库删除 <code>' + esc(filePath()) + '</code>。<br><br>' +
+        '<span style="color:var(--red);font-weight:600">其它设备将读不到云端数据</span>；' +
+        '本机数据不受影响。<br>Gitee 仓库中的历史提交仍可在提交记录里找回。', '确认删除').then(function (y) {
+        if (!y) { log('用户取消删除。', 'warn'); return; }
+        setBusy(true);
+        return apiDeleteFile(rem.sha, 'sync: 删除云端同步文件 ' + nowStr()).then(function (r) {
+          if (!r.ok && r.status !== 404) throw new Error('删除失败：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+          try { localStorage.removeItem(BASE_KEY); } catch (e) {}
+          log('✔ 云端同步文件已删除。', 'ok');
+          renderLastSync();
+          setCfgState('云端同步文件已删除。下次点「上传到云端」会重新建立。', 'warn');
+        });
+      });
+    }).catch(function (e) {
+      log('删除失败：' + (e.message || e), 'err');
+    }).then(function () { setBusy(false); });
+  });
+}
+
+function renderLastSync() {
+  var b = readJSON(BASE_KEY, null);
+  if (!b || !b.savedAt) { $('#lastSync').textContent = '尚未同步过'; return; }
+  $('#lastSync').innerHTML = '上次同步 <b style="color:var(--gold)">' + timeStr(b.savedAt) + '</b>';
+}
+
+/** 自动检查：只提示，绝不自动覆盖 */
+function autoCheck() {
+  if (!cfg.token || !cfg.owner) return;
+  apiGetFile().then(function (r) {
+    if (!r.ok) return;
+    var d = r.data || {}, txt = null;
+    if (d.content && d.encoding !== 'none') { try { txt = b64decode(d.content); } catch (e) {} }
+    if (!txt) return;
+    var snap = null; try { snap = JSON.parse(txt); } catch (e) { return; }
+    var remoteAt = snap && snap.savedAt ? snap.savedAt : 0;
+    var b = readBase();
+    var localAt = (b && b.savedAt) ? b.savedAt : 0;
+    if (remoteAt && remoteAt > localAt + 60000) {
+      $('#bannerTxt').innerHTML = '☁️ 云端有更新的数据：<b>' + timeStr(remoteAt) + '</b>' +
+        (snap.device ? '（来自 ' + esc(snap.device.label || '') + '）' : '') +
+        '，本机上次同步在 ' + (localAt ? timeStr(localAt) : '从未') + '。建议点「下载并合并」。';
+      $('#banner').classList.add('show');
+      log('自动检查：发现云端数据较新（' + timeStr(remoteAt) + '），已顶部提示。', 'warn');
+    } else {
+      log('自动检查：云端数据不新于本机，无需处理。');
+    }
+  }).catch(function () { /* 自动检查失败静默 */ });
+}
+
+/* ============================================================
+   9. 事件绑定
+   ============================================================ */
+$('#btnTest').addEventListener('click', function () { testConnection(); });
+$('#btnSave').addEventListener('click', function () {
+  pullForm(); saveCfg();
+  log('配置已保存到本机浏览器。' + (cfg.token ? '（令牌已保存）' : ''));
+  setCfgState('配置已保存。' + (cfg.owner ? '' : '别忘了点「测试连接」识别账号并创建仓库。'), 'ok');
+});
+$('#btnClear').addEventListener('click', function () {
+  confirmDlg('清除本机配置？',
+    '将删除本机保存的 <b>Gitee 令牌</b>与同步配置。<br>本机数据与云端数据都<b>不受影响</b>。<br><br>' +
+    '换机器或怀疑令牌泄露时应当清除，并到 Gitee 后台吊销该令牌。', '清除').then(function (y) {
+    if (!y) return;
+    try { localStorage.removeItem(CFG_KEY); } catch (e) {}
+    cfg = { token: '', owner: '', repo: 'inverstent-data', space: 'default', branch: '', authMode: 'query' };
+    $('#token').value = ''; $('#repo').value = cfg.repo; $('#space').value = cfg.space; $('#branch').value = '';
+    refreshOpState();
+    setCfgState('本机配置已清除。', 'warn');
+    log('已清除本机配置（令牌已从本机删除）。', 'warn');
+  });
+});
+$('#btnUp').addEventListener('click', function () {
+  confirmDlg('上传到云端？',
+    '把本机当前数据整体写入云端，<b>覆盖云端旧版本</b>。<br>本机数据不受影响。', '上传').then(function (y) {
+    if (y) uploadToCloud();
+  });
+});
+$('#btnMerge').addEventListener('click', function () { downloadMerge(); });
+$('#btnDown').addEventListener('click', function () { downloadOverwrite(); });
+$('#btnDel').addEventListener('click', function () { deleteRemote(); });
+$('#btnAll').addEventListener('click', function () {
+  Object.keys(selection).forEach(function (k) { selection[k] = true; }); renderInventory();
+});
+$('#btnNone').addEventListener('click', function () {
+  Object.keys(selection).forEach(function (k) { selection[k] = false; }); renderInventory();
+});
+$('#btnDef').addEventListener('click', function () {
+  selection = {}; renderInventory();
+});
+$('#bannerGo').addEventListener('click', function () {
+  $('#banner').classList.remove('show');
+  downloadMerge();
+});
+$('#bannerX').addEventListener('click', function () { $('#banner').classList.remove('show'); });
+
+/* ============================================================
+   10. 启动
+   ============================================================ */
+(function init() {
+  applyTheme(localStorage.getItem('tw_theme_v2') || 'dark');
+  loadCfg();
+  renderInventory();
+  renderLastSync();
+  refreshOpState();
+  if (cfg.token && cfg.owner) {
+    setCfgState('已读取本机保存的配置（账号 <span class="k">' + esc(cfg.owner) + '</span>，仓库 <span class="k">' +
+      esc(cfg.repo) + '</span>，空间 <span class="k">' + esc(cfg.space) + '</span>，分支 <span class="k">' +
+      esc(cfg.branch || '默认') + '</span>）。');
+    log('已载入本机配置。');
+    autoCheck();
+  } else if (cfg.token) {
+    setCfgState('已保存令牌，但还没识别账号。点「测试连接」继续。', 'warn');
+  }
+  log('数据同步页已就绪。本页与其它工具同源，可直接读写它们的数据。');
+})();
+
+/* 暴露给调试与自动化测试 */
+window.INVS_SYNC = {
+  cfg: cfg,
+  get selection() { return selection; },
+  scanKeys: scanKeys,
+  buildSnapshot: buildSnapshot,
+  b64encode: b64encode,
+  b64decode: b64decode,
+  filePath: filePath,
+  stableStringify: stableStringify,
+  hashStr: hashStr,
+  deepMerge: deepMerge,
+  unionArray: unionArray,
+  resolveKey: resolveKey,
+  hashesOf: hashesOf,
+  saveBase: saveBase,
+  readBase: readBase,
+  fetchRemote: fetchRemote,
+  testConnection: testConnection,
+  uploadToCloud: uploadToCloud,
+  downloadMerge: downloadMerge,
+  downloadOverwrite: downloadOverwrite,
+  deleteRemote: deleteRemote,
+  setCfg: function (o) { Object.assign(cfg, o); },
+  saveCfg: saveCfg,
+  CFG_KEY: CFG_KEY,
+  BASE_KEY: BASE_KEY
+};
+
+})();
+</script>
+</body>
+</html>
