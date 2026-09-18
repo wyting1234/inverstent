@@ -12,15 +12,37 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-  header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#24467f 100%);color:#fff;padding:34px 24px 30px}
-  .head-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#24467f 100%);color:#fff;padding:26px 24px 24px}
+  .head-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .brand{display:flex;align-items:center;gap:14px}
   .logo{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.18)}
   h1{font-size:22px;letter-spacing:.5px}
   .sub{font-size:13px;color:#b9c6de;margin-top:3px}
   .date{font-size:13px;color:#b9c6de;text-align:right;line-height:1.7}
-  main{max-width:1080px;margin:0 auto;padding:28px 24px 60px}
-  .section-title{font-size:15px;font-weight:600;color:var(--muted);margin:6px 0 16px;display:flex;align-items:center;gap:8px}
+  .shell{max-width:1280px;margin:0 auto;padding:22px 24px 60px;display:grid;
+         grid-template-columns:232px 1fr;gap:24px;align-items:start}
+  /* ---------- 侧边栏 ---------- */
+  aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--line);
+        border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .sd-h{font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.7px;
+        padding:12px 14px 8px}
+  .sd-list{padding:0 8px 10px;display:flex;flex-direction:column;gap:1px}
+  .sd-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:7px;
+           text-decoration:none;color:var(--text);font-size:13px}
+  a.sd-item:hover{background:#f2f6fd;color:var(--accent)}
+  .sd-item .no{font-size:10.5px;color:#a8b3c4;font-family:ui-monospace,Consolas,monospace;width:16px;flex:0 0 16px}
+  .sd-item .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sd-item .v{font-size:9.5px;font-family:ui-monospace,Consolas,monospace;color:var(--accent);
+              background:#eef3fc;border-radius:8px;padding:1px 5px;white-space:nowrap}
+  .sd-item.off{color:#aeb8c7;cursor:default}
+  .sd-ver{margin-top:auto;border-top:1px solid var(--line);padding:10px 14px 12px;
+          background:#fafbfe;font:11px/1.75 ui-monospace,Consolas,monospace}
+  .sd-ver .k{color:#9aa6b8}
+  .sd-ver .n1{color:#5c6b85}
+  .sd-ver .n2{color:var(--accent);font-weight:700}
+  /* ---------- 主区 ---------- */
+  main{min-width:0}
+  .section-title{font-size:15px;font-weight:600;color:var(--muted);margin:2px 0 16px;display:flex;align-items:center;gap:8px}
   .section-title::after{content:"";flex:1;height:1px;background:var(--line)}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
   a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden}
@@ -31,8 +53,15 @@
   .tag{position:absolute;top:14px;right:14px;font-size:11px;padding:2px 8px;border-radius:20px;background:#eef3fc;color:var(--accent)}
   .card.disabled{opacity:.55;cursor:default}
   .card.disabled:hover{transform:none;box-shadow:none}
-  footer{max-width:1080px;margin:0 auto;padding:0 24px 30px;font-size:12px;color:var(--muted)}
+  footer{max-width:1280px;margin:0 auto;padding:0 24px 30px;font-size:12px;color:var(--muted)}
   .tag.red{background:#fdeeee;color:var(--red)} .tag.green{background:#e9f7ef;color:var(--green)}
+  @media(max-width:880px){
+    .shell{grid-template-columns:1fr;padding:16px 14px 50px}
+    aside{position:static}
+    .sd-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:4px}
+    .hd{padding:20px 14px}
+    header{padding:20px 14px}
+  }
 </style>
 </head>
 <body>
@@ -49,71 +78,93 @@
   </div>
 </header>
 
-<main>
-  <div class="section-title">工具导航</div>
-  <div class="grid">
-    <a class="card" href="tools/screenshot.html">
-      <span class="tag">01</span>
-      <div class="icon">📸</div>
-      <h3>截图工具</h3>
-      <p>屏幕捕获 / 剪贴板粘贴，支持画笔、矩形、箭头、文字标注，一键保存 PNG —— 适合截取行情图做交易标记。</p>
-    </a>
-    <a class="card" href="tools/asset-allocation.html">
-      <span class="tag">02</span>
-      <div class="icon">🧰</div>
-      <h3>资产配置百宝箱</h3>
-      <p>六大策略（风险平价 / 全天候 / 杠铃等）配置建议 · 定投计算 · 收益率 · 投资期限 · 标的池 · 策略构建详解。</p>
-    </a>
-    <a class="card" href="tools/hsi-sentiment.html">
-      <span class="tag">03</span>
-      <div class="icon">📈</div>
-      <h3>HSI 市场情绪监测</h3>
-      <p>恒生指数走势 + 信心指数 + 信号指数三面板；基于价格动量、波动率与量能的日度情绪监测，灵感源自郑挺国教授混频动态因子监测思想。</p>
-    </a>
-    <a class="card" href="tools/hsi-backtest.html">
-      <span class="tag">04</span>
-      <div class="icon">📉</div>
-      <h3>HSI 情绪指标回测</h3>
-      <p>对信心/信号指数做历史回测：净值对比、绩效指标、分桶预测力检验，结论源自郑挺国监测思想的简化复现。</p>
-    </a>
-    <a class="card" href="tools/sh-sentiment-backtest.html">
-      <span class="tag">05</span>
-      <div class="icon">📉</div>
-      <h3>上证指数情绪交叉回测</h3>
-      <p>情绪线（市场宽度）上穿上证指数买入、下穿卖出；含交叉信号图、净值曲线与绩效指标，结论诚实标注数据来源与局限。</p>
-    </a>
-    <a class="card" href="tools/消息源工作台.html">
-      <span class="tag">06</span>
-      <div class="icon">📡</div>
-      <h3>消息源工作台</h3>
-      <p>多信息源巡检：按宏观 / 行业 / 个股等分类管理信息源，一键打开未看、RSS 标题聚合、今日已看进度；支持分类检索与 JSON 导入导出。</p>
-    </a>
-    <a class="card" href="tools/data-sync.html">
-      <span class="tag">07</span>
-      <div class="icon">☁️</div>
-      <h3>数据同步</h3>
-      <p>把交易记录与投研数据备份到你的 Gitee 私有仓库：上传 / 下载合并 / 覆盖本机，多台设备共用一份；支持逐项勾选、自动检查云端更新。</p>
-    </a>
-    <a class="card disabled">
-      <span class="tag">08</span>
-      <div class="icon">💼</div>
-      <h3>持仓管理</h3>
-      <p>持仓录入 · 成本与盈亏跟踪（开发中）</p>
-    </a>
-    <a class="card disabled">
-      <span class="tag">09</span>
-      <div class="icon">📓</div>
-      <h3>交易复盘日志</h3>
-      <p>买卖记录 · 复盘笔记 · 纪律检查（开发中）</p>
-    </a>
-    <a class="card disabled">
-      <span class="tag">10</span>
-      <div class="icon">📊</div>
-      <h3>收益统计</h3>
-      <p>收益率曲线 · 回撤分析 · 月度报表（开发中）</p>
-    </a>
-  </div>
-</main>
+<div class="shell">
+  <aside>
+    <div class="sd-h">工具导航</div>
+    <div class="sd-list">
+      <a class="sd-item" href="tools/screenshot.html"><span class="no">01</span><span class="nm">截图工具</span></a>
+      <a class="sd-item" href="tools/asset-allocation.html"><span class="no">02</span><span class="nm">资产配置百宝箱</span></a>
+      <a class="sd-item" href="tools/hsi-sentiment.html"><span class="no">03</span><span class="nm">HSI 市场情绪监测</span></a>
+      <a class="sd-item" href="tools/hsi-backtest.html"><span class="no">04</span><span class="nm">HSI 情绪指标回测</span></a>
+      <a class="sd-item" href="tools/sh-sentiment-backtest.html"><span class="no">05</span><span class="nm">上证情绪交叉回测</span></a>
+      <a class="sd-item" href="tools/%E6%B6%88%E6%81%AF%E6%BA%90%E5%B7%A5%E4%BD%9C%E5%8F%B0.html"><span class="no">06</span><span class="nm">投研资源工作台</span><span class="v">AA</span></a>
+      <a class="sd-item" href="tools/data-sync.html"><span class="no">07</span><span class="nm">数据同步</span></a>
+      <span class="sd-item off"><span class="no">08</span><span class="nm">持仓管理 · 开发中</span></span>
+      <span class="sd-item off"><span class="no">09</span><span class="nm">交易复盘日志 · 开发中</span></span>
+      <span class="sd-item off"><span class="no">10</span><span class="nm">收益统计 · 开发中</span></span>
+    </div>
+    <div class="sd-ver">
+      <div><span class="k">导航</span> <span class="n1">V20260918 aa</span></div>
+      <div><span class="k">投研资源工作台</span> <span class="n2">V20260918 AA</span></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="section-title">工具导航</div>
+    <div class="grid">
+      <a class="card" href="tools/screenshot.html">
+        <span class="tag">01</span>
+        <div class="icon">📸</div>
+        <h3>截图工具</h3>
+        <p>屏幕捕获 / 剪贴板粘贴，支持画笔、矩形、箭头、文字标注，一键保存 PNG —— 适合截取行情图做交易标记。</p>
+      </a>
+      <a class="card" href="tools/asset-allocation.html">
+        <span class="tag">02</span>
+        <div class="icon">🧰</div>
+        <h3>资产配置百宝箱</h3>
+        <p>六大策略（风险平价 / 全天候 / 杠铃等）配置建议 · 定投计算 · 收益率 · 投资期限 · 标的池 · 策略构建详解。</p>
+      </a>
+      <a class="card" href="tools/hsi-sentiment.html">
+        <span class="tag">03</span>
+        <div class="icon">📈</div>
+        <h3>HSI 市场情绪监测</h3>
+        <p>恒生指数走势 + 信心指数 + 信号指数三面板；基于价格动量、波动率与量能的日度情绪监测，灵感源自郑挺国教授混频动态因子监测思想。</p>
+      </a>
+      <a class="card" href="tools/hsi-backtest.html">
+        <span class="tag">04</span>
+        <div class="icon">📉</div>
+        <h3>HSI 情绪指标回测</h3>
+        <p>对信心/信号指数做历史回测：净值对比、绩效指标、分桶预测力检验，结论源自郑挺国监测思想的简化复现。</p>
+      </a>
+      <a class="card" href="tools/sh-sentiment-backtest.html">
+        <span class="tag">05</span>
+        <div class="icon">📉</div>
+        <h3>上证指数情绪交叉回测</h3>
+        <p>情绪线（市场宽度）上穿上证指数买入、下穿卖出；含交叉信号图、净值曲线与绩效指标，结论诚实标注数据来源与局限。</p>
+      </a>
+      <a class="card" href="tools/%E6%B6%88%E6%81%AF%E6%BA%90%E5%B7%A5%E4%BD%9C%E5%8F%B0.html">
+        <span class="tag green">06 · V20260918 AA</span>
+        <div class="icon">📡</div>
+        <h3>投研资源工作台</h3>
+        <p>267 条投研资源分类归档：<b>标签筛选</b>（40 个标签 + 8 个场景预设）、每条附<b>主要内容</b>与<b>使用方向</b>；支持搜索、巡检「今日已看」进度、一键打开未看、JSON / Markdown 导出与机器可读索引。</p>
+      </a>
+      <a class="card" href="tools/data-sync.html">
+        <span class="tag">07</span>
+        <div class="icon">☁️</div>
+        <h3>数据同步</h3>
+        <p>把交易记录与投研数据备份到你的 Gitee 私有仓库：上传 / 下载合并 / 覆盖本机，多台设备共用一份；支持逐项勾选、自动检查云端更新。</p>
+      </a>
+      <a class="card disabled">
+        <span class="tag">08</span>
+        <div class="icon">💼</div>
+        <h3>持仓管理</h3>
+        <p>持仓录入 · 成本与盈亏跟踪（开发中）</p>
+      </a>
+      <a class="card disabled">
+        <span class="tag">09</span>
+        <div class="icon">📓</div>
+        <h3>交易复盘日志</h3>
+        <p>买卖记录 · 复盘笔记 · 纪律检查（开发中）</p>
+      </a>
+      <a class="card disabled">
+        <span class="tag">10</span>
+        <div class="icon">📊</div>
+        <h3>收益统计</h3>
+        <p>收益率曲线 · 回撤分析 · 月度报表（开发中）</p>
+      </a>
+    </div>
+  </main>
+</div>
 
 <footer>Inverstent © 2026 · 工具持续添加中 · 数据默认保存在本地浏览器，可用「数据同步」备份到你的 Gitee 私有仓库</footer>
 
