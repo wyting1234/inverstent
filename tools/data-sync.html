@@ -108,7 +108,7 @@ input::placeholder{color:var(--txm)}
 .banner .g{flex:1;min-width:200px}
 .banner b{color:var(--gold)}
 
-/* ---- 数据盘点表 ---- */
+/* ---- 同步范围 ---- */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
 th{font-size:11.5px;color:var(--txm);font-weight:700;letter-spacing:.4px;text-transform:uppercase;background:var(--bg2)}
@@ -210,6 +210,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);cursor:poin
     <div class="hdr-r">
       <button class="btn mini" id="themeBtn" title="切换深浅色">🌓 主题</button>
       <a class="btn mini" href="../index.html">← 返回导航</a>
+      <span class="chip" style="margin-left:4px">V20260921 AB</span>
     </div>
   </div>
 
@@ -264,34 +265,16 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);cursor:poin
     </div>
   </div>
 
-  <!-- 2 数据盘点 -->
+  <!-- 2 同步范围 -->
   <div class="card">
     <div class="card-h">
-      <div class="t"><span class="n">2</span>数据盘点</div>
-      <div class="hint">勾选要纳入同步的项</div>
+      <div class="t"><span class="n">2</span>同步范围</div>
+      <div class="hint">默认同步以下数据项</div>
     </div>
-    <div class="card-b tight">
-      <div style="overflow-x:auto">
-        <table>
-          <thead>
-            <tr>
-              <th>数据项</th>
-              <th class="hm">存储键</th>
-              <th>大小</th>
-              <th>状态</th>
-              <th class="ck">同步</th>
-            </tr>
-          </thead>
-          <tbody id="invBody"></tbody>
-        </table>
-      </div>
-      <div class="tfoot">
-        <div id="invSum">—</div>
-        <div>
-          <button class="btn mini" id="btnAll">全选</button>
-          <button class="btn mini" id="btnNone">全不选</button>
-          <button class="btn mini" id="btnDef">恢复默认</button>
-        </div>
+    <div class="card-b">
+      <div id="syncScope" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <div class="state" style="margin-top:12px">
+        令牌只保存在本机。云端文件为 <code>data-<span id="fp"></span>.json</code>，位于你的私有仓库。
       </div>
     </div>
   </div>
@@ -304,24 +287,34 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);cursor:poin
     </div>
     <div class="card-b">
       <div class="ops">
-        <div class="op">
-          <h4>⬆️ 上传到云端</h4>
-          <p>把本机数据整体覆盖到云端。本机数据不受影响，云端旧版本会被替换。</p>
-          <button class="btn primary" id="btnUp" disabled>上传</button>
-        </div>
         <div class="op rec">
-          <h4>🔄 下载并合并</h4>
-          <p>把云端与本机数据合并，两边新增的记录都会保留。日常推荐用这个。</p>
-          <button class="btn primary" id="btnMerge" disabled>下载并合并</button>
+          <h4>🔄 双向同步</h4>
+          <p>把云端和本机数据合并后，同时写回云端和本机。两边最终内容一致，日常首选。</p>
+          <button class="btn primary" id="btnBi" disabled>双向同步</button>
         </div>
         <div class="op">
-          <h4>⬇️ 下载并覆盖本机</h4>
-          <p>用云端数据整体替换本机。<span class="warn-t">本机未同步的改动会丢失</span>，建议先上传备份。</p>
-          <button class="btn danger" id="btnDown" disabled>覆盖本机</button>
+          <h4>⬆️ 上传合并</h4>
+          <p>把本机数据与云端数据合并，结果写回云端，同时更新本机。</p>
+          <button class="btn" id="btnUpMerge" disabled>上传合并</button>
         </div>
         <div class="op">
-          <h4>🧨 删除云端备份</h4>
-          <p>删除云端的同步文件。本机数据不受影响，但其它设备将读不到云端数据。</p>
+          <h4>⬆️ 上传覆盖</h4>
+          <p>用本机当前数据整体覆盖云端。云端旧版本会被替换，本机不受影响。</p>
+          <button class="btn" id="btnUp" disabled>上传覆盖</button>
+        </div>
+        <div class="op">
+          <h4>⬇️ 下载合并</h4>
+          <p>把云端数据与本机数据合并，只更新本机，不修改云端。</p>
+          <button class="btn" id="btnMerge" disabled>下载合并</button>
+        </div>
+        <div class="op">
+          <h4>⬇️ 下载覆盖</h4>
+          <p>用云端数据整体替换本机。<span class="warn-t">本机未同步的改动会丢失</span>。</p>
+          <button class="btn danger" id="btnDown" disabled>下载覆盖</button>
+        </div>
+        <div class="op">
+          <h4>🧨 删除云端</h4>
+          <p>删除云端的同步文件。本机数据不受影响，其它设备将读不到云端数据。</p>
           <button class="btn danger" id="btnDel" disabled>删除云端</button>
         </div>
       </div>
@@ -401,10 +394,11 @@ var PKG_VER  = 1;
 
 /* 已知数据项：名称 / 说明 / 分组 / 默认是否勾选 */
 var KNOWN = {
+  'investResBoard_v1':   { name: '消息源工作台',    desc: '投研资源工作台 · 消息源与已看状态',              grp: '其它工具',   on: true  },
   'tw_trades_v2':        { name: '交易记录',        desc: '成功交易者工作台 · 交易明细、计划、复盘',        grp: '交易工作台', on: true  },
   'tw_workspace_v2':     { name: '投研工作台数据',  desc: '书签 / 笔记 / 研报 / 模型 / 个股 / 技术 / 想法 / 习惯', grp: '交易工作台', on: true },
   'watchlist_data':      { name: '资产配置观察池',  desc: '资产配置百宝箱 · 自选标的与备注',              grp: '其它工具',   on: true  },
-  'msgSourceBoard_v1':   { name: '消息源清单',      desc: '消息源巡检工作台 · 信息源与今日已看状态',        grp: '其它工具',   on: true  },
+  'msgSourceBoard_v1':   { name: '消息源清单（旧）', desc: '旧版键，新数据已落到 investResBoard_v1',        grp: '历史遗留',   on: false },
   'tw_theme_v2':         { name: '界面主题',        desc: '深色 / 浅色偏好 —— 每台设备各设各的，不该同步', grp: '设备偏好',   on: false },
   'tw_backup_v2':        { name: '自动备份快照',    desc: '导入 / 清空前自动留存的一份副本，体积大且可重建', grp: '设备偏好',   on: false },
   'trade_journal_data':  { name: '旧版交易数据',    desc: 'v1 迁移来源，新数据已落到 tw_trades_v2',       grp: '历史遗留',   on: false },
@@ -751,7 +745,7 @@ function fetchRemote() {
 }
 
 /* ============================================================
-   6. 快照 / 数据盘点
+   6. 快照 / 同步范围
    ============================================================ */
 function scanKeys() {
   var out = [], seen = {}, i, k;
@@ -775,55 +769,30 @@ function scanKeys() {
   return out;
 }
 
-var selection = {};
-function renderInventory() {
-  var items = scanKeys();
-  var body = $('#invBody');
-  var h = '', lastGrp = null, i;
-  var prevSel = selection;
-  selection = {};
-  for (i = 0; i < items.length; i++) {
-    var it = items[i];
-    selection[it.key] = (it.key in prevSel) ? prevSel[it.key] : it.def;
-    if (it.grp !== lastGrp) {
-      h += '<tr><td colspan="5" class="grp" style="background:var(--bg2);padding:9px 14px">' + esc(it.grp) + '</td></tr>';
-      lastGrp = it.grp;
-    }
-    var sel = selection[it.key];
-    h += '<tr>' +
-      '<td class="name">' + esc(it.name) + '<span class="d">' + esc(it.desc) + '</span></td>' +
-      '<td class="k hm">' + esc(it.key) + '</td>' +
-      '<td class="sz">' + bytes(it.size) + '</td>' +
-      '<td>' + (sel ? '<span class="chip g">将同步</span>' : '<span class="chip m">不参与</span>') + '</td>' +
-      '<td class="ck"><input type="checkbox" data-k="' + esc(it.key) + '"' + (sel ? ' checked' : '') + '></td>' +
-      '</tr>';
+function defaultKeys() {
+  var out = [];
+  for (var k in KNOWN) {
+    if (KNOWN[k].on && localStorage.getItem(k) !== null) out.push(k);
   }
-  if (!items.length) {
-    h = '<tr><td colspan="5" style="text-align:center;color:var(--txm);padding:26px">本机没有任何数据</td></tr>';
-  }
-  body.innerHTML = h;
-  Array.prototype.forEach.call(body.querySelectorAll('input[type=checkbox]'), function (cb) {
-    cb.addEventListener('change', function () {
-      selection[cb.dataset.k] = cb.checked;
-      renderSum();
-      renderInventory();
-    });
-  });
-  renderSum();
+  return out;
 }
-function renderSum() {
-  var total = 0, n = 0, k;
-  for (k in selection) {
-    if (!selection[k]) continue;
-    var raw = localStorage.getItem(k);
-    if (raw === null) continue;
-    total += raw.length; n++;
+function renderScope() {
+  var ks = defaultKeys();
+  var box = $('#syncScope');
+  var h = '';
+  if (!ks.length) {
+    h = '<span style="color:var(--txm)">本机没有可同步的工作台数据。请在其它工具页使用后再来同步。</span>';
+  } else {
+    ks.forEach(function(k) {
+      var meta = KNOWN[k] || { name: k };
+      h += '<span class="chip g" title="' + esc(meta.desc || '') + '">' + esc(meta.name) + '</span>';
+    });
   }
-  $('#invSum').innerHTML = '已选 <b style="color:var(--gold)">' + n + '</b> 项，估算 <b style="color:var(--gold)">' +
-    bytes(total) + '</b>' + (total > 700000 ? '<span class="chip" style="background:rgba(255,107,107,.14);color:var(--red)">接近 1MB 上限</span>' : '');
+  box.innerHTML = h;
+  $('#fp').textContent = cfg.space;
 }
 function selKeys() {
-  return Object.keys(selection).filter(function (k) { return selection[k] && localStorage.getItem(k) !== null; });
+  return defaultKeys();
 }
 
 function buildSnapshot() {
@@ -946,8 +915,8 @@ function readBase() {
 var busy = false;
 function setBusy(on, which) {
   busy = on;
-  ['#btnTest', '#btnSave', '#btnClear', '#btnUp', '#btnMerge', '#btnDown', '#btnDel',
-   '#btnAll', '#btnNone', '#btnDef', '#bannerGo'].forEach(function (s) { $(s).disabled = on; });
+  ['#btnTest', '#btnSave', '#btnClear', '#btnBi', '#btnUpMerge', '#btnUp', '#btnMerge', '#btnDown', '#btnDel',
+   '#bannerGo'].forEach(function (s) { $(s).disabled = on; });
   if (!on) refreshOpState();
 }
 function refreshOpState() {
@@ -1035,7 +1004,7 @@ function uploadToCloud() {
     var b64 = b64encode(json);
     if (json.length > 900000) {
       return confirmDlg('数据偏大', '<b>本次快照约 ' + bytes(json.length) + '</b>，已接近 Gitee 单个文件 1MB 的读取上限。' +
-        '建议在「数据盘点」里取消勾选体积大的项（如自动备份快照）后再上传。<br><br>仍要继续吗？', '仍然上传')
+        '默认同步范围已排除体积大的项（如自动备份快照）。若仍超标，可临时清空相关工具数据后再试。<br><br>仍要继续吗？', '仍然上传')
         .then(function (y) { if (!y) { log('用户取消上传。', 'warn'); return; } return doPut(snap, b64); });
     }
     return doPut(snap, b64);
@@ -1061,6 +1030,64 @@ function doPut(snap, b64) {
   }).then(function () { setBusy(false); });
 }
 
+function uploadMerge() {
+  return ensureReady().then(function () {
+    setBusy(true);
+    log('读取云端数据以进行合并 …');
+    return fetchRemote().then(function (rem) {
+      var localSnap = buildSnapshot();
+      var localData = localSnap.data || {};
+      var mergedData = {};
+      var keys = {}, k;
+      for (k in localData) keys[k] = 1;
+      if (rem.exists && rem.snap && rem.snap.data) {
+        for (k in rem.snap.data) keys[k] = 1;
+      }
+      var base = readBase();
+      var stat = { local: 0, remote: 0, merge: 0, same: 0 };
+      Object.keys(keys).sort().forEach(function (key) {
+        var dec = resolveKey(key, localData[key], rem.exists ? rem.snap.data[key] : undefined, base && base.hashes ? base.hashes[key] : undefined);
+        if (dec.act === 'skip' || dec.act === 'same' || dec.act === 'local') {
+          if (dec.act === 'same') stat.same++;
+          else if (dec.act === 'local') stat.local++;
+          mergedData[key] = localData[key];
+          return;
+        }
+        if (dec.act === 'remote') { stat.remote++; mergedData[key] = dec.value; }
+        else { stat.merge++; mergedData[key] = dec.value; }
+      });
+      Object.keys(mergedData).forEach(function (k) { writeJSON(k, mergedData[k]); });
+      var snap = {
+        format: PKG, snapshotVersion: PKG_VER, space: cfg.space,
+        site: 'wyting1234.github.io/inverstent', savedAt: Date.now(),
+        device: deviceInfo(), keys: Object.keys(mergedData), data: mergedData
+      };
+      var json = JSON.stringify(snap);
+      var b64 = b64encode(json);
+      if (json.length > 900000) {
+        return confirmDlg('数据偏大', '<b>本次快照约 ' + bytes(json.length) + '</b>，已接近 Gitee 单个文件 1MB 的读取上限。<br><br>仍要继续吗？', '仍然上传').then(function (y) {
+          if (!y) { log('用户取消上传合并。', 'warn'); return; }
+          return doPutMerged(snap, b64, rem.exists ? rem.sha : null, stat);
+        });
+      }
+      return doPutMerged(snap, b64, rem.exists ? rem.sha : null, stat);
+    }).catch(function (e) {
+      log('上传合并失败：' + (e.message || e), 'err');
+    }).then(function () { setBusy(false); });
+  });
+}
+function doPutMerged(snap, b64, sha, stat) {
+  return apiPutFile(b64, 'sync: 上传合并 ' + nowStr() + ' @ ' + (snap.device.label || ''), sha).then(function (r) {
+    if (!r.ok) throw new Error('上传合并失败：' + giteeErr(r) + '（HTTP ' + r.status + '）');
+    saveBase(snap.data);
+    log('✔ 上传合并完成：本地保留 ' + stat.local + ' 项 / 云端采用 ' + stat.remote + ' 项 / 合并 ' + stat.merge + ' 项 / 无差异 ' + stat.same + ' 项', 'ok');
+    renderLastSync();
+    renderScope();
+    setCfgState('最近一次操作：<span class="k">上传合并</span>（' + timeStr(snap.savedAt) + '），共 ' +
+      Object.keys(snap.data).length + ' 项。', 'ok');
+  });
+}
+
 function downloadMerge() {
   return ensureReady().then(function () {
     setBusy(true);
@@ -1075,11 +1102,11 @@ function downloadMerge() {
       var rdata = (rem.snap && rem.snap.data) || {};
       var keys = {}, k;
       for (k in rdata) keys[k] = 1;
-      for (k in selection) if (selection[k] && localStorage.getItem(k) !== null) keys[k] = 1;
+      defaultKeys().forEach(function (k) { keys[k] = 1; });
 
       var applied = {}, stat = { local: 0, remote: 0, merge: 0, same: 0, skip: 0 }, details = [];
       Object.keys(keys).sort().forEach(function (key) {
-        if (!(key in selection) || !selection[key]) return;   // 只处理勾选项
+        if (defaultKeys().indexOf(key) < 0) return;   // 只处理默认同步项
         var raw = localStorage.getItem(key);
         var lv;
         if (raw === null) lv = undefined;
@@ -1104,7 +1131,7 @@ function downloadMerge() {
           stat.local + ' 项 / 无差异 ' + stat.same + ' 项', 'ok');
       details.forEach(function (d) { log('  · ' + d); });
       if (!Object.keys(applied).length && !stat.skip) log('没有任何可应用的数据。', 'warn');
-      renderInventory();
+      renderScope();
       renderLastSync();
       setCfgState('最近一次操作：<span class="k">下载并合并</span>（' + timeStr(Date.now()) + '）。' +
         '云端快照时间 ' + timeStr(rem.snap && rem.snap.savedAt) +
@@ -1143,7 +1170,7 @@ function downloadOverwrite() {
         Object.keys(d).forEach(function (k) { writeJSON(k, d[k]); applied[k] = d[k]; });
         saveBase(applied);
         log('✔ 已用云端数据覆盖本机，共 ' + Object.keys(d).length + ' 项。请到对应工具页刷新查看。', 'ok');
-        renderInventory(); renderLastSync();
+        renderScope(); renderLastSync();
         setCfgState('最近一次操作：<span class="k">下载并覆盖本机</span>（' + timeStr(Date.now()) + '）。', 'warn');
         setBusy(false);
       });
@@ -1229,24 +1256,17 @@ $('#btnClear').addEventListener('click', function () {
     log('已清除本机配置（令牌已从本机删除）。', 'warn');
   });
 });
+$('#btnBi').addEventListener('click', function () { uploadMerge(); });
+$('#btnUpMerge').addEventListener('click', function () { uploadMerge(); });
 $('#btnUp').addEventListener('click', function () {
-  confirmDlg('上传到云端？',
-    '把本机当前数据整体写入云端，<b>覆盖云端旧版本</b>。<br>本机数据不受影响。', '上传').then(function (y) {
+  confirmDlg('上传覆盖到云端？',
+    '把本机当前数据整体写入云端，<b>覆盖云端旧版本</b>。<br>本机数据不受影响。', '上传覆盖').then(function (y) {
     if (y) uploadToCloud();
   });
 });
 $('#btnMerge').addEventListener('click', function () { downloadMerge(); });
 $('#btnDown').addEventListener('click', function () { downloadOverwrite(); });
 $('#btnDel').addEventListener('click', function () { deleteRemote(); });
-$('#btnAll').addEventListener('click', function () {
-  Object.keys(selection).forEach(function (k) { selection[k] = true; }); renderInventory();
-});
-$('#btnNone').addEventListener('click', function () {
-  Object.keys(selection).forEach(function (k) { selection[k] = false; }); renderInventory();
-});
-$('#btnDef').addEventListener('click', function () {
-  selection = {}; renderInventory();
-});
 $('#bannerGo').addEventListener('click', function () {
   $('#banner').classList.remove('show');
   downloadMerge();
@@ -1259,7 +1279,7 @@ $('#bannerX').addEventListener('click', function () { $('#banner').classList.rem
 (function init() {
   applyTheme(localStorage.getItem('tw_theme_v2') || 'dark');
   loadCfg();
-  renderInventory();
+  renderScope();
   renderLastSync();
   refreshOpState();
   if (cfg.token && cfg.owner) {
@@ -1277,7 +1297,7 @@ $('#bannerX').addEventListener('click', function () { $('#banner').classList.rem
 /* 暴露给调试与自动化测试 */
 window.INVS_SYNC = {
   cfg: cfg,
-  get selection() { return selection; },
+  defaultKeys: defaultKeys,
   scanKeys: scanKeys,
   buildSnapshot: buildSnapshot,
   b64encode: b64encode,
