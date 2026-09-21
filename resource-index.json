@@ -1,10 +1,10 @@
 {
  "title": "投研资源工作台",
- "version": "V20260918 AB",
- "navVersion": "V20260918 ab",
- "updated": "2026-09-18",
+ "version": "V20260921 AA",
+ "navVersion": "V20260921 aa",
+ "updated": "2026-09-21",
  "source": "favorites_2026_9_18.html（浏览器收藏夹导出）",
- "count": 256,
+ "count": 265,
  "tags": [
   "估值分位",
   "内容运营",
@@ -51,7 +51,7 @@
   {
    "cat": "行情·估值·数据源",
    "icon": "📊",
-   "n": 14
+   "n": 15
   },
   {
    "cat": "通达信数据口",
@@ -66,12 +66,12 @@
   {
    "cat": "复盘与情绪博弈",
    "icon": "🌡️",
-   "n": 3
+   "n": 5
   },
   {
    "cat": "财经资讯与电子报",
    "icon": "📰",
-   "n": 23
+   "n": 29
   },
   {
    "cat": "宏观政策与时政参考",
@@ -3725,6 +3725,126 @@
    "use": "按时点完成数据报送与合规自查",
    "url": "http://sah.ishop.lcweb03.cn/user/infolist/index.html",
    "host": "sah.ishop.lcweb03.cn"
+  },
+  {
+   "id": "r268",
+   "name": "同花顺经典版",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://www.10jqka.com.cn/classic/",
+   "host": "www.10jqka.com.cn"
+  },
+  {
+   "id": "r269",
+   "name": "同花顺早盘",
+   "cat": "复盘与情绪博弈",
+   "sub": "情绪与复盘",
+   "tags": [
+    "情绪指标"
+   ],
+   "what": "复盘与情绪指标工具",
+   "use": "盘前盘后判断多空温度",
+   "url": "https://stock.10jqka.com.cn/zaopan/",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r270",
+   "name": "同花顺复盘",
+   "cat": "复盘与情绪博弈",
+   "sub": "复盘工具",
+   "tags": [
+    "复盘",
+    "情绪指标"
+   ],
+   "what": "复盘工具与流程",
+   "use": "收盘后整理当日交易与思路",
+   "url": "https://stock.10jqka.com.cn/fupan/",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r271",
+   "name": "同花顺股票",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://stock.10jqka.com.cn/",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r272",
+   "name": "同花顺板块题材",
+   "cat": "行情·估值·数据源",
+   "sub": "其他数据",
+   "tags": [
+    "板块题材",
+    "行情数据"
+   ],
+   "what": "行情与估值数据入口",
+   "use": "选股、查估值、看基金数据时用",
+   "url": "https://stock.10jqka.com.cn/bktt_list/",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r273",
+   "name": "同花顺投资计划",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://stock.10jqka.com.cn/tzjh_list/",
+   "host": "stock.10jqka.com.cn"
+  },
+  {
+   "id": "r274",
+   "name": "同花顺今日要闻",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://news.10jqka.com.cn/today_list/",
+   "host": "news.10jqka.com.cn"
+  },
+  {
+   "id": "r275",
+   "name": "同花顺新闻",
+   "cat": "财经资讯与电子报",
+   "sub": "媒体主站",
+   "tags": [
+    "资讯快讯"
+   ],
+   "what": "财经媒体主站",
+   "use": "扫资讯、看官方报道",
+   "url": "https://news.10jqka.com.cn/",
+   "host": "news.10jqka.com.cn"
+  },
+  {
+   "id": "r276",
+   "name": "电子报荟萃 foclogic",
+   "cat": "财经资讯与电子报",
+   "sub": "电子报",
+   "tags": [
+    "电子报",
+    "资讯快讯"
+   ],
+   "what": "四大证券报电子版",
+   "use": "看官方评论与版面内容",
+   "url": "https://foclogic.cn/newspapers",
+   "host": "foclogic.cn"
   }
  ]
 }
